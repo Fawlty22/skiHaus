@@ -44,6 +44,7 @@ const resolvers = {
         }
       },
       login: async (parent, { username, password }) => {
+        console.log('login mutation line 47', username, password)
         const employee = await Employee.findOne({ username });
   
         if (!employee) {
