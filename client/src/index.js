@@ -8,10 +8,9 @@ import {
 } from '@apollo/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
 const httpLink = createHttpLink({
-  uri: '/graphql'
+  uri: 'http://localhost:3001/graphql'
 });
 
 const client = new ApolloClient({

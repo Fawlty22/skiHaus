@@ -27,7 +27,7 @@ function App() {
       </div>
 
       <Switch>
-        <Route exact path="/" render={() => <Dashboard user={user} />} />
+        <Route exact path="/dashboard" render={() => <Dashboard user={user} />} />
         <Route exact path="/login" render={() => <Login setUser={setUser} />} />
       </Switch>
     </Router>
