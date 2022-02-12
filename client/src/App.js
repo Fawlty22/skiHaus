@@ -7,8 +7,11 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
+import CustomerForm from './pages/CustomerForm';
+import Header from './Components/Header';
 import { StoreProvider } from "./utils/GlobalContext";
 import './App.css';
 
@@ -37,17 +40,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <header>
-            <h1>Library App</h1>
-            <ul>
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-            </ul>
-          </header>
+          <Header />
         </div>
         <StoreProvider>
           <Switch>

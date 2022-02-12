@@ -10,9 +10,8 @@ const Header = () => {
         </Navbar.Brand>
         <Nav className="align-items-end gap-3">
           <Link to="/customerform">Customer Form</Link>
-          <Link to="/">Dashboard</Link>
+          <Link to="/dashboard">Dashboard</Link>
           <Link to="/login">Login</Link>
-          <a href="https://www.google.com">Google</a>
         </Nav>
       </Container>
     </Navbar>

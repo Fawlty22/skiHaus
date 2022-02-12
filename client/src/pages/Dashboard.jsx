@@ -6,15 +6,6 @@ import { QUERY_EMPLOYEE } from '../graphql/queries';
 import { StoreProvider } from '../utils/GlobalContext';
 
 const Dashboard = () => {
-
-  // const { data, loading, error } = useQuery(QUERY_EMPLOYEE, {
-  //   context: {
-  //     headers: {
-  //       'Authorization': `Bearer ${props.employee.token}`
-  //     },
-  //   },
-  //   fetchPolicy: 'no-cache'
-  // });
   
   let employee = Auth.getProfile();
 
@@ -25,13 +16,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      {employee ?
-      <div>
-        Dashboard
-      </div>
-      :
-      <span>You must log in to access the dashboard</span>
-      }
+      {employee ?? <div>Dashboard</div>}
     </div>
     );
   };
