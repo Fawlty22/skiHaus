@@ -1,5 +1,7 @@
 import { Form, Button, Container, FloatingLabel } from "react-bootstrap";
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADDUSER_MUTATION } from "../graphql/mutations.js";
 
 const CustomerForm = () => {
   const [formState, setFormState] = useState({
@@ -15,14 +17,32 @@ const CustomerForm = () => {
   const { firstName, lastName, birthDate, email, phone, username, password } =
     formState;
 
+  const [addUser, { error }] = useMutation(ADDUSER_MUTATION);
+
   function handleChange(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formState);
-  }
+
+    try {
+      const newUser = await addUser({
+        variables: {
+          firstName: firstName,
+          lastName: lastName,
+          birthDate: birthDate,
+          email: email,
+          phone: phone,
+          username: username,
+          password: password,
+        },
+      });
+      console.log(newUser);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Container>
