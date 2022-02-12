@@ -11,11 +11,25 @@ const typeDefs = gql`
     lastName: String
     birthDate: String
     phone: String
+    Contracts: [Contract]
+  }
+
+  type Contract {
+    checkOutDate: Date
+    checkInDate: Date
+    active: Boolean
+    equipment: [Equipment]
   }
 
   type Employee {
     _id: ID
     username: String
+  }
+
+  type Equipment {
+    boots: [boot]
+    skis: [ski]
+    snowboards: [snowboard]
   }
 
   type Ski {

@@ -11,7 +11,8 @@ import { setContext } from '@apollo/client/link/context';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import CustomerForm from './pages/CustomerForm';
-import Header from './Components/Header';
+import Header from './components/Header';
+import CreateContract from './pages/CreateContract.jsx'
 import { StoreProvider } from "./utils/GlobalContext";
 import './App.css';
 
@@ -47,6 +48,7 @@ function App() {
             <Route exact path="/dashboard" render={() => <Dashboard />} />
             <Route exact path="/login" render={() => <Login />} />
             <Route exact path="/customerform" render={() => <CustomerForm />} />
+            <Route exact path="/contract" render={() => <CreateContract />} />
           </Switch>
         </StoreProvider>
       </Router>
