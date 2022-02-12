@@ -53,6 +53,7 @@ function App() {
           <Switch>
             <Route exact path="/dashboard" render={() => <Dashboard />} />
             <Route exact path="/login" render={() => <Login />} />
+            <Route exact path="/customerform" render={() => <CustomerForm />} />
           </Switch>
         </StoreProvider>
       </Router>
