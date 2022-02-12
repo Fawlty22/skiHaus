@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_MUTATION } from '../graphql/mutations';
 import Auth from '../utils/auth';
+import { useStoreContext } from '../utils/GlobalContext';
+import useEmployeeReducer from '../utils/reducers';
+import { UPDATE_EMPLOYEE } from '../utils/actions';
 
 function Login(props) {
+    const [state, dispatch] = useStoreContext();
     const [formState, setFormState] = useState({ username: '', password: '' });
     // const [username, setUsername] = useState('');
     // const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION);
-    const [login, { error }] = useMutation(LOGIN_MUTATION);
+    const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState, 'line 13 login')
         try {
             const mutationResponse = await login({
                 variables: { username: formState.username, password: formState.password },
             });
-            console.log(mutationResponse, 'line 18 login')
-            const token = mutationResponse.data.login.token;
+            const { token, employee } = mutationResponse.data.login;
+            console.log(token, 'line 20 login')
+            dispatch({ type: UPDATE_EMPLOYEE, payload: { token: token, _id: employee._id }})
             Auth.login(token);
         }
         catch (e) {
@@ -35,7 +39,7 @@ function Login(props) {
 
     // useEffect(() => {
     //     if (data && data.login) {
-    //         props.setUser({ token: data.login.token, author: data.login.author });
+    //         props.setEmployee({ token: data.login.token, employee: data.login.author });
     //     }
     // }, [data]);
 
