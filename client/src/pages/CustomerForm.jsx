@@ -5,12 +5,15 @@ const CustomerForm = () => {
   const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",
+    username: "",
+    password: "",
     birthDate: "",
     email: "",
     phone: "",
   });
 
-  const { firstName, lastName, birthDate, email, phone } = formState;
+  const { firstName, lastName, birthDate, email, phone, username, password } =
+    formState;
 
   function handleChange(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
@@ -31,7 +34,7 @@ const CustomerForm = () => {
         >
           <Form.Control
             name="firstName"
-            type="name"
+            type="text"
             placeholder="First Name"
             defaultValue={firstName}
             onChange={handleChange}
@@ -45,9 +48,35 @@ const CustomerForm = () => {
         >
           <Form.Control
             name="lastName"
-            type="name"
+            type="text"
             placeholder="Last Name"
             defaultValue={lastName}
+            onChange={handleChange}
+          />
+        </FloatingLabel>
+        <FloatingLabel
+          controlId="floatingInput"
+          label="username"
+          className="mb-3"
+        >
+          <Form.Control
+            name="username"
+            type="text"
+            placeholder="User Name"
+            defaultValue={username}
+            onChange={handleChange}
+          />
+        </FloatingLabel>
+        <FloatingLabel
+          controlId="floatingInput"
+          label="password"
+          className="mb-3"
+        >
+          <Form.Control
+            name="password"
+            type="password"
+            placeholder="Password"
+            defaultValue={password}
             onChange={handleChange}
           />
         </FloatingLabel>
