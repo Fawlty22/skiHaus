@@ -1,28 +1,39 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-// import { QUERY_BOOKS } from '../graphql/queries';
+import Auth from '../utils/auth';
+import { QUERY_EMPLOYEE } from '../graphql/queries';
+import { StoreProvider } from '../utils/GlobalContext';
 
-const Dashboard = (props) => {
-  // const { data, loading, error } = useQuery(QUERY_BOOKS, {
+const Dashboard = () => {
+
+  // const { data, loading, error } = useQuery(QUERY_EMPLOYEE, {
   //   context: {
   //     headers: {
-  //       'Authorization': `Bearer ${props.user.token}`
+  //       'Authorization': `Bearer ${props.employee.token}`
   //     },
   //   },
   //   fetchPolicy: 'no-cache'
   // });
+  
+  let employee = Auth.getProfile();
 
-  //redirect to login if error in a query, not defined yet
-//   if (error) {
-//     return <Redirect to={"/login"} />
-//   }
+  // redirect to login if error in a query, not defined yet
+  if (!employee) {
+    return <Redirect to={"/login"} />
+  }
 
   return (
     <div>
-      Dashboard
+      {employee ?
+      <div>
+        Dashboard
+      </div>
+      :
+      <span>You must log in to access the dashboard</span>
+      }
     </div>
-  );
-};
+    );
+  };
 
 export default Dashboard;
