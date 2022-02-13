@@ -15,8 +15,8 @@ const typeDefs = gql`
   }
 
   type Contract {
-    checkOutDate: Date
-    checkInDate: Date
+    checkOutDate: String
+    checkInDate: String
     active: Boolean
     equipment: [Equipment]
   }
@@ -27,9 +27,9 @@ const typeDefs = gql`
   }
 
   type Equipment {
-    boots: [boot]
-    skis: [ski]
-    snowboards: [snowboard]
+    boots: [Boot]
+    skis: [Ski]
+    snowboards: [Snowboard]
   }
 
   type Ski {
@@ -80,6 +80,17 @@ const typeDefs = gql`
       email: String!
       phone: String!
     ): User
+    createContract(
+      user: String!, 
+      checkOutDate: String!, 
+      checkInDate: String!, 
+      equipment: [ID]!
+    ): User
+    addSki(
+      brand: String!
+      model: String!
+      condition: String!
+    ): Ski
   }
 `;
 

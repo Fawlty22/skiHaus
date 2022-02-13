@@ -20,7 +20,7 @@ const bootSchema = new Schema(
     {
         toJSON: {
             virtuals: false
-          }
+        }
     }
 );
 

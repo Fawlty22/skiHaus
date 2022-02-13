@@ -14,6 +14,7 @@ import CustomerForm from './pages/CustomerForm';
 import Header from './components/Header';
 import CreateContract from './pages/CreateContract.jsx'
 import { StoreProvider } from "./utils/GlobalContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 const httpLink = createHttpLink({

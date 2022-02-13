@@ -64,6 +64,11 @@ const resolvers = {
 
       return user;
     },
+    addSki: async (parent, args) => {
+      const ski = await Ski.create(args);
+
+      return ski;
+    },
     createContract: async (parent, args) => {
       const contract = await Contract.create(args);
       const equipment = await Contract.findOneAndUpdate(
