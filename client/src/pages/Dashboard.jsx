@@ -1,6 +1,7 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { Card, Button } from "react-bootstrap";
 // import { QUERY_BOOKS } from '../graphql/queries';
 
 const Dashboard = (props) => {
@@ -14,14 +15,21 @@ const Dashboard = (props) => {
   // });
 
   //redirect to login if error in a query, not defined yet
-//   if (error) {
-//     return <Redirect to={"/login"} />
-//   }
+  //   if (error) {
+  //     return <Redirect to={"/login"} />
+  //   }
 
   return (
-    <div>
-      Dashboard
-    </div>
+    <Card>
+      <Card.Header as="h5">Featured</Card.Header>
+      <Card.Body>
+        <Card.Title>Special title treatment</Card.Title>
+        <Card.Text>
+          With supporting text below as a natural lead-in to additional content.
+        </Card.Text>
+        <Button variant="primary">Go somewhere</Button>
+      </Card.Body>
+    </Card>
   );
 };
 
