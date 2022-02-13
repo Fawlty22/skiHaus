@@ -11,11 +11,25 @@ const typeDefs = gql`
     lastName: String
     birthDate: String
     phone: String
+    Contracts: [Contract]
+  }
+
+  type Contract {
+    checkOutDate: String
+    checkInDate: String
+    active: Boolean
+    equipment: [Equipment]
   }
 
   type Employee {
     _id: ID
     username: String
+  }
+
+  type Equipment {
+    boots: [Boot]
+    skis: [Ski]
+    snowboards: [Snowboard]
   }
 
   type Ski {
@@ -55,8 +69,11 @@ const typeDefs = gql`
 
   type Mutation {
     addEmployee(username: String!, password: String!): Auth
+
     updateEmployee(username: String!, password: String!): Employee
+
     login(username: String!, password: String!): Auth
+
     addUser(
       firstName: String!
       lastName: String!
@@ -66,6 +83,17 @@ const typeDefs = gql`
       email: String!
       phone: String!
     ): User
+
+    createContract(
+      user: String!
+      checkOutDate: String!
+      checkInDate: String!
+      equipment: [ID]!
+    ): User
+
+    addSki(brand: String!, model: String!, condition: String!): Ski
+    addSnowboard(brand: String!, model: String!, condition: String!): Snowboard
+    addBoot(brand: String!, model: String!, condition: String!): Boot
   }
 `;
 

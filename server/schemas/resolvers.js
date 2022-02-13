@@ -1,5 +1,12 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Employee, Snowboard, Ski, Boot } = require("../models");
+const {
+  User,
+  Employee,
+  Snowboard,
+  Ski,
+  Boot,
+  Contract,
+} = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -63,6 +70,43 @@ const resolvers = {
       const user = await User.create(args);
 
       return user;
+    },
+    addSki: async (parent, args) => {
+      const ski = await Ski.create(args);
+
+      return ski;
+    },
+    addSnowboard: async (parent, args) => {
+      const snowboard = await Snowboard.create(args);
+
+      return snowboard;
+    },
+    addBoot: async (parent, args) => {
+      const boot = await Boot.create(args);
+
+      return boot;
+    },
+    createContract: async (parent, args) => {
+      const contract = await Contract.create(args);
+      const equipment = await Contract.findOneAndUpdate(
+        { _id: contract._id },
+        {
+          $addToSet: {
+            equipment: {
+              boots: [...args.equipment.boots],
+              skis: [...args.equipment.skis],
+              snowboards: [...args.equipment.snowboards],
+            },
+          },
+        },
+        { new: true }
+      );
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: args.user._id }, //update for how the info comes into the route
+        { $push: { contracts: contract._id } },
+        { new: true }
+      );
+      return updatedUser;
     },
   },
 };
