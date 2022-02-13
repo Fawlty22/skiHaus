@@ -1,7 +1,7 @@
-const User = require('./User');
-const Ski = require('./Ski');
-const Boot = require('./Boot');
-const Snowboard = require('./Snowboard');
+const Customer = require('./Customer');
+const Equipment = require('./Equipment');
+const Contract = require('./Contract');
+const Category = require('./Category');
 const Employee = require('./Employee');
 
-module.exports = { User, Ski, Snowboard, Boot, Employee };
+module.exports = { Employee, Customer, Equipment, Contract, Category  };

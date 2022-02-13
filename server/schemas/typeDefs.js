@@ -3,7 +3,7 @@ const { gql } = require("apollo-server-express");
 
 // create our typeDefs
 const typeDefs = gql`
-  type User {
+  type Customer {
     _id: ID
     username: String
     email: String
@@ -18,46 +18,58 @@ const typeDefs = gql`
     username: String
   }
 
-  type Ski {
-    _id: ID
-    brand: String
-    model: String
-    condition: String
-  }
-
-  type Snowboard {
-    _id: ID
-    brand: String
-    model: String
-    condition: String
-  }
-
-  type Boot {
-    _id: ID
-    brand: String
-    model: String
-    condition: String
-  }
-
+type Equipment {
+  _id: ID
+  name: String
+  description: String
+  image: String
+  quantity: Int
+  price: Float
+  category: []
+}
+type: Category: {
+  _id: ID
+  name: String
+}
+type Contract: {
+  _id: ID
+  rentalDate: Date
+  products: [Equipment]
+  customer: Customer
+}
   type Auth {
     token: ID
     employee: Employee
   }
 
   type Query {
-    users: [User]
-    employee: Employee
+    custumers: [Customer]
+    contract(_id: ID!): Contract
     employees: [Employee]
-    skis: [Ski]
-    snowboards: [Snowboard]
-    boots: [Boot]
+   equipment(category: ID, Name: String!): [Eqipment]
   }
 
   type Mutation {
     addEmployee(username: String!, password: String!): Auth
     updateEmployee(username: String!, password: String!): Employee
     login(username: String!, password: String!): Auth
-    addUser(
+  addCategory (name: String!): Category
+  addContract (
+    _id: ID
+    rentalDate: Date!
+    customer: Customer
+    equipment:[Equipment]
+
+  ): Contract
+    addEquipment(
+      name: String!, 
+      description: String!,
+      Image: String!,
+      price: Int!,
+      quantity: Int!,): Equipment
+
+    addCustomer(
+      _id: ID
       firstName: String!
       lastName: String!
       username: String!
@@ -65,7 +77,7 @@ const typeDefs = gql`
       birthDate: String!
       email: String!
       phone: String!
-    ): User
+    ): Customer
   }
 `;
 

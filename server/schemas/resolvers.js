@@ -1,32 +1,62 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Employee, Snowboard, Ski, Boot } = require("../models");
+const { Employee, Category , Customer, Equipment } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    users: async () => {
-      return User.find().select("-__v -password");
+    //find all categories
+    categories: async () => {
+      return await Category.find();
     },
-    boots: async () => {
-      return Boot.find().select("-__v");
-    },
-    skis: async () => {
-      return Ski.find().select("-__v");
-    },
-    snowboards: async () => {
-      return Snowboard.find().select("-__v");
-    },
-    employee: async (parent, args, context) => {
-      if (context.employee) {
-        const employee = await Employee.findById(context.employee._id);
-        return employee;
+    //find all equipment
+    equipment: async (parent, { category, name }) => {
+      const params = {};
+
+      if (category) {
+        params.category = category;
       }
-      throw new AuthenticationError("Not logged in");
+
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
+
+      return await Equipment.find(params).populate('category');
     },
-    employees: async () => {
-      return await Employee.find();
+    //find single equipment
+    equipment: async (parent, { _id }) => {
+      return await Equipment.findById(_id).populate('category');
     },
+    //finnd all customers and populate contracts 
+    customer: async (parent, args, context) => {
+      if (context.customer) {
+        const customer = await Customer.findById(context.customer._id).populate({
+          path: 'contract.equipment',
+          populate: 'category'
+        });
+
+        customer.contract.sort((a, b) => b.rentalDate - a.rentalDate);
+
+        return customer;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+    contract: async (parent, { _id }, context) => {
+      if (context.customer) {
+        const customer = await Customer.findById(context.customer._id).populate({
+          path: 'contract.equipment',
+          populate: 'category'
+        });
+
+        return Customer.contract.id(_id);
+      }
+
+      throw new AuthenticationError('Not logged in');
+    }
   },
+ 
   Mutation: {
     addEmployee: async (parent, args) => {
       const employee = await Employee.create(args);
@@ -59,10 +89,10 @@ const resolvers = {
 
       return { token, employee };
     },
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+    addCustomer: async (parent, args) => {
+      const customer = await Customer.create(args);
 
-      return user;
+      return customer;
     },
   },
 };
