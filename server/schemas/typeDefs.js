@@ -1,6 +1,9 @@
 // import the gql tagged template function
 const { gql } = require("apollo-server-express");
 
+
+
+
 // create our typeDefs
 const typeDefs = gql`
   type Customer {
@@ -12,6 +15,11 @@ const typeDefs = gql`
     birthDate: String
     phone: String
   }
+  
+
+type Date {
+   created: Date
+}
 
   type Employee {
     _id: ID
@@ -25,13 +33,13 @@ type Equipment {
   image: String
   quantity: Int
   price: Float
-  category: []
+  
 }
-type: Category: {
+type Category {
   _id: ID
   name: String
 }
-type Contract: {
+type Contract {
   _id: ID
   rentalDate: Date
   products: [Equipment]
@@ -46,7 +54,7 @@ type Contract: {
     custumers: [Customer]
     contract(_id: ID!): Contract
     employees: [Employee]
-   equipment(category: ID, Name: String!): [Eqipment]
+   equipment(category: ID, Name: String!): [Equipment]
   }
 
   type Mutation {

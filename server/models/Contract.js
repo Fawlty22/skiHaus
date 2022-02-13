@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const contractSchema = new Schema({
-  rentalDate: {
-    type: Date,
-    default: Date.now
-  },
+
   Equipment: [
     {
       type: Schema.Types.ObjectId,
