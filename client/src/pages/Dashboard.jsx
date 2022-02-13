@@ -1,22 +1,14 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 import { QUERY_EMPLOYEE } from '../graphql/queries';
 import { StoreProvider } from '../utils/GlobalContext';
 
 const Dashboard = () => {
-
-  // const { data, loading, error } = useQuery(QUERY_EMPLOYEE, {
-  //   context: {
-  //     headers: {
-  //       'Authorization': `Bearer ${props.employee.token}`
-  //     },
-  //   },
-  //   fetchPolicy: 'no-cache'
-  // });
   
   let employee = Auth.getProfile();
+  console.log(employee)
 
   // redirect to login if error in a query, not defined yet
   if (!employee) {
@@ -26,11 +18,13 @@ const Dashboard = () => {
   return (
     <div>
       {employee ?
-      <div>
-        Dashboard
-      </div>
-      :
-      <span>You must log in to access the dashboard</span>
+        <div>
+          <button>
+            <Link to="/contract">Create Contract</Link>
+          </button>
+        </div>
+        :
+        ''
       }
     </div>
     );

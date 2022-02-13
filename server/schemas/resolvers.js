@@ -1,81 +1,33 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { Employee, Category , Customer, Equipment } = require("../models");
+const { User, Employee, Snowboard, Ski, Boot, Contract } = require("../models");
 const { signToken } = require("../utils/auth");
-import { GraphQLScalarType } from 'graphql';
-import { Kind } from 'graphql/language';
 
 const resolvers = {
   Query: {
-    //find all categories
-    categories: async () => {
-      return await Category.find();
+    users: async () => {
+      return User.find().select("-__v -password");
     },
-    //find all equipment
-    equipment: async (parent, { category, name }) => {
-      const params = {};
-
-      if (category) {
-        params.category = category;
-      }
-
-      if (name) {
-        params.name = {
-          $regex: name
-        };
-      }
-
-      return await Equipment.find(params).populate('category');
+    boots: async () => {
+      return Boot.find().select("-__v");
     },
-    //find single equipment
-    equipment: async (parent, { _id }) => {
-      return await Equipment.findById(_id).populate('category');
+    skis: async () => {
+      return Ski.find().select("-__v");
     },
-    //finnd all customers and populate contracts 
-    customer: async (parent, args, context) => {
-      if (context.customer) {
-        const customer = await Customer.findById(context.customer._id).populate({
-          path: 'contract.equipment',
-          populate: 'category'
-        });
-
-        customer.contract.sort((a, b) => b.rentalDate - a.rentalDate);
-
-        return customer;
-      }
-
-      throw new AuthenticationError('Not logged in');
+    snowboards: async () => {
+      return Snowboard.find().select("-__v");
     },
-    contract: async (parent, { _id }, context) => {
-      if (context.customer) {
-        const customer = await Customer.findById(context.customer._id).populate({
-          path: 'contract.equipment',
-          populate: 'category'
-        });
-
-        return Customer.contract.id(_id);
+    employee: async (parent, args, context) => {
+      if (context.employee) {
+        const employee = await Employee.findById(context.employee._id);
+        return employee;
       }
-
-      throw new AuthenticationError('Not logged in');
-    },  
-    
-    Date: new GraphQLScalarType({
-      name: 'Date',
-      description: 'Date custom scalar type',
-      parseValue(value) {
-        return new Date(value); // value from the client
-      },
-      serialize(value) {
-        return value.getTime(); // value sent to the client
-      },
-      parseLiteral(ast) {
-        if (ast.kind === Kind.INT) {
-          return parseInt(ast.value, 10); // ast value is always in string format
-        }
-        return null;
-      },
-    
+      throw new AuthenticationError("Not logged in");
+    },
+    employees: async () => {
+      return await Employee.find();
+    }
   },
- 
+
   Mutation: {
     addEmployee: async (parent, args) => {
       const employee = await Employee.create(args);
@@ -108,10 +60,42 @@ const resolvers = {
 
       return { token, employee };
     },
-    addCustomer: async (parent, args) => {
-      const customer = await Customer.create(args);
+    addSki: async (parent, args) => {
+      const ski = await Ski.create(args);
 
-      return customer;
+      return ski;
+    },
+    addSnowboard: async (parent, args) => {
+      const snowboard = await Snowboard.create(args);
+
+      return snowboard;
+    },
+    addBoot: async (parent, args) => {
+      const boot = await Boot.create(args);
+
+      return boot;
+    },
+    createContract: async (parent, args) => {
+      const contract = await Contract.create(args);
+      const equipment = await Contract.findOneAndUpdate(
+        { _id: contract._id },
+        {
+          $addToSet: {
+            equipment: {
+              boots: [...args.equipment.boots],
+              skis: [...args.equipment.skis],
+              snowboards: [...args.equipment.snowboards],
+            },
+          },
+        },
+        { new: true }
+      );
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: args.user._id }, //update for how the info comes into the route
+        { $push: { contracts: contract._id } },
+        { new: true }
+      );
+      return updatedUser;
     },
   },
 };

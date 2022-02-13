@@ -1,21 +1,25 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
+const EquipmentSchema = require('./Equipment');
 
-const { Schema } = mongoose;
-
-const contractSchema = new Schema({
-
-  Equipment: [
+const contractSchema = new Schema(
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Equipment'
+        checkOutDate: {
+            type: Date,
+            required: true
+        },
+        checkInDate: {
+            type: Date,
+            required: true
+        },
+        active: {
+            type: Boolean,
+            required: true,
+            default: () => new Types.boolean()
+        },
+        equipment: [EquipmentSchema]
     }
-  ],
-  customer: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Customer'
-  }]
-});
+)
 
-const Contract = mongoose.model('Order', contractSchema);
+const Contract = model('Contract', contractSchema);
 
 module.exports = Contract;

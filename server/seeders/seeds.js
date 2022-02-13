@@ -26,7 +26,6 @@ db.once('open', async () => {
       condition: 'Good',
       price: 10.00, 
       quantity: 3,
-      category: "Boots"
 
     },
       {
@@ -35,7 +34,6 @@ db.once('open', async () => {
       condition: 'Fair',
       price: 10.00,
       quantity: 15,
-      category: "Boots"
     },
     {
       name: 'Faction',
@@ -43,7 +41,6 @@ db.once('open', async () => {
       condition: 'Good',
       price: 30,
       quantity: 5,
-      category: "Ski"
     },
       {
       name: 'Faction',
@@ -51,7 +48,6 @@ db.once('open', async () => {
       condition: 'New',
       price: 25.00,
       quantity: 6,
-      category: "Ski"
     },
       {
       name: 'Black Crows',
@@ -59,7 +55,6 @@ db.once('open', async () => {
       condition: 'Good',
       price: 35.00,
       quantity: 3,
-      category: "Ski"
     },
       {
       name: '4FRNT',
@@ -67,7 +62,6 @@ db.once('open', async () => {
       condition: 'Good',
       price: 18.00,
       quantity: 8,
-      category: "Snowboard"
     },
       {
       name: 'Elan',
@@ -75,7 +69,6 @@ db.once('open', async () => {
       condition: 'New',
       price: 55.00,
       quantity: 7,
-      category: "Snowboard"
       }
   ];
 

@@ -1,83 +1,90 @@
 // import the gql tagged template function
 const { gql } = require("apollo-server-express");
 
-
-
-
 // create our typeDefs
 const typeDefs = gql`
-  type Customer {
-    _id: ID
-    username: String
-    email: String
-    firstName: String
-    lastName: String
-    birthDate: String
-    phone: String
-  }
-  
-
-type Date {
-   created: Date
+type User {
+  _id: ID
+  username: String
+  email: String
+  firstName: String
+  lastName: String
+  birthDate: String
+  phone: String
+  contracts: [Contract]
 }
+
+  type Contract {
+    _id: ID
+    checkOutDate: String
+    checkInDate: String
+    active: Boolean
+    equipment: Equipment!
+  }
 
   type Employee {
     _id: ID
     username: String
   }
 
-type Equipment {
-  _id: ID
-  name: String
-  description: String
-  image: String
-  quantity: Int
-  price: Float
-  
-}
-type Category {
-  _id: ID
-  name: String
-}
-type Contract {
-  _id: ID
-  rentalDate: Date
-  products: [Equipment]
-  customer: Customer
-}
+  type Equipment {
+    boots: [Boot]
+    skis: [Ski]
+    snowboards: [Snowboard]
+  }
+
+  input EquipmentInput {
+    boots: [ID]
+    skis: [ID]
+    snowboards: [ID]
+  }
+
+  type Ski {
+    _id: ID
+    brand: String
+    model: String
+    condition: String
+  }
+
+  type Snowboard {
+    _id: ID
+    brand: String
+    model: String
+    condition: String
+  }
+
+  type Boot {
+    _id: ID
+    brand: String
+    model: String
+    condition: String
+  }
+
   type Auth {
     token: ID
     employee: Employee
   }
 
+
   type Query {
-    custumers: [Customer]
-    contract(_id: ID!): Contract
+    users: [User]
+    employee: Employee
     employees: [Employee]
-   equipment(category: ID, Name: String!): [Equipment]
+    contract(_id: ID!): Contract
+    skis: [Ski]
+    snowboards: [Snowboard]
+    boots: [Boot]
   }
 
   type Mutation {
+
     addEmployee(username: String!, password: String!): Auth
+
     updateEmployee(username: String!, password: String!): Employee
+
     login(username: String!, password: String!): Auth
-  addCategory (name: String!): Category
-  addContract (
-    _id: ID
-    rentalDate: Date!
-    customer: Customer
-    equipment:[Equipment]
 
-  ): Contract
-    addEquipment(
-      name: String!, 
-      description: String!,
-      Image: String!,
-      price: Int!,
-      quantity: Int!,): Equipment
-
-    addCustomer(
-      _id: ID
+    addUser(
       firstName: String!
       lastName: String!
       username: String!
@@ -85,7 +92,18 @@ type Contract {
       birthDate: String!
       email: String!
       phone: String!
-    ): Customer
+    ): User
+
+    createContract(
+      user: String!
+      checkOutDate: String!
+      checkInDate: String!
+      equipment: EquipmentInput!
+    ): User
+
+    addSki(brand: String!, model: String!, condition: String!): Ski
+    addSnowboard(brand: String!, model: String!, condition: String!): Snowboard
+    addBoot(brand: String!, model: String!, condition: String!): Boot
   }
 `;
 
