@@ -40,7 +40,12 @@ const userSchema = new Schema(
       required: true,
       trim: true,
     },
-  },
+    contracts: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Contract'
+
+  }],
+},
   {
     toJSON: {
       virtuals: true,

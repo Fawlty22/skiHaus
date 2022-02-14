@@ -1,80 +1,147 @@
 const faker = require('faker');
 
 const db = require('../config/connection');
-const { Contract, Customer, Employee, Equipment } = require('../models');
+const { Ski, User, Boot, Snowboard } = require('../models');
 
 db.once('open', async () => {
-  await Equipment.deleteMany({});
- 
+  // await Ski.deleteMany({});
+  // await Boot.deleteMany({});
+  // await Snowboard.deleteMany({});
+  // await User.deleteMany({});
+
   // create user data
-  const employeeData = [];
+  const userData = [];
 
   for (let i = 0; i < 10; i += 1) {
     const username = faker.internet.userName();
     const email = faker.internet.email(username);
     const password = faker.internet.password();
 
-    employeeData.push({ username, email, password });
+    userData.push({ username, email, password });
   }
 
-  const createdEmployees = await Employee.collection.insertMany(employeeData);
+  const createdUsers = await User.collection.insertMany(userData);
 
-  const equipmentData = [
-    {
-      name: 'Volkl',
-     description: 'Scratch',
-      condition: 'Good',
-      price: 10.00, 
-      quantity: 3,
+  // const skiData = [
+  //   {
+  //     brand: 'Volkl',
+  //     model: 'Scratch',
+  //     condition: 'Good'
+  //   },
+  //   {
+  //     brand: 'Armada',
+  //     model: 'ARV 96',
+  //     condition: 'Fair'
+  //   },
+  //   {
+  //     brand: 'Faction',
+  //     model: 'Candide 5.0',
+  //     condition: 'Good'
+  //   },
+  //   {
+  //     brand: 'Faction',
+  //     model: 'Candide 3.0',
+  //     condition: 'New'
+  //   },
+  //   {
+  //     brand: 'Black Crows',
+  //     model: 'Atris',
+  //     condition: 'Good'
+  //   },
+  //   {
+  //     brand: '4FRNT',
+  //     model: 'Devastator',
+  //     condition: 'Good'
+  //   },
+  //   {
+  //     brand: 'Elan',
+  //     model: 'Ripstick 106',
+  //     condition: 'New'
+  //   }
+  // ];
 
-    },
-      {
-      name: 'Armada',
-     description: 'ARV 96',
-      condition: 'Fair',
-      price: 10.00,
-      quantity: 15,
+  // const createdSkis = await Ski.collection.insertMany(skiData);
+
+  const bootData = [
+    {
+      brand: 'Atomic',
+      model: 'Hawx 130',
+      condition: 'Good'
     },
     {
-      name: 'Faction',
-     description: 'Candide 5.0',
-      condition: 'Good',
-      price: 30,
-      quantity: 5,
+      brand: 'Atomic',
+      model: 'HAWX 130',
+      condition: 'Fair'
     },
-      {
-      name: 'Faction',
-     description: 'Candide 3.0',
-      condition: 'New',
-      price: 25.00,
-      quantity: 6,
+    {
+      brand: 'Tecnica',
+      model: 'Mach1 120',
+      condition: 'Good'
     },
-      {
-      name: 'Black Crows',
-     description: 'Atris',
-      condition: 'Good',
-      price: 35.00,
-      quantity: 3,
+    {
+      brand: 'Rossignol',
+      model: 'Evo 70',
+      condition: 'New'
     },
-      {
-      name: '4FRNT',
-     description: 'Devastator',
-      condition: 'Good',
-      price: 18.00,
-      quantity: 8,
+    {
+      brand: 'Full Tilt',
+      model: 'Ascendant SC',
+      condition: 'Good'
     },
-      {
-      name: 'Elan',
-     description: 'Ripstick 106',
-      condition: 'New',
-      price: 55.00,
-      quantity: 7,
-      }
+    {
+      brand: 'K2',
+      model: 'BFC 90',
+      condition: 'Good'
+    },
+    {
+      brand: 'Tecnica',
+      model: 'Cochise 120',
+      condition: 'New'
+    }
   ];
-
-  const createdEquipment= await Equipment.collection.insertMany(equipmentData);
-
   
+  const createdBoots = await Boot.collection.insertMany(bootData);
+
+  const snowboardData = [
+    {
+      brand: 'Jones',
+      model: 'Flagship',
+      condition: 'Good'
+    },
+    {
+      brand: 'Lib Tech',
+      model: 'Orca',
+      condition: 'Fair'
+    },
+    {
+      brand: 'Jones',
+      model: 'Stratos',
+      condition: 'Good'
+    },
+    {
+      brand: 'Salomon',
+      model: 'Sickstick',
+      condition: 'New'
+    },
+    {
+      brand: 'Burton',
+      model: 'Custom X',
+      condition: 'Good'
+    },
+    {
+      brand: 'Salomon',
+      model: 'Sight 2022',
+      condition: 'Good'
+    },
+    {
+      brand: 'Ride',
+      model: 'Warpig',
+      condition: 'New'
+    }
+  ];
+  
+  const createdSnowboards = await Snowboard.collection.insertMany(snowboardData);
+
 
   console.log('all done!');
   process.exit(0);
