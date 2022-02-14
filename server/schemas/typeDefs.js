@@ -18,8 +18,8 @@ type User {
     _id: ID
     checkOutDate: String
     checkInDate: String
+    equipment: Equipment
     active: Boolean
-    equipment: Equipment!
   }
 
   type Employee {
@@ -70,7 +70,8 @@ type User {
     users: [User]
     employee: Employee
     employees: [Employee]
-    contract(_id: ID!): Contract
+    contract(id: ID!): Contract
+    contracts: [Contract]
     skis: [Ski]
     snowboards: [Snowboard]
     boots: [Boot]

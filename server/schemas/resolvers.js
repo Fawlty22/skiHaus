@@ -12,7 +12,8 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().select("-__v -password");
+      return User.find().select("-__v -password")
+      .populate('contracts');
     },
     boots: async () => {
       return Boot.find().select("-__v");
@@ -32,7 +33,16 @@ const resolvers = {
     },
     employees: async () => {
       return await Employee.find();
-    }
+    },
+    //find all contract
+    contracts: async () => {
+      return await Contract.find()
+    }, 
+    //find one contract
+    contract: async (parent, args) => {
+      return await Contract.findOne({ _id: args.id})
+    }, 
+
   },
 
   Mutation: {
@@ -48,6 +58,12 @@ const resolvers = {
           new: true,
         });
       }
+    },    
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      
+
+      return user;
     },
     login: async (parent, { username, password }) => {
       console.log("login mutation line 47", username, password);

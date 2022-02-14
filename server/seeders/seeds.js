@@ -10,25 +10,23 @@ const User = require('../models/User')
 
 
 db.once('open', async () => {
- 
-    await Ski.deleteMany({});
-    await Boot.deleteMany({});
-    await Snowboard.deleteMany({});
-    await User.deleteMany({});
-    await Employee.deleteMany({})
+  await Ski.deleteMany({});
+  await Boot.deleteMany({});
+  await Snowboard.deleteMany({});
+  await User.deleteMany({});
 
   // create user data
-  const employeeData = [];
+  const userData = [];
 
   for (let i = 0; i < 10; i += 1) {
     const username = faker.internet.userName();
     const email = faker.internet.email(username);
     const password = faker.internet.password();
 
-    employeeData.push({ username, email, password });
+    userData.push({ username, email, password });
   }
 
-  const createdEmployees = await Employee.collection.insertMany(employeeData);
+  const createdUsers = await User.collection.insertMany(userData);
 
     // create user data
     const userData = [];
