@@ -95,10 +95,11 @@ type User {
     ): User
 
     createContract(
+      active: Boolean
       user: String!
       checkOutDate: String!
       checkInDate: String!
-      equipment: EquipmentInput!
+      equipment: EquipmentInput
     ): User
 
     addSki(brand: String!, model: String!, condition: String!): Ski

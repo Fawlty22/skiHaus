@@ -14,7 +14,8 @@ const equipmentSchema = new Schema(
         snowboards: [{
             type: Schema.Types.ObjectId,
             ref: "Snowboard"
-        }]
+        }],
+        
     }
 )
 

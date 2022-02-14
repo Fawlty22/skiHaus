@@ -1,5 +1,12 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Employee, Snowboard, Ski, Boot, Contract } = require("../models");
+const { Employee, Contract } = require("../models");
+//again fucking ridiculous but it wont let me destructure these 
+const User = require('../models/User')
+const Ski = require('../models/Ski')
+const Snowboard = require('../models/Snowboard')
+const Boot = require('../models/Boot')
+
+
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -63,7 +70,7 @@ const resolvers = {
     addSki: async (parent, args) => {
       const ski = await Ski.create(args);
 
-      return ski;
+      return ski; 
     },
     addSnowboard: async (parent, args) => {
       const snowboard = await Snowboard.create(args);
@@ -76,28 +83,24 @@ const resolvers = {
       return boot;
     },
     createContract: async (parent, args) => {
+      console.log('args', args)
+
       const contract = await Contract.create(args);
-      const equipment = await Contract.findOneAndUpdate(
-        { _id: contract._id },
-        {
-          $addToSet: {
-            equipment: {
-              boots: [...args.equipment.boots],
-              skis: [...args.equipment.skis],
-              snowboards: [...args.equipment.snowboards],
-            },
-          },
-        },
-        { new: true }
-      );
+      console.log('contract', contract)
+
       const updatedUser = await User.findOneAndUpdate(
-        { _id: args.user._id }, //update for how the info comes into the route
-        { $push: { contracts: contract._id } },
+        { username: args.user }, 
+        { $addToSet: { contracts: contract._id } },
         { new: true }
       );
+      
+        console.log('updatedUser', updatedUser)
       return updatedUser;
     },
   },
 };
 
 module.exports = resolvers;
+
+
+
