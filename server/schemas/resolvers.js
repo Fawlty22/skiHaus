@@ -13,7 +13,8 @@ const resolvers = {
   Query: {
     users: async () => {
       return User.find().select("-__v -password")
-      .populate('contracts');
+      .populate('contracts')
+      ;
     },
     boots: async () => {
       return Boot.find().select("-__v");
@@ -111,25 +112,57 @@ const resolvers = {
       console.log('contract', contract)
       console.log('_*_*_*_*_*_*_', contract.equipment.boots )
 
+      const updatedSkis = await Ski.updateMany(
+        { _id: { $in: contract.equipment.skis } },
+        { $set: { available: false } },
+        { new: true }
+      );
+      const updatedSnowboards = await Snowboard.updateMany(
+        { _id: { $in: contract.equipment.snowboards } },
+        { $set: { available: false } },
+        { new: true }
+      );
+      const updatedBoots = await Boot.updateMany(
+        { _id: { $in: contract.equipment.boots } },
+        { $set: { available: false } },
+        { new: true }
+      );
+
       const updatedUser = await User.findOneAndUpdate(
         { username: args.user }, 
         { $addToSet: { contracts: contract._id } },
         { new: true }
-      );
+      )
+      .populate('contracts');
       
         console.log('updatedUser', updatedUser)
+
       return updatedUser;
     },
     deactivateContract: async (parent, args) => {
-      console.log(args)
-
-      const contract = Contract.findOneAndUpdate(
+      //find contract by ID
+      const updatedContract = await Contract.findOneAndUpdate(
         { _id: args._id },
-        { $setField: { active: false } },
+        { $set: { active: false } },
         { new: true }
-      )
+      );
+      const updatedSkis = await Ski.updateMany(
+        { _id: { $in: updatedContract.equipment.skis } },
+        { $set: { available: true } },
+        { new: true }
+      );
+      const updatedSnowboards = await Snowboard.updateMany(
+        { _id: { $in: updatedContract.equipment.snowboards } },
+        { $set: { available: true } },
+        { new: true }
+      );
+      const updatedBoots = await Boot.updateMany(
+        { _id: { $in: updatedContract.equipment.boots } },
+        { $set: { available: true } },
+        { new: true }
+      );
 
-        console.log(contract)
+        return updatedContract;
     }
   },
 };
