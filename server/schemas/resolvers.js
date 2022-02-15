@@ -37,10 +37,16 @@ const resolvers = {
     //find all contract
     contracts: async () => {
       return await Contract.find()
+      .populate('equipment.boots')
+      .populate('equipment.skis')
+      .populate('equipment.snowboards')
     }, 
     //find one contract
     contract: async (parent, args) => {
       return await Contract.findOne({ _id: args.id})
+      .populate('equipment.boots')
+      .populate('equipment.skis')
+      .populate('equipment.snowboards')
     }, 
 
   },
@@ -103,6 +109,7 @@ const resolvers = {
 
       const contract = await Contract.create(args);
       console.log('contract', contract)
+      console.log('_*_*_*_*_*_*_', contract.equipment.boots )
 
       const updatedUser = await User.findOneAndUpdate(
         { username: args.user }, 
@@ -113,6 +120,17 @@ const resolvers = {
         console.log('updatedUser', updatedUser)
       return updatedUser;
     },
+    deactivateContract: async (parent, args) => {
+      console.log(args)
+
+      const contract = Contract.findOneAndUpdate(
+        { _id: args._id },
+        { $setField: { active: false } },
+        { new: true }
+      )
+
+        console.log(contract)
+    }
   },
 };
 

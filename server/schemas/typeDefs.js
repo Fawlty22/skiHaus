@@ -44,6 +44,7 @@ type User {
     brand: String
     model: String
     condition: String
+    available: Boolean
   }
 
   type Snowboard {
@@ -51,6 +52,7 @@ type User {
     brand: String
     model: String
     condition: String
+    available: Boolean
   }
 
   type Boot {
@@ -58,6 +60,7 @@ type User {
     brand: String
     model: String
     condition: String
+    available: Boolean
   }
 
   type Auth {
@@ -102,6 +105,10 @@ type User {
       checkInDate: String!
       equipment: EquipmentInput
     ): User
+
+    deactivateContract(
+      _id: ID!
+    ): Contract
 
     addSki(brand: String!, model: String!, condition: String!): Ski
     addSnowboard(brand: String!, model: String!, condition: String!): Snowboard
