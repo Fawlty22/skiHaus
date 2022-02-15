@@ -8,16 +8,25 @@ export const QUERY_EMPLOYEE = gql`
   }
 `;
 
-export const ALLEQUIPMENT_QUERY = gql`
-  {
-    skis {
-      _id
-    }
-    snowboards {
-      _id
-    }
-    boots {
-      _id
-    }
-  }
-`;
+// export const ALLEQUIPMENT_QUERY = gql`
+//   allEquipment {
+//     skis {
+//       _id
+//       brand
+//       model
+//       condition
+//     }
+//     snowboards {
+//       _id
+//       brand
+//       model
+//       condition
+//     }
+//     boots {
+//       _id
+//       brand
+//       model
+//       condition
+//     }
+//   }
+// `;

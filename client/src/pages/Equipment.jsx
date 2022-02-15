@@ -4,8 +4,8 @@ import AddSnowboardModal from "../Components/AddSnowboard";
 import AddBootModal from "../Components/AddBootModal";
 import React from "react";
 import css from "../equipment.css";
-import EquipmentList from "../Components/EquipmentList";
-import { EquipmentProvider } from "../utils/EquipmentContext";
+// import { EquipmentProvider } from "../utils/EquipmentContext";
+// import EquipmentList from "../Components/EquipmentList";
 
 const Equipment = () => {
   const [skimodalShow, setSkiModalShow] = React.useState(false);
@@ -41,9 +41,9 @@ const Equipment = () => {
       </Card.Body>
       <Card.Body>
         <Card.Title>View Current Inventory Below</Card.Title>
-        <EquipmentProvider>
-          <EquipmentList />
-        </EquipmentProvider>
+        {/* <EquipmentProvider>
+        <EquipmentList />
+        </EquipmentProvider> */}
       </Card.Body>
     </Card>
   );
