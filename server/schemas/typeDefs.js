@@ -3,22 +3,23 @@ const { gql } = require("apollo-server-express");
 
 // create our typeDefs
 const typeDefs = gql`
-  type User {
-    _id: ID
-    username: String
-    email: String
-    firstName: String
-    lastName: String
-    birthDate: String
-    phone: String
-    Contracts: [Contract]
-  }
+type User {
+  _id: ID
+  username: String
+  email: String
+  firstName: String
+  lastName: String
+  birthDate: String
+  phone: String
+  contracts: [Contract]
+}
 
   type Contract {
+    _id: ID
     checkOutDate: String
     checkInDate: String
+    equipment: Equipment
     active: Boolean
-    equipment: [Equipment]
   }
 
   type Employee {
@@ -30,6 +31,12 @@ const typeDefs = gql`
     boots: [Boot]
     skis: [Ski]
     snowboards: [Snowboard]
+  }
+
+  input EquipmentInput {
+    boots: [ID]
+    skis: [ID]
+    snowboards: [ID]
   }
 
   type Ski {
@@ -58,16 +65,20 @@ const typeDefs = gql`
     employee: Employee
   }
 
+
   type Query {
     users: [User]
     employee: Employee
     employees: [Employee]
+    contract(id: ID!): Contract
+    contracts: [Contract]
     skis: [Ski]
     snowboards: [Snowboard]
     boots: [Boot]
   }
 
   type Mutation {
+
     addEmployee(username: String!, password: String!): Auth
 
     updateEmployee(username: String!, password: String!): Employee
@@ -85,10 +96,11 @@ const typeDefs = gql`
     ): User
 
     createContract(
+      active: Boolean
       user: String!
       checkOutDate: String!
       checkInDate: String!
-      equipment: [ID]!
+      equipment: EquipmentInput
     ): User
 
     addSki(brand: String!, model: String!, condition: String!): Ski

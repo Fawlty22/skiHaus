@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const skiSchema = new Schema(
+    //add id's
     {
         brand: {
             type: String,
@@ -15,7 +16,7 @@ const skiSchema = new Schema(
             type: String,
             required: true,
             default: 'Good'
-        }
+        },
     }, 
     {
         toJSON: {

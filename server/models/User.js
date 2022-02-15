@@ -43,7 +43,7 @@ const userSchema = new Schema(
     contracts: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Contract"
+        ref: 'Contract'
       }
     ]
   },

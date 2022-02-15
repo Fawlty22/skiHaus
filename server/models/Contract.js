@@ -4,17 +4,17 @@ const EquipmentSchema = require('./Equipment');
 const contractSchema = new Schema(
     {
         checkOutDate: {
-            type: Date,
+            type: String,
             required: true
         },
         checkInDate: {
-            type: Date,
+            type: String,
             required: true
         },
         active: {
             type: Boolean,
             required: true,
-            default: () => new Types.boolean()
+            default: true
         },
         equipment: [EquipmentSchema]
     }
