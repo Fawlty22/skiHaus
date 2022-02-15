@@ -17,6 +17,8 @@ import CreateContract from "./pages/CreateContract.jsx";
 import { StoreProvider } from "./utils/GlobalContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { EquipmentProvider } from "../src/utils/EquipmentContext";
+
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -40,6 +42,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <EquipmentProvider>
       <Router>
         <div>
           <Header />
@@ -54,6 +57,7 @@ function App() {
           </Switch>
         </StoreProvider>
       </Router>
+      </EquipmentProvider>
     </ApolloProvider>
   );
 }
