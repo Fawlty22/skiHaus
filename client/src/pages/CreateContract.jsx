@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { UserSearchForm } from '../components/index.js';
+import { UserSearchForm, EquipmentSearch } from '../components/index.js';
 import { Card } from "react-bootstrap";
 import { useQuery } from '@apollo/client';
 import { QUERY_USERS } from '../graphql/queries';
@@ -7,6 +7,7 @@ import { QUERY_USERS } from '../graphql/queries';
 // import { CreateContractStoreProvider, useCreateContractContext } from '../utils/CreateContractContext';
 
 const CreateContract = () => {
+    const { data } = useQuery(QUERY_USERS)
     const [userSearchShow, setUserSearchShow] = React.useState(false);
     const [contractData, setContractData] = React.useState({
         step: 1,
@@ -24,7 +25,6 @@ const CreateContract = () => {
         console.log(contractData)
     }
 
-    const { data } = useQuery(QUERY_USERS)
     return (
         <div>
             <Card id="userSearch" className="text-center">
@@ -38,7 +38,9 @@ const CreateContract = () => {
                         contractData={contractData}
                         setContractData={setContractData}
                         />
-                    ) : ''}
+                    ) : 
+                        <EquipmentSearch />
+                    }
                 </Card.Body>
             </Card>
              

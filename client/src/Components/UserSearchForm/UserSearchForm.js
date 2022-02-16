@@ -10,25 +10,23 @@ const UserSearchForm = ({ contractData, userData, setContractData }) => {
     const handleUserSearch = (event) => {
         event.preventDefault();
         const selectedUserData = userData.users.map((user) => {
-            if(formState.username) {
+            // if(formState.username) {
                 if (user.username.toLowerCase().trim() === formState.username.toLowerCase().trim()) {
                     return user
                 }
-            }
         })[0]
-        console.log(selectedUserData)
         setContractData({
             ...contractData,
             user: selectedUserData
         })
-        console.log(contractData)
+        // console.log(contractData)
     }
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({
             ...formState,
-            [name]: value,
+            [name]: value
         });
     };
 

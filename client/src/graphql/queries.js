@@ -35,12 +35,18 @@ export const QUERY_USERS = gql`
 export const ALLEQUIPMENT_QUERY = gql`
   {
     skis {
+      brand
+      model
       _id
     }
     snowboards {
+      brand
+      model
       _id
     }
     boots {
+      brand
+      model
       _id
     }
   }
