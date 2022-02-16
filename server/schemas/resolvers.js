@@ -99,6 +99,7 @@ const resolvers = {
       return boot;
     },
     createContract: async (parent, args) => {
+      console.log('create contract line 102')
       console.log('args', args)
 
       const contract = await Contract.create(args);

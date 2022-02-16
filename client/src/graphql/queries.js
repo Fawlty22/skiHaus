@@ -8,6 +8,30 @@ export const QUERY_EMPLOYEE = gql`
   }
 `;
 
+export const QUERY_USERS = gql`
+  {
+    users {
+      _id
+      username
+      firstName
+      lastName
+      email
+      birthDate
+      phone
+      contracts {
+        checkOutDate
+        checkInDate
+        active
+        equipment {
+          skis {
+            _id
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const ALLEQUIPMENT_QUERY = gql`
   {
     skis {

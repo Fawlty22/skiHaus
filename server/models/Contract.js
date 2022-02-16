@@ -4,11 +4,11 @@ const EquipmentSchema = require('./Equipment');
 const contractSchema = new Schema(
     {
         checkOutDate: {
-            type: String,
+            type: Date,
             required: true
         },
         checkInDate: {
-            type: String,
+            type: Date,
             required: true
         },
         active: {
