@@ -1,11 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { Employee, Contract } = require("../models");
-//again fucking ridiculous but it wont let me destructure these 
-const User = require('../models/User')
-const Ski = require('../models/Ski')
-const Snowboard = require('../models/Snowboard')
-const Boot = require('../models/Boot')
-
+const { Employee, User, Ski, Snowboard, Boot, Contract } = require("../models");
 
 const { signToken } = require("../utils/auth");
 
@@ -168,7 +162,8 @@ const resolvers = {
         { new: true }
       );
       return updatedContract;
-    }
+    },
+   
   },
 };
 

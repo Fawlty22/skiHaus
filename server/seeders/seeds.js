@@ -2,7 +2,7 @@ const faker = require('faker');
 
 const db = require('../config/connection');
 const { Contract, Employee } = require('../models');
-//i realize this is ridiculous but it wont let me destructure these ones below here EVEN THOUGH THE TWO ABOVE WORK JUST FINE!!!
+//i realize this is ridiculous but it  me destructure these ones below here EVEN THOUGH THE TWO ABOVE WORK JUST FINE!!!
 const Ski = require('../models/Ski')
 const Boot = require('../models/Boot')
 const Snowboard = require('../models/Snowboard')
