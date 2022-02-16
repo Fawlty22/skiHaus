@@ -45,9 +45,7 @@ const resolvers = {
     //find one contract
     contract: async (parent, args) => {
       return await Contract.findOne({ _id: args.id})
-      .populate('equipment.boots')
-      .populate('equipment.skis')
-      .populate('equipment.snowboards')
+      
     }, 
 
   },
@@ -134,8 +132,6 @@ const resolvers = {
         { new: true }
       )
       .populate('contracts');
-      
-        console.log('updatedUser', updatedUser)
 
       return updatedUser;
     },
@@ -146,6 +142,7 @@ const resolvers = {
         { $set: { active: false } },
         { new: true }
       );
+      //update each piece of gear in each array
       const updatedSkis = await Ski.updateMany(
         { _id: { $in: updatedContract.equipment.skis } },
         { $set: { available: true } },
@@ -161,8 +158,16 @@ const resolvers = {
         { $set: { available: true } },
         { new: true }
       );
-
+        //return new contract
         return updatedContract;
+    },
+    editContract: async (parent, { _id, checkoutOutDate, checkoutInDate, equipment }) => {
+      const updatedContract = await Contract.findOneAndUpdate(
+        { _id: _id },
+        { $set: { checkoutOutDate: checkoutOutDate, checkoutInDate: checkoutInDate, equipment: equipment } },
+        { new: true }
+      );
+      return updatedContract;
     }
   },
 };

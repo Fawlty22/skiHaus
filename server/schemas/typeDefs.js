@@ -110,6 +110,13 @@ type User {
       _id: ID!
     ): Contract
 
+    editContract(
+      _id: ID!
+      checkOutDate: String!
+      checkInDate: String!
+      equipment: EquipmentInput
+    ): Contract
+
     addSki(brand: String!, model: String!, condition: String!): Ski
     addSnowboard(brand: String!, model: String!, condition: String!): Snowboard
     addBoot(brand: String!, model: String!, condition: String!): Boot
