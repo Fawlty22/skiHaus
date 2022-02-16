@@ -95,11 +95,9 @@ const resolvers = {
         { new: true }
       ); 
     },
-    deleteSki: async (parent, {_id, brand, model, condition}) => {
+    deleteSki: async (parent, { _id }) => {
       return await Ski.findOneAndDelete(
-        { _id: _id },
-        { $set: { brand: brand, model: model, condition: condition } },
-       
+        { _id },
       );
     },
     addSnowboard: async (parent, args) => {
@@ -114,11 +112,9 @@ const resolvers = {
         { new: true }
       );
     },
-    deleteSnowboard: async (parent, {_id, brand, model, condition}) => {
+    deleteSnowboard: async (parent, { _id }) => {
       return await Snowboard.findOneAndDelete(
-        { _id: _id },
-        { $set: { brand: brand, model: model, condition: condition } },
-       
+        { _id },
       );
     },
     addBoot: async (parent, args) => {
@@ -133,11 +129,9 @@ const resolvers = {
         { new: true }
       );
     },
-    deleteBoot: async (parent, {_id, brand, model, condition}) => {
+    deleteBoot: async (parent, { _id }) => {
       return await Boot.findOneAndDelete(
-        { _id: _id },
-        { $set: { brand: brand, model: model, condition: condition } },
-       
+        { _id },
       );
     },
     createContract: async (parent, args) => {
