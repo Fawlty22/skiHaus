@@ -10,6 +10,9 @@ const resolvers = {
       .populate('contracts')
       ;
     },
+    user: async (parent, {firstName, lastName, email}) => {
+      return User.findOne({ firstName: firstName, lastName: lastName, email: email}).select("-__v")
+    },
     boots: async () => {
       return Boot.find().select("-__v");
     },
@@ -60,9 +63,14 @@ const resolvers = {
     },    
     addUser: async (parent, args) => {
       const user = await User.create(args);
-      
-
       return user;
+    },
+    editUser: async (parent, { _id, username, firstName, lastName, email, birthDate, phone }) => {
+      const userUpdate = await User.findOneAndUpdate(
+        { _id: _id },
+        { $set: { username: username, firstName: firstName, lastName: lastName, email: email, birthDate: birthDate, phone: phone } },
+        { new:true }
+        )
     },
     login: async (parent, { username, password }) => {
       console.log("login mutation line 47", username, password);

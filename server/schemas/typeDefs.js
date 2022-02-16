@@ -71,6 +71,7 @@ type User {
 
   type Query {
     users: [User]
+    user: User
     employee: Employee
     employees: [Employee]
     contract(id: ID!): Contract
@@ -93,6 +94,15 @@ type User {
       lastName: String!
       username: String!
       password: String!
+      birthDate: String!
+      email: String!
+      phone: String!
+    ): User
+
+    editUser(
+      firstName: String!
+      lastName: String!
+      username: String!
       birthDate: String!
       email: String!
       phone: String!
