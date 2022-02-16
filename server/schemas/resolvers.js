@@ -66,11 +66,12 @@ const resolvers = {
       return user;
     },
     editUser: async (parent, { _id, username, firstName, lastName, email, birthDate, phone }) => {
-      const userUpdate = await User.findOneAndUpdate(
+      const userUpdate = await User.findByIdAndUpdate(
         { _id: _id },
         { $set: { username: username, firstName: firstName, lastName: lastName, email: email, birthDate: birthDate, phone: phone } },
         { new:true }
         )
+        return userUpdate;
     },
     login: async (parent, { username, password }) => {
       console.log("login mutation line 47", username, password);

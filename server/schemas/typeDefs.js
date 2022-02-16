@@ -100,6 +100,7 @@ type User {
     ): User
 
     editUser(
+      _id: ID!
       firstName: String!
       lastName: String!
       username: String!
