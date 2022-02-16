@@ -97,7 +97,7 @@ const resolvers = {
     },
     deleteSki: async (parent, { _id }) => {
       return await Ski.findOneAndDelete(
-        { _id },
+        { _id: _id },
       );
     },
     addSnowboard: async (parent, args) => {
@@ -113,8 +113,8 @@ const resolvers = {
       );
     },
     deleteSnowboard: async (parent, { _id }) => {
-      return await Snowboard.findOneAndDelete(
-        { _id },
+      return await Snowboard.findByIdAndDelete(
+        { _id: _id },
       );
     },
     addBoot: async (parent, args) => {
@@ -131,7 +131,7 @@ const resolvers = {
     },
     deleteBoot: async (parent, { _id }) => {
       return await Boot.findOneAndDelete(
-        { _id },
+        { _id: _id },
       );
     },
     createContract: async (parent, args) => {
