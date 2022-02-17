@@ -6,7 +6,7 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().select("-__v -password")
+      return User.find().select("-__v")
       .populate('contracts')
       ;
     },

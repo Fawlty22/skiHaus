@@ -93,7 +93,6 @@ type User {
       firstName: String!
       lastName: String!
       username: String!
-      password: String!
       birthDate: String!
       email: String!
       phone: String!
