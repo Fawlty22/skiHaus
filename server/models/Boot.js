@@ -15,6 +15,11 @@ const bootSchema = new Schema(
             type: String,
             required: true,
             default: 'Good'
+        },
+        available: {
+            type: Boolean,
+            required: true,
+            default: true
         }
     }, 
     {

@@ -44,6 +44,7 @@ type User {
     brand: String
     model: String
     condition: String
+    available: Boolean
   }
 
   type Snowboard {
@@ -51,6 +52,7 @@ type User {
     brand: String
     model: String
     condition: String
+    available: Boolean
   }
 
   type Boot {
@@ -58,6 +60,7 @@ type User {
     brand: String
     model: String
     condition: String
+    available: Boolean
   }
 
   type Auth {
@@ -68,6 +71,7 @@ type User {
 
   type Query {
     users: [User]
+    user: User
     employee: Employee
     employees: [Employee]
     contract(id: ID!): Contract
@@ -97,6 +101,16 @@ type User {
       phone: String!
     ): User
 
+    editUser(
+      _id: ID!
+      firstName: String!
+      lastName: String!
+      username: String!
+      birthDate: String!
+      email: String!
+      phone: String!
+    ): User
+
     createContract(
       active: Boolean
       user: String!
@@ -104,6 +118,17 @@ type User {
       checkInDate: String!
       equipment: EquipmentInput
     ): User
+
+    deactivateContract(
+      _id: ID!
+    ): Contract
+
+    editContract(
+      _id: ID!
+      checkOutDate: String!
+      checkInDate: String!
+      equipment: EquipmentInput
+    ): Contract
 
     addSki(brand: String!, model: String!, condition: String!): Ski
     updateSki(_id: ID!, brand: String!, model: String!, condition: String!): Ski
