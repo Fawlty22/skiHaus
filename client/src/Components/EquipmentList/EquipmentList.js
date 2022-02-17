@@ -1,41 +1,60 @@
 import React, { useState } from "react";
-// import { useEquipmentContext } from "../../utils/EquipmentContext";
 import { ListGroup, Card } from "react-bootstrap";
+import { CREATE_CONTRACT } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 const EquipmentList = ({ equipmentData, categoryState, setContractData, contractData }) => {
-  let category
-  let equipmentSelected
-  category = categoryState.category.toLowerCase()
-  // if(categoryState) {
-  //   category = categoryState.category.toLowerCase()
-  // }
-  // else {
-  //   category = 'all'
-  // }
-  // console.log(category)
-  // if(category = "all") {
-  //   equipmentSelected = equipmentData
-  // }
-  // else {
-  //   equipmentSelected=equipmentData[category]
-  // }
+  const [formState, setFormState] = useState({ skis: [], snowboards: [], boots: [] })
+  console.log(formState)
 
-  equipmentSelected=equipmentData[category]
+    if(!categoryState) {
+      console.log('no categoryState')
+      equipmentSelected = equipmentData
 
-  console.log(category, equipmentSelected)
-  // const { equipment } = useEquipmentContext();
+      const handleEquipmentSubmit = (event) => {
+        console.log(event)
+      }
+
+      return (
+        <>
+          <ul>
+            {equipmentSelected.map((equipment) => (
+              <button 
+                key={equipment._id} 
+                id={equipment._id}
+                onClick={handleEquipmentSubmit}>
+                  Brand : {equipment.brand}
+                  Model : {equipment.model}
+              </button>
+            ))}
+          </ul>
+        </>
+      );
+    }
+
+  const category = categoryState.category.toLowerCase()
+  const equipmentSelected=equipmentData[category]
 
   const handleEquipmentSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target.id)
     const selectedEquipment = event.target.id
-    setContractData({
-      ...contractData,
-      equipment: selectedEquipment
+    const categoryArray = formState[category]
+    const updatedCategoryArray = [...categoryArray, selectedEquipment]
+    formState[category] = updatedCategoryArray
+    setFormState({
+      ...formState
     })
-    console.log(contractData)
   }
 
+  const handleContractSubmit = async (event) => {
+    event.preventDefault();
+    await setContractData({
+      ...contractData,
+      equipment: {...formState}
+    })
+  }
+  console.log(contractData, 'contract data =====================')
+  // console.log(equipmentSelected)
   return (
     <>
       <span>Select the {category} you would like to add</span>
@@ -50,6 +69,7 @@ const EquipmentList = ({ equipmentData, categoryState, setContractData, contract
           </button>
         ))}
       </ul>
+      <button onClick={handleContractSubmit}>Submit Contract</button>
     </>
   );
 };

@@ -10,28 +10,30 @@ const EquipmentSearch = ({ contractData, setContractData, }) => {
     const [categoryState, setCategoryState] = useState({category: ''})
 
     switch (categoryState.category) {
-        case 'Skis':
+        case '':
             return (
                 <div>
                     <EquipmentSearchBar
                         setCategoryState={setCategoryState}
                         categoryState={categoryState}
                     />
-                    <EquipmentList 
-                        equipmentData={equipmentData}
-                        categoryState={categoryState}
-                        setContractData={setContractData}
-                        contractData={contractData}
-                    />
                 </div>
             )
             
         default:
             return(
-                <EquipmentSearchBar
-                    setCategoryState={setCategoryState}
-                    categoryState={categoryState}
-                />
+                <>
+                    <EquipmentSearchBar
+                        setCategoryState={setCategoryState}
+                        categoryState={categoryState}
+                    />
+                    <EquipmentList
+                        equipmentData={equipmentData}
+                        categoryState={categoryState}
+                        setContractData={setContractData}
+                        contractData={contractData}
+                    />
+                </>
             )
     }
 }

@@ -19,7 +19,6 @@ const UserSearchForm = ({ contractData, userData, setContractData }) => {
             ...contractData,
             user: selectedUserData
         })
-        // console.log(contractData)
     }
 
     const handleChange = (event) => {
