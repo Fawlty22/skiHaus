@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
-// import { useCreateContractContext } from '../../utils/CreateContractContext';
+import { useLazyQuery } from '@apollo/client';
+import { QUERY_USER } from '../../graphql/queries';
 
 const UserSearchForm = ({ contractData, userData, setContractData }) => {
-    const [formState, setFormState] = useState({ firstName: '', lastName: '', email: '' });
-    // const [state, dispatch ] = useCreateContractContext();
-    // const { createContractData } = state;
+    const [formState, setFormState] = useState({ email: '' });
+    const[getUser, { data }] = useLazyQuery(QUERY_USER)
+    console.log(data)
 
 
-    const handleUserSearch = (event) => {
+    const handleUserSearch = async (event) => {
         event.preventDefault();
-        const selectedUserData = userData.users.map((user) => {
-            // if(formState.username) {
-                if (user.username.toLowerCase().trim() === formState.username.toLowerCase().trim()) {
-                    return user
-                }
-        })[0]
+        await getUser({ variables: { 'email': formState.email }})
         setContractData({
             ...contractData,
-            user: selectedUserData
+            user: data.users[0]
         })
     }
 
@@ -34,12 +30,12 @@ const UserSearchForm = ({ contractData, userData, setContractData }) => {
             <h2>Search For Customer to Begin Contract</h2>
             <form onSubmit={handleUserSearch}>
                 <div className="flex-row space-between my-2">
-                    <label htmlFor="username">Search by username:</label>
+                    <label htmlFor="email">Search by email:</label>
                     <input
-                        placeholder="username"
-                        name="username"
-                        type="username"
-                        id="username"
+                        placeholder="example@example.com"
+                        name="email"
+                        type="email"
+                        id="email"
                         onChange={handleChange}
                     />
                 </div>

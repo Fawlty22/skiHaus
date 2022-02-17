@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { UserSearchForm, EquipmentSearch } from '../components/index.js';
 import { Card } from "react-bootstrap";
-import { useQuery } from '@apollo/client';
-import { QUERY_USERS } from '../graphql/queries';
+
 // import { UPDATE_USERS } from '../utils/actions'
 // import { CreateContractStoreProvider, useCreateContractContext } from '../utils/CreateContractContext';
 
 const CreateContract = () => {
-    const { data } = useQuery(QUERY_USERS)
+    // const { data } = useQuery(QUERY_USER)
     const [userSearchShow, setUserSearchShow] = React.useState(false);
     const [contractData, setContractData] = React.useState({
         step: 1,
@@ -16,13 +15,14 @@ const CreateContract = () => {
         checkInDate: '',
         equipment: {},
     })
+    console.log(contractData)
 
     const nextStep = () => {
         setContractData({
             ...contractData,
             step: contractData.step++
         })
-        console.log(contractData)
+        // console.log(contractData)
     }
 
     return (
@@ -34,7 +34,7 @@ const CreateContract = () => {
                         show={userSearchShow}
                         // updateContractData = {updateContractData}
                         onHide={() => setUserSearchShow(false)}
-                        userData={data}
+                        // userData={data}
                         contractData={contractData}
                         setContractData={setContractData}
                         />
