@@ -8,25 +8,46 @@ export const QUERY_EMPLOYEE = gql`
   }
 `;
 
-// export const ALLEQUIPMENT_QUERY = gql`
-//   allEquipment {
-//     skis {
-//       _id
-//       brand
-//       model
-//       condition
-//     }
-//     snowboards {
-//       _id
-//       brand
-//       model
-//       condition
-//     }
-//     boots {
-//       _id
-//       brand
-//       model
-//       condition
-//     }
-//   }
-// `;
+export const QUERY_USERS = gql`
+  {
+    users {
+      _id
+      username
+      firstName
+      lastName
+      email
+      birthDate
+      phone
+      contracts {
+        checkOutDate
+        checkInDate
+        active
+        equipment {
+          skis {
+            _id
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ALLEQUIPMENT_QUERY = gql`
+  {
+    skis {
+      brand
+      model
+      _id
+    }
+    snowboards {
+      brand
+      model
+      _id
+    }
+    boots {
+      brand
+      model
+      _id
+    }
+  }
+`;

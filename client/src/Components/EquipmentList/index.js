@@ -1,10 +1,4 @@
-// import React from "react";
-// import { useEquipmentContext } from "../../utils/EquipmentContext";
-
-// const EquipmentList = ({}) => {
-//   const { equipment } = useEquipmentContext();
-
-//   console.log( equipment );
+import EquipmentList from './EquipmentList';
 
 //   return (
 //     <>
