@@ -81,6 +81,8 @@ type User {
     boots: [Boot]
   }
 
+  
+
   type Mutation {
 
     addEmployee(username: String!, password: String!): Auth
@@ -93,7 +95,6 @@ type User {
       firstName: String!
       lastName: String!
       username: String!
-      password: String!
       birthDate: String!
       email: String!
       phone: String!
@@ -129,8 +130,15 @@ type User {
     ): Contract
 
     addSki(brand: String!, model: String!, condition: String!): Ski
+    updateSki(_id: ID!, brand: String!, model: String!, condition: String!): Ski
+    deleteSki(_id: ID!): Ski
     addSnowboard(brand: String!, model: String!, condition: String!): Snowboard
+    updateSnowboard(_id: ID!, brand: String!, model: String!, condition: String!): Snowboard
+    deleteSnowboard(_id: ID!): Snowboard
     addBoot(brand: String!, model: String!, condition: String!): Boot
+    updateBoot(_id: ID!, brand: String!, model: String!, condition: String!): Boot
+    deleteBoot(_id: ID!): Boot
+
   }
 `;
 

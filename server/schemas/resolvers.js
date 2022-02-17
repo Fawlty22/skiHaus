@@ -6,7 +6,7 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().select("-__v -password")
+      return User.find().select("-__v")
       .populate('contracts')
       ;
     },
@@ -96,15 +96,51 @@ const resolvers = {
 
       return ski; 
     },
+    updateSki: async (parent, {_id, brand, model, condition}) => {
+      return await Ski.findByIdAndUpdate(
+        { _id: _id },
+        { $set: { brand: brand, model: model, condition: condition } },
+        { new: true }
+      ); 
+    },
+    deleteSki: async (parent, { _id }) => {
+      return await Ski.findOneAndDelete(
+        { _id: _id },
+      );
+    },
     addSnowboard: async (parent, args) => {
       const snowboard = await Snowboard.create(args);
 
       return snowboard;
     },
+    updateSnowboard: async (parent, {_id, brand, model, condition}) => {
+      return await Snowboard.findByIdAndUpdate(
+        { _id: _id },
+        { $set: { brand: brand, model: model, condition: condition } },
+        { new: true }
+      );
+    },
+    deleteSnowboard: async (parent, { _id }) => {
+      return await Snowboard.findByIdAndDelete(
+        { _id: _id },
+      );
+    },
     addBoot: async (parent, args) => {
       const boot = await Boot.create(args);
 
       return boot;
+    },
+    updateBoot: async (parent, {_id, brand, model, condition}) => {
+      return await Boot.findByIdAndUpdate(
+        { _id: _id },
+        { $set: { brand: brand, model: model, condition: condition } },
+        { new: true }
+      );
+    },
+    deleteBoot: async (parent, { _id }) => {
+      return await Boot.findOneAndDelete(
+        { _id: _id },
+      );
     },
     createContract: async (parent, args) => {
       console.log('create contract line 102')
