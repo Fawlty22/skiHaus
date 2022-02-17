@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { QUERY_USER } from '../../graphql/queries';
 
 const UserSearchForm = ({ contractData, userData, setContractData }) => {
     const [formState, setFormState] = useState({ email: '' });
     const[getUser, { data }] = useLazyQuery(QUERY_USER)
-    console.log(data)
 
+    useEffect(() => {
+        if (data) {
+            setContractData({
+                ...contractData,
+                user: data.users[0]
+            })
+        }
+    }, [data])
 
-    const handleUserSearch = async (event) => {
+    const handleUserSearch = (event) => {
         event.preventDefault();
-        await getUser({ variables: { 'email': formState.email }})
-        setContractData({
-            ...contractData,
-            user: data.users[0]
-        })
+        getUser({ variables: { 'email': formState.email }})
     }
 
     const handleChange = (event) => {

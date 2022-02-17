@@ -15,14 +15,12 @@ const CreateContract = () => {
         checkInDate: '',
         equipment: {},
     })
-    console.log(contractData)
 
     const nextStep = () => {
         setContractData({
             ...contractData,
             step: contractData.step++
         })
-        // console.log(contractData)
     }
 
     return (

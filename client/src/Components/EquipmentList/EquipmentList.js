@@ -5,7 +5,6 @@ import { useMutation } from "@apollo/client";
 
 const EquipmentList = ({ equipmentData, categoryState, setContractData, contractData }) => {
   const [formState, setFormState] = useState({ skis: [], snowboards: [], boots: [] })
-  console.log(formState)
 
     if(!categoryState) {
       console.log('no categoryState')
@@ -34,6 +33,7 @@ const EquipmentList = ({ equipmentData, categoryState, setContractData, contract
 
   const category = categoryState.category.toLowerCase()
   const equipmentSelected=equipmentData[category]
+  console.log(equipmentData, category)
 
   const handleEquipmentSubmit = (event) => {
     event.preventDefault();
@@ -53,8 +53,7 @@ const EquipmentList = ({ equipmentData, categoryState, setContractData, contract
       equipment: {...formState}
     })
   }
-  console.log(contractData, 'contract data =====================')
-  // console.log(equipmentSelected)
+  
   return (
     <>
       <span>Select the {category} you would like to add</span>
