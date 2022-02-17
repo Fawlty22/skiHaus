@@ -1,11 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { Employee, Contract } = require("../models");
-//again fucking ridiculous but it wont let me destructure these 
-const User = require('../models/User')
-const Ski = require('../models/Ski')
-const Snowboard = require('../models/Snowboard')
-const Boot = require('../models/Boot')
-
+const { Employee, User, Ski, Snowboard, Boot, Contract } = require("../models");
 
 const { signToken } = require("../utils/auth");
 
@@ -13,7 +7,11 @@ const resolvers = {
   Query: {
     users: async () => {
       return User.find().select("-__v -password")
-      .populate('contracts');
+      .populate('contracts')
+      ;
+    },
+    user: async (parent, {firstName, lastName, email}) => {
+      return User.findOne({ firstName: firstName, lastName: lastName, email: email}).select("-__v")
     },
     boots: async () => {
       return Boot.find().select("-__v");
@@ -37,10 +35,14 @@ const resolvers = {
     //find all contract
     contracts: async () => {
       return await Contract.find()
+      .populate('equipment.boots')
+      .populate('equipment.skis')
+      .populate('equipment.snowboards')
     }, 
     //find one contract
     contract: async (parent, args) => {
       return await Contract.findOne({ _id: args.id})
+      
     }, 
 
   },
@@ -61,9 +63,15 @@ const resolvers = {
     },    
     addUser: async (parent, args) => {
       const user = await User.create(args);
-      
-
       return user;
+    },
+    editUser: async (parent, { _id, username, firstName, lastName, email, birthDate, phone }) => {
+      const userUpdate = await User.findByIdAndUpdate(
+        { _id: _id },
+        { $set: { username: username, firstName: firstName, lastName: lastName, email: email, birthDate: birthDate, phone: phone } },
+        { new:true }
+        )
+        return userUpdate;
     },
     login: async (parent, { username, password }) => {
       console.log("login mutation line 47", username, password);
@@ -103,16 +111,68 @@ const resolvers = {
 
       const contract = await Contract.create(args);
       console.log('contract', contract)
+      console.log('_*_*_*_*_*_*_', contract.equipment.boots )
+
+      const updatedSkis = await Ski.updateMany(
+        { _id: { $in: contract.equipment.skis } },
+        { $set: { available: false } },
+        { new: true }
+      );
+      const updatedSnowboards = await Snowboard.updateMany(
+        { _id: { $in: contract.equipment.snowboards } },
+        { $set: { available: false } },
+        { new: true }
+      );
+      const updatedBoots = await Boot.updateMany(
+        { _id: { $in: contract.equipment.boots } },
+        { $set: { available: false } },
+        { new: true }
+      );
 
       const updatedUser = await User.findOneAndUpdate(
         { username: args.user }, 
         { $addToSet: { contracts: contract._id } },
         { new: true }
-      );
-      
-        console.log('updatedUser', updatedUser)
+      )
+      .populate('contracts');
+
       return updatedUser;
     },
+    deactivateContract: async (parent, args) => {
+      //find contract by ID
+      const updatedContract = await Contract.findOneAndUpdate(
+        { _id: args._id },
+        { $set: { active: false } },
+        { new: true }
+      );
+      //update each piece of gear in each array
+      const updatedSkis = await Ski.updateMany(
+        { _id: { $in: updatedContract.equipment.skis } },
+        { $set: { available: true } },
+        { new: true }
+      );
+      const updatedSnowboards = await Snowboard.updateMany(
+        { _id: { $in: updatedContract.equipment.snowboards } },
+        { $set: { available: true } },
+        { new: true }
+      );
+      const updatedBoots = await Boot.updateMany(
+        { _id: { $in: updatedContract.equipment.boots } },
+        { $set: { available: true } },
+        { new: true }
+      );
+        //return new contract
+        return updatedContract;
+    },
+    editContract: async (parent, { _id, checkoutOutDate, checkoutInDate, equipment }) => {
+      const updatedContract = await Contract.findOneAndUpdate(
+        { _id: _id },
+        { $set: { checkoutOutDate: checkoutOutDate, checkoutInDate: checkoutInDate, equipment: equipment } },
+        { new: true }
+      );
+      return updatedContract;
+    },
+   
   },
 };
 

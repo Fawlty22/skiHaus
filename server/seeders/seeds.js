@@ -2,7 +2,7 @@ const faker = require('faker');
 
 const db = require('../config/connection');
 const { Contract, Employee } = require('../models');
-//i realize this is ridiculous but it wont let me destructure these ones below here EVEN THOUGH THE TWO ABOVE WORK JUST FINE!!!
+//i realize this is ridiculous but it  me destructure these ones below here EVEN THOUGH THE TWO ABOVE WORK JUST FINE!!!
 const Ski = require('../models/Ski')
 const Boot = require('../models/Boot')
 const Snowboard = require('../models/Snowboard')
@@ -15,18 +15,7 @@ db.once('open', async () => {
   await Snowboard.deleteMany({});
   await User.deleteMany({});
 
-  // create user data
-  const userData = [];
 
-  for (let i = 0; i < 10; i += 1) {
-    const username = faker.internet.userName();
-    const email = faker.internet.email(username);
-    const password = faker.internet.password();
-
-    userData.push({ username, email, password });
-  }
-
-  const createdUsers = await User.collection.insertMany(userData);
 
     // create user data
     const userData = [];
@@ -35,8 +24,12 @@ db.once('open', async () => {
       const username = faker.internet.userName();
       const email = faker.internet.email(username);
       const password = faker.internet.password();
-  
-      userData.push({ username, email, password });
+      const firstName = faker.name.firstName();
+      const lastName = faker.name.lastName();
+      const phone = '555-555-5555'
+      const birthDate = '01/11/1994'
+
+      userData.push({ username, email, password, firstName, lastName, phone, birthDate });
     }
   
     const createdUsers = await User.collection.insertMany(userData);

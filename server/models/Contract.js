@@ -16,7 +16,7 @@ const contractSchema = new Schema(
             required: true,
             default: true
         },
-        equipment: [EquipmentSchema]
+        equipment: EquipmentSchema
     }
 )
 

@@ -17,6 +17,11 @@ const snowboardSchema = new Schema(
             required: true,
             default: 'Good'
         },
+        available: {
+            type: Boolean,
+            required: true,
+            default: true
+        }
     }, 
     {
         toJSON: {
