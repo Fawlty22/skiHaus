@@ -71,7 +71,7 @@ type User {
 
   type Query {
     users: [User]
-    user: User
+    user(email: String!): User
     employee: Employee
     employees: [Employee]
     contract(id: ID!): Contract
