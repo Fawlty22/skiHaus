@@ -3,13 +3,15 @@ const { gql } = require("apollo-server-express");
 
 // create our typeDefs
 const typeDefs = gql`
+scalar Date
+
 type User {
   _id: ID
   username: String
   email: String
   firstName: String
   lastName: String
-  birthDate: String
+  birthDate: Date
   phone: String
   contracts: [Contract]
 }

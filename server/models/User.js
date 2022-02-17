@@ -26,9 +26,8 @@ const userSchema = new Schema(
       match: [/.+@.+\..+/, "Must match an email address!"],
     },
     birthDate: {
-      type: String,
+      type: Date,
       required: true,
-      trim: true,
     },
     phone: {
       type: String,
