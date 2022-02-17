@@ -1,6 +1,6 @@
 import UserSearchForm from "./UserSearchForm";
 import EquipmentSearch from "./EquipmentSearch";
-import SkiList from './SkiList';
+import EquipmentList from './EquipmentList';
 import EquipmentSearchBar from "./EquipmentSearchBar";
 
-export { UserSearchForm, EquipmentSearch, EquipmentSearchBar, SkiList }
+export { UserSearchForm, EquipmentSearch, EquipmentSearchBar, EquipmentList }

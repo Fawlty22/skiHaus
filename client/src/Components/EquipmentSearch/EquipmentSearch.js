@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card } from "react-bootstrap";
 import { useQuery } from '@apollo/client';
 import { ALLEQUIPMENT_QUERY } from '../../graphql/queries';
-import { EquipmentSearchBar, SkiList } from '../'
+import { EquipmentSearchBar, EquipmentList } from '../'
 
 const EquipmentSearch = ({ contractData, setContractData, }) => {
     const { data } = useQuery(ALLEQUIPMENT_QUERY)
@@ -17,7 +17,12 @@ const EquipmentSearch = ({ contractData, setContractData, }) => {
                         setCategoryState={setCategoryState}
                         categoryState={categoryState}
                     />
-                    <SkiList equipmentData={equipmentData}/>
+                    <EquipmentList 
+                        equipmentData={equipmentData}
+                        categoryState={categoryState}
+                        setContractData={setContractData}
+                        contractData={contractData}
+                    />
                 </div>
             )
             

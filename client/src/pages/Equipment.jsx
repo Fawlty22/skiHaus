@@ -41,9 +41,9 @@ const Equipment = () => {
       </Card.Body>
       <Card.Body>
         <Card.Title>View Current Inventory Below</Card.Title>
-        <EquipmentProvider>
+        {/* <EquipmentProvider>
           <EquipmentList />
-        </EquipmentProvider>
+        </EquipmentProvider> */}
       </Card.Body>
     </Card>
   );

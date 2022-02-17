@@ -16,7 +16,6 @@ const AddSnowboardModal = (props) => {
 
   function handleChange(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
-    console.log(formState);
   }
 
   const handleSubmit = async (e) => {

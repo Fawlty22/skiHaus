@@ -39,7 +39,10 @@ const CreateContract = () => {
                         setContractData={setContractData}
                         />
                     ) : 
-                        <EquipmentSearch />
+                        <EquipmentSearch 
+                            contractData={contractData}
+                            setContractData={setContractData}
+                        />
                     }
                 </Card.Body>
             </Card>
