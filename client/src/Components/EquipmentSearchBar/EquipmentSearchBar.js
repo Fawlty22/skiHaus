@@ -13,21 +13,32 @@ const EquipmentSearchBar = ({ categoryState, setCategoryState }) => {
     }
 
     return (
-        <Card>
-            <h2>
-                Select an Equipment Category
-            </h2>
-            <label htmlFor="equipmentCategory">Select What Type of Equipment to Add</label>
-            <select onChange={handleCategory} name="equipmentCategory" id="equipmentCategory">
-                <option value=""></option>
-                <option value="Skis">Skis</option>
-                <option value="Snowboards">Snowboards</option>
-                <option value="Boots">Boots</option>
-            </select>
-            {/* <button onClick={handleCategory}>Skis</button>
-            <button onClick={handleCategory}>Snowboards</button>
-            <button onClick={handleCategory}>Boots</button> */}
-        </Card>
+        <Container>
+            <Row>
+                <Col>
+                    <label htmlFor="checkOutDate">Check Out Date:</label>
+                    <input type="date" id="checkOutDate" name="checkOutDate"></input>
+                </Col>
+                <Col>
+                    <label htmlFor="checkInDate">Check In Date:</label>
+                    <input type="date" id="checkInDate" name="checkInDate"></input>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <h2>
+                        Select an Equipment Category
+                    </h2>
+                    <label htmlFor="equipmentCategory">Select What Type of Equipment to Add</label>
+                    <select onChange={handleCategory} name="equipmentCategory" id="equipmentCategory">
+                        <option value=""></option>
+                        <option value="Skis">Skis</option>
+                        <option value="Snowboards">Snowboards</option>
+                        <option value="Boots">Boots</option>
+                    </select>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
