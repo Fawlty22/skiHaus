@@ -7,13 +7,9 @@ import UpdateSnowboardModal from "../Components/UpdateSnowboardModal";
 import UpdateBootModal from "../Components/UpdateBootModal";
 import React from "react";
 import css from "../equipment.css";
-import AddSkiModal from "../components/AddSkiModal";
-import AddSnowboardModal from "../components/AddSnowboard";
-import AddBootModal from "../components/AddBootModal";
-import React from "react";
-import css from "../equipment.css";
-import EquipmentList from "../components/EquipmentList";
-import { EquipmentProvider } from "../utils/EquipmentContext";
+import EquipmentList from "../Components/EquipmentList";
+import { EquipmentSearch } from "../Components";
+
 
 const Equipment = () => {
   const [addSkimodalShow, setaddSkiModalShow] = React.useState(false);
@@ -94,6 +90,7 @@ const Equipment = () => {
           />
         </Card.Body>
       </Card>
+      <EquipmentSearch />
     </>
   );
 };

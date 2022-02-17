@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { UserSearchForm, EquipmentSearch } from '../components/index.js';
+import { UserSearchForm, EquipmentSearch } from "../Components";
+
 import { Card } from "react-bootstrap";
 import { useQuery } from '@apollo/client';
 import { QUERY_USERS } from '../graphql/queries';
-// import { UPDATE_USERS } from '../utils/actions'
-// import { CreateContractStoreProvider, useCreateContractContext } from '../utils/CreateContractContext';
+import { UPDATE_USERS } from '../utils/actions'
+import { CreateContractStoreProvider, useCreateContractContext } from '../utils/CreateContractContext';
+
 
 const CreateContract = () => {
     const { data } = useQuery(QUERY_USERS)

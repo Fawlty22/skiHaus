@@ -14,4 +14,4 @@ import EquipmentList from './EquipmentList';
 //   );
 // };
 
-// export default EquipmentList;
+export default EquipmentList;

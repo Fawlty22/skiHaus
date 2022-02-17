@@ -12,7 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import Equipment from "./pages/Equipment";
 import Login from "./pages/Login";
 import CustomerForm from "./pages/CustomerForm";
-import Header from "./components/Header";
+import Header from "./Components/Header";
 import CreateContract from "./pages/CreateContract.jsx";
 import { StoreProvider } from "./utils/GlobalContext";
 import "bootstrap/dist/css/bootstrap.min.css";
