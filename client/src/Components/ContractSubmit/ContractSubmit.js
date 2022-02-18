@@ -11,7 +11,7 @@ const ContractSubmit = ({ contractData }) => {
         const mutationResponse = await createContract({
             variables: {
                 active: 'True',
-                user: contractData.user._id,
+                user: contractData.user.username,
                 checkInDate: contractData.checkInDate,
                 checkOutDate: contractData.checkOutDate,
                 equipment: contractData.equipment

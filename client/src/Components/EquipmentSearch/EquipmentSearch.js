@@ -40,6 +40,4 @@ const EquipmentSearch = ({ contractData, setContractData, setContractStep, contr
     }
 }
 
-
-
 export default EquipmentSearch
