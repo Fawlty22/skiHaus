@@ -1,8 +1,6 @@
 import React from "react";
-import { Redirect, Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
-import { StoreProvider } from "../utils/GlobalContext";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -12,6 +10,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 const Dashboard = () => {
   let employee = Auth.getProfile();
   console.log(employee);
+
+  //I have commented out the login logic for development purposes.
 
   // // redirect to login if error in a query, not defined yet
   // if (!employee) {
@@ -121,19 +121,6 @@ const Dashboard = () => {
     </Container>
   );
 
-  // return (
-  //   <div>
-  //     {employee ?
-  //       <div>
-  //         <button>
-  //           <Link style={{ textDecoration: 'none' }} to="/contract">Create Contract</Link>
-  //         </button>
-  //       </div>
-  //       :
-  //       ''
-  //     }
-  //   </div>
-  //   );
 };
 
 export default Dashboard;
