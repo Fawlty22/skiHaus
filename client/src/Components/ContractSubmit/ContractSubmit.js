@@ -47,15 +47,27 @@ const ContractSubmit = ({ contractData }) => {
                     <h3>Equipment:</h3>
                     <Col>
                         <h4>Skis</h4>
-                        <span>{contractData.equipment.skis}</span>
+                        {contractData.equipment.skis.map((ski) => (
+                            <Col>
+                                <span>{ski}</span>
+                            </Col>
+                        ))}
                     </Col>
                     <Col>
                         <h4>Snowboards</h4>
-                        <span>{contractData.equipment.snowboards}</span>
+                        {contractData.equipment.snowboards.map((snowboard) => (
+                            <Col>
+                                <span>{snowboard}</span>
+                            </Col>
+                        ))}
                     </Col>
                     <Col>
                         <h4>Boots</h4>
-                        <span>{contractData.equipment.boots}</span>
+                        {contractData.equipment.boots.map((boot) => (
+                            <Col>
+                                <span>{boot}</span>
+                            </Col>
+                        ))}
                     </Col>
                 </Row>
             </Container>
