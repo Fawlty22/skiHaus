@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { UserSearchForm, EquipmentSearch } from '../components/index.js';
-import { Card } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 
 // import { UPDATE_USERS } from '../utils/actions'
 // import { CreateContractStoreProvider, useCreateContractContext } from '../utils/CreateContractContext';
@@ -16,15 +16,27 @@ const CreateContract = () => {
         equipment: {},
     })
 
-    const nextStep = () => {
+    const handleContractNavigation = (event) => {
+        console.log(event)
         setContractData({
             ...contractData,
-            step: contractData.step++
+            step: 1
         })
     }
 
     return (
         <div>
+            <Row>
+                <Col>
+                    <button onClick={handleContractNavigation} type="button" id="1">Select User</button>
+                </Col>
+                <Col>
+                    <button onClick={handleContractNavigation} type="button" id="2">Select Dates</button>
+                </Col>
+                <Col>
+                    <button onClick={handleContractNavigation} type="button" id="3">Select Equipment</button>
+                </Col>
+            </Row>
             <Card id="userSearch" className="text-center">
                 <Card.Body className="d-flex justify-content-between flex-column gap-3">
                     {!contractData.user.username ? (
@@ -44,8 +56,6 @@ const CreateContract = () => {
                     }
                 </Card.Body>
             </Card>
-             
-
         </div>
     )
 }
