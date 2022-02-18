@@ -16,16 +16,6 @@ const EquipmentSearchBar = ({ categoryState, setCategoryState }) => {
         <Container>
             <Row>
                 <Col>
-                    <label htmlFor="checkOutDate">Check Out Date:</label>
-                    <input type="date" id="checkOutDate" name="checkOutDate"></input>
-                </Col>
-                <Col>
-                    <label htmlFor="checkInDate">Check In Date:</label>
-                    <input type="date" id="checkInDate" name="checkInDate"></input>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
                     <h2>
                         Select an Equipment Category
                     </h2>

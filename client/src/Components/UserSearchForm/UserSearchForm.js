@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { QUERY_USER } from '../../graphql/queries';
+import { Alert } from 'react-bootstrap'
 
 const UserSearchForm = ({ contractData, userData, setContractData }) => {
     const [formState, setFormState] = useState({ email: '' });
-    const[getUser, { data }] = useLazyQuery(QUERY_USER)
+    const[getUser, { data, error }] = useLazyQuery(QUERY_USER);
+    const[show, setShow] = useState(true)
 
     useEffect(() => {
         if (data) {
@@ -46,6 +48,11 @@ const UserSearchForm = ({ contractData, userData, setContractData }) => {
                     <button type="submit">Search for User</button>
                 </div>
             </form>
+            {error &&
+                <Alert variant="warning" onClose={() => setShow(false)} dismissible>
+                    <span>User Not Found. Please try again</span>
+                </Alert>
+            }
         </div>
     )
 }
