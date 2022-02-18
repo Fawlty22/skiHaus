@@ -35,12 +35,12 @@ const ContractSubmit = ({ contractData }) => {
                 </Row>
                 <Row>
                     <Col>
-                        <h3>Check In Date</h3>
-                        <span>{contractData.checkInDate}</span>
-                    </Col>
-                    <Col>
                         <h3>Check Out Date</h3>
                         <span>{contractData.checkOutDate}</span>
+                    </Col>
+                    <Col>
+                        <h3>Check In Date</h3>
+                        <span>{contractData.checkInDate}</span>
                     </Col>
                 </Row>
                 <Row>
