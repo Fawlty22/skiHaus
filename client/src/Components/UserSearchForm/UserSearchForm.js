@@ -5,27 +5,28 @@ import { Alert } from 'react-bootstrap'
 
 const UserSearchForm = ({ contractData, setContractData, contractStep, setContractStep }) => {
     const [formState, setFormState] = useState({ email: '' });
-    const[getUser, { data, error }] = useLazyQuery(QUERY_USER);
+    const[getUser, { loading, error, data }] = useLazyQuery(QUERY_USER);
     const[show, setShow] = useState(true)
+    console.log(error)
     useEffect(() => {
         if (data) {
             setContractData({
                 ...contractData,
-                user: data.users
+                user: data.user
             })
+            if(data.user) {
+                setContractStep({
+                    ...contractStep,
+                    step: '2'
+                })
+            }
         }
     }, [data])
 
     const handleUserSearch = async (event) => {
-        console.log(formState.email)
         event.preventDefault();
         await getUser({ 
             variables: { email: formState.email }
-        })
-        
-        setContractStep({
-            ...contractStep,
-            step: '2'
         })
     }
 
