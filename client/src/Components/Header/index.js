@@ -5,8 +5,8 @@ const Header = () => {
   return (
     <Navbar className="d-flex align-items-start bg-dark" bg="light" expand="lg">
       <Container className="d-flex justify-content-between">
-        <Navbar.Brand className="fs-1 fw-bold d-flex text-light" to="/">
-          Ski Haus
+        <Navbar.Brand className="fs-1 fw-bold d-flex text-light" to="/dashboard">
+         <Link to='/dashboard' style={{ textDecoration: 'none', color: 'orange' }}>Ski Haus</Link>
         </Navbar.Brand>
         <Nav className="align-items-end gap-3">
           <Link to="/customerform">Customer Form</Link>
