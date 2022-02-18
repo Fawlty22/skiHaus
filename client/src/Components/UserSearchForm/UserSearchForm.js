@@ -17,9 +17,14 @@ const UserSearchForm = ({ contractData, setContractData, contractStep, setContra
         }
     }, [data])
 
-    const handleUserSearch = (event) => {
+    const handleUserSearch = async (event) => {
         event.preventDefault();
-        getUser({ variables: { 'email': formState.email }})
+        const userResult = await getUser({ variables: { 'email': formState.email }})
+        const user = userResult.data.users[0]
+        setContractData({
+            ...contractData,
+            user: user
+        })
         setContractStep({
             ...contractStep,
             step: '2'
