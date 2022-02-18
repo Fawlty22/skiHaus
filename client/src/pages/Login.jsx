@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_MUTATION } from '../graphql/mutations';
 import Auth from '../utils/auth';
 import { useStoreContext } from '../utils/GlobalContext';
-import useEmployeeReducer from '../utils/reducers';
+// import useEmployeeReducer from '../utils/reducers';
 import { UPDATE_EMPLOYEE } from '../utils/actions';
 
 function Login(props) {

@@ -7,19 +7,22 @@ const UserSearchForm = ({ contractData, setContractData, contractStep, setContra
     const [formState, setFormState] = useState({ email: '' });
     const[getUser, { data, error }] = useLazyQuery(QUERY_USER);
     const[show, setShow] = useState(true)
-
     useEffect(() => {
         if (data) {
             setContractData({
                 ...contractData,
-                user: data.users[0]
+                user: data.users
             })
         }
     }, [data])
 
-    const handleUserSearch = (event) => {
+    const handleUserSearch = async (event) => {
+        console.log(formState.email)
         event.preventDefault();
-        getUser({ variables: { 'email': formState.email }})
+        await getUser({ 
+            variables: { email: formState.email }
+        })
+        
         setContractStep({
             ...contractStep,
             step: '2'

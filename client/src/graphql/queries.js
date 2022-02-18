@@ -9,8 +9,8 @@ export const QUERY_EMPLOYEE = gql`
 `;
 
 export const QUERY_USER = gql`
-  {
-    users {
+  query user($email: String!) {
+    user(email: $email) {
       _id
       username
       firstName
