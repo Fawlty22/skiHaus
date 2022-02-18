@@ -3,7 +3,16 @@ import { ListGroup, Card } from "react-bootstrap";
 import { CREATE_CONTRACT } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
 
-const EquipmentList = ({ equipmentData, categoryState, setContractData, contractData }) => {
+const EquipmentList = (
+  { 
+    equipmentData, 
+    categoryState, 
+    setContractData, 
+    contractData,
+    setContractStep,
+    contractStep 
+  }
+) => {
 
   //if statement trying to make the equipment list work for Chad's purposes
   if(!categoryState) {
@@ -44,6 +53,14 @@ const EquipmentList = ({ equipmentData, categoryState, setContractData, contract
       ...contractData
     })
   }
+
+  const handleNextPage = (event) => {
+    event.preventDefault();
+    setContractStep({
+      ...contractStep,
+      step: '4'
+    })
+  }
   
   return (
     <>
@@ -59,7 +76,7 @@ const EquipmentList = ({ equipmentData, categoryState, setContractData, contract
           </button>
         ))}
       </ul>
-      
+      <button onClick={handleNextPage}>Proceed to Finalize Contract</button>
     </>
   );
 };

@@ -50,7 +50,7 @@ const CreateContract = () => {
                 <Card.Body className="d-flex justify-content-between flex-column gap-3">
                     {contractStep.step === '1' && <UserSearchForm 
                         contractData={contractData}
-                        setContractData={setContractData}   
+                        setContractData={setContractData}
                         contractStep={contractStep}
                         setContractStep={setContractStep}
                     />}

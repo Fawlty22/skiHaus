@@ -3,7 +3,7 @@ import { useLazyQuery } from '@apollo/client';
 import { QUERY_USER } from '../../graphql/queries';
 import { Alert } from 'react-bootstrap'
 
-const UserSearchForm = ({ contractData, userData, setContractData }) => {
+const UserSearchForm = ({ contractData, setContractData, contractStep, setContractStep }) => {
     const [formState, setFormState] = useState({ email: '' });
     const[getUser, { data, error }] = useLazyQuery(QUERY_USER);
     const[show, setShow] = useState(true)
@@ -20,6 +20,10 @@ const UserSearchForm = ({ contractData, userData, setContractData }) => {
     const handleUserSearch = (event) => {
         event.preventDefault();
         getUser({ variables: { 'email': formState.email }})
+        setContractStep({
+            ...contractStep,
+            step: '2'
+        })
     }
 
     const handleChange = (event) => {
