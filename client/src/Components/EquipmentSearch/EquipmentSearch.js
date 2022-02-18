@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card } from "react-bootstrap";
 import { useQuery } from '@apollo/client';
 import { ALLEQUIPMENT_QUERY } from '../../graphql/queries';
-import { EquipmentSearchBar, EquipmentList } from '../'
+import { EquipmentSearchBar, EquipmentList } from '..'
 
 const EquipmentSearch = ({ contractData, setContractData, setContractStep, contractStep }) => {
     const { data } = useQuery(ALLEQUIPMENT_QUERY)
