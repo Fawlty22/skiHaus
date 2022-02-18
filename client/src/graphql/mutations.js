@@ -35,6 +35,33 @@ export const ADDUSER_MUTATION = gql`
   }
 `;
 
+export const CREATE_CONTRACT = gql`
+  mutation createContract(
+    $user: String! 
+    $checkOutDate: String! 
+    $checkInDate: String!
+    $equipment:EquipmentInput!) {
+      createContract(
+        user: $user 
+        checkOutDate: $checkOutDate 
+        checkInDate: $checkInDate
+        equipment: $equipment) {
+          _id
+          username
+          contracts {
+            _id
+            active
+            equipment {
+              skis {
+                _id
+                model
+              }
+            }
+          }
+        }
+    }
+`;
+
 export const ADDSKI_MUTATION = gql`
   mutation addSki($brand: String!, $model: String!, $condition: String!) {
     addSki(brand: $brand, model: $model, condition: $condition) {

@@ -1,13 +1,16 @@
 import { Card, Button, ListGroup } from "react-bootstrap";
-import AddSkiModal from "../Components/AddSkiModal";
-import AddSnowboardModal from "../Components/AddSnowboard";
-import AddBootModal from "../Components/AddBootModal";
+import AddSkiModal from "../components/AddSkiModal";
+import AddSnowboardModal from "../components/AddSnowboard";
+import AddBootModal from "../components/AddBootModal";
 import React from "react";
 import css from "../equipment.css";
-import EquipmentList from "../Components/EquipmentList";
-import { EquipmentProvider } from "../utils/EquipmentContext";
+import EquipmentList from "../components/EquipmentList";
+import { useQuery } from '@apollo/client';
+import { ALLEQUIPMENT_QUERY } from '../graphql/queries';
 
 const Equipment = () => {
+  const { data } = useQuery(ALLEQUIPMENT_QUERY)
+  const equipmentData = data
   const [skimodalShow, setSkiModalShow] = React.useState(false);
   const [snowboardmodalShow, setSnowboardModalShow] = React.useState(false);
   const [bootmodalShow, setBootModalShow] = React.useState(false);
@@ -41,9 +44,7 @@ const Equipment = () => {
       </Card.Body>
       <Card.Body>
         <Card.Title>View Current Inventory Below</Card.Title>
-        <EquipmentProvider>
-          <EquipmentList />
-        </EquipmentProvider>
+        {/* <EquipmentList equipmentData={equipmentData}/> */}
       </Card.Body>
     </Card>
   );
