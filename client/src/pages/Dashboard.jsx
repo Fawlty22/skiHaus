@@ -18,84 +18,97 @@ const Dashboard = () => {
   // }
 
   return (
-    
-      <Container fluid >
-        <Row className="dashboard-row" >
-          <Col xs={4} md={4} className="dashboard-col">
-            <Card style={{ width: "18rem" }}>
-              <Card.Body className="text-center">
-              <Card.Title>
-                  <Link to='/contract'>Create A New Contract</Link>
-                </Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col xs={4} md={4} className="dashboard-col">
-            <Card style={{ width: "18rem" }}>
-              <Card.Body className="text-center">
-              <Card.Title>
-                  <Link to='/new-employee'>Create New Employee</Link>
-                </Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col xs={4} md={4} className="dashboard-col">
-            <Card style={{ width: "18rem" }}>
-              <Card.Body className="text-center">
-                <Card.Title>
-                <Link to='/customerform'>Customer Form</Link>
-                </Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row className="dashboard-row" >
-          <Col xs={4} md={4} className="dashboard-col">
-            <Card style={{ width: "18rem" }}>
-              <Card.Body className="text-center">
-              <Card.Title>
-                  <Link to='/equipment'>Equipment Management</Link>
-                </Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col xs={4} md={4} className="dashboard-col">
-            <Card style={{ width: "18rem" }}>
-              <Card.Body className="text-center">
-              <Card.Title>
-                  <Link to='/returning'>Returning Today</Link>
-                </Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col xs={4} md={4} className="dashboard-col">
-            <Card style={{ width: "18rem" }}>
-              <Card.Body className="text-center">
-              <Card.Title>
-                  <Link to='/user-management'>User Management</Link>
-                </Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-        <Row className="dashboard-row" >
+    <Container fluid>
+      <Row className="dashboard-row">
         <Col xs={4} md={4} className="dashboard-col">
-          <Card style={{ width: "18rem" }}>
+          <Card bg="dark" style={{ width: "18rem" }}>
+            <Link style={{ textDecoration: "none" }} to="/contract">
               <Card.Body className="text-center">
-              <Card.Title>
-                  <Link to='/view-contracts'>View Contracts</Link>
+                <Card.Title style={{ color: "violet" }}>
+                  Create A New Contract
+                </Card.Title>
+              </Card.Body>{" "}
+            </Link>
+          </Card>
+        </Col>
+
+        <Col xs={4} md={4} className="dashboard-col">
+          <Card bg="dark" style={{ width: "18rem" }}>
+            <Link style={{ textDecoration: "none" }} to="/new-employee">
+              <Card.Body className="text-center">
+                <Card.Title style={{ color: "violet" }}>
+                  Create New Employee
                 </Card.Title>
               </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    
+            </Link>
+          </Card>
+        </Col>
+
+        <Col xs={4} md={4} className="dashboard-col">
+          <Card bg="dark" style={{ width: "18rem" }}>
+            <Link style={{ textDecoration: "none" }} to="/customerform">
+              <Card.Body className="text-center">
+                <Card.Title style={{ color: "violet" }}>
+                  Customer Form
+                </Card.Title>
+              </Card.Body>
+            </Link>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row className="dashboard-row">
+        <Col xs={4} md={4} className="dashboard-col">
+          <Card bg="dark" style={{ width: "18rem" }}>
+            <Link style={{ textDecoration: "none" }} to="/equipment">
+              <Card.Body className="text-center">
+                <Card.Title style={{ color: "violet" }}>
+                  Equipment Management
+                </Card.Title>
+              </Card.Body>
+            </Link>
+          </Card>
+        </Col>
+
+        <Col xs={4} md={4} className="dashboard-col">
+          <Card bg="dark" style={{ width: "18rem" }}>
+            <Link style={{ textDecoration: "none" }} to="/returning">
+              <Card.Body className="text-center">
+                <Card.Title style={{ color: "violet" }}>
+                  Returning Today
+                </Card.Title>
+              </Card.Body>
+            </Link>
+          </Card>
+        </Col>
+
+        <Col xs={4} md={4} className="dashboard-col">
+          <Card bg="dark" style={{ width: "18rem" }}>
+            {" "}
+            <Link style={{ textDecoration: "none" }} to="/user-management">
+              <Card.Body className="text-center">
+                <Card.Title style={{ color: "violet" }}>
+                  User Management
+                </Card.Title>
+              </Card.Body>
+            </Link>
+          </Card>
+        </Col>
+      </Row>
+      <Row className="dashboard-row">
+        <Col xs={4} md={4} className="dashboard-col">
+          <Card bg="dark" style={{ width: "18rem" }}>
+            <Link style={{ textDecoration: "none" }} to="/view-contracts">
+              <Card.Body className="text-center">
+                <Card.Title style={{ color: "violet" }}>
+                  View Contracts
+                </Card.Title>
+              </Card.Body>
+            </Link>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 
   // return (
@@ -103,7 +116,7 @@ const Dashboard = () => {
   //     {employee ?
   //       <div>
   //         <button>
-  //           <Link to="/contract">Create Contract</Link>
+  //           <Link style={{ textDecoration: 'none' }} to="/contract">Create Contract</Link>
   //         </button>
   //       </div>
   //       :
