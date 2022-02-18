@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 
 const ContractDateSelection = ({ contractData, setContractData }) => {
+    
     const handleDateChange = (event) => {
         if(event.target.labels[0].innerText === 'Check In Date:') {
             setContractData({

@@ -5,6 +5,7 @@ import { useMutation } from "@apollo/client";
 
 const EquipmentList = ({ equipmentData, categoryState, setContractData, contractData }) => {
 
+  //if statement trying to make the equipment list work for Chad's purposes
   if(!categoryState) {
     console.log('no categoryState')
     equipmentSelected = equipmentData
@@ -37,7 +38,6 @@ const EquipmentList = ({ equipmentData, categoryState, setContractData, contract
     event.preventDefault();
     const selectedEquipment = event.target.id
     const categoryArray = contractData.equipment[category]
-    console.log(categoryArray)
     const updatedCategoryArray = [...categoryArray, selectedEquipment]
     contractData.equipment[category] = updatedCategoryArray
     setContractData({

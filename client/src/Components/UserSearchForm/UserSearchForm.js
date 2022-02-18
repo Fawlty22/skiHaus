@@ -30,6 +30,8 @@ const UserSearchForm = ({ contractData, userData, setContractData }) => {
         });
     };
 
+    // return has a conditionally rendered alert but the query doesn't seem to 
+    //respond with error if the user is not found. 
     return (
         <div>
             <h2>Search For Customer to Begin Contract</h2>

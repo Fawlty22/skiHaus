@@ -11,7 +11,6 @@ const CreateContract = () => {
     // state that handles the contract data, ultimately this state is pushed
     // in a mutation to the database.
     const [contractData, setContractData] = React.useState({
-        step: 1,
         user: {},
         checkOutDate: '',
         checkInDate: '',

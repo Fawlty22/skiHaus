@@ -5,7 +5,6 @@ const EquipmentSearchBar = ({ categoryState, setCategoryState }) => {
     const handleCategory = (event) => {
         const dropDownIndex = event.target.options.selectedIndex
         const category = event.target.options[dropDownIndex].innerText;
-        console.log(event, category)
         setCategoryState({
             ...categoryState,
             category: category
