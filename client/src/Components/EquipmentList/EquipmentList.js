@@ -4,53 +4,44 @@ import { CREATE_CONTRACT } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
 
 const EquipmentList = ({ equipmentData, categoryState, setContractData, contractData }) => {
-  const [formState, setFormState] = useState({ skis: [], snowboards: [], boots: [] })
 
-    if(!categoryState) {
-      console.log('no categoryState')
-      equipmentSelected = equipmentData
+  if(!categoryState) {
+    console.log('no categoryState')
+    equipmentSelected = equipmentData
 
-      const handleEquipmentSubmit = (event) => {
-        console.log(event)
-      }
-
-      return (
-        <>
-          <ul>
-            {equipmentSelected.map((equipment) => (
-              <button 
-                key={equipment._id} 
-                id={equipment._id}
-                onClick={handleEquipmentSubmit}>
-                  Brand : {equipment.brand}
-                  Model : {equipment.model}
-              </button>
-            ))}
-          </ul>
-        </>
-      );
+    const handleEquipmentSubmit = (event) => {
+      console.log(event)
     }
+
+    return (
+      <>
+        <ul>
+          {equipmentSelected.map((equipment) => (
+            <button 
+              key={equipment._id} 
+              id={equipment._id}
+              onClick={handleEquipmentSubmit}>
+                Brand : {equipment.brand}
+                Model : {equipment.model}
+            </button>
+          ))}
+        </ul>
+      </>
+    );
+  }
 
   const category = categoryState.category.toLowerCase()
   const equipmentSelected=equipmentData[category]
-  console.log(equipmentData, category)
 
   const handleEquipmentSubmit = (event) => {
     event.preventDefault();
     const selectedEquipment = event.target.id
-    const categoryArray = formState[category]
+    const categoryArray = contractData.equipment[category]
+    console.log(categoryArray)
     const updatedCategoryArray = [...categoryArray, selectedEquipment]
-    formState[category] = updatedCategoryArray
-    setFormState({
-      ...formState
-    })
-  }
-
-  const handleContractSubmit = async (event) => {
-    event.preventDefault();
-    await setContractData({
-      ...contractData,
-      equipment: {...formState}
+    contractData.equipment[category] = updatedCategoryArray
+    setContractData({
+      ...contractData
     })
   }
   
@@ -68,7 +59,7 @@ const EquipmentList = ({ equipmentData, categoryState, setContractData, contract
           </button>
         ))}
       </ul>
-      <button onClick={handleContractSubmit}>Submit Contract</button>
+      
     </>
   );
 };

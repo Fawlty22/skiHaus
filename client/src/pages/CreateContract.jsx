@@ -8,21 +8,31 @@ import { Card, Row, Col } from "react-bootstrap";
 const CreateContract = () => {
     // const { data } = useQuery(QUERY_USER)
     const [userSearchShow, setUserSearchShow] = React.useState(false);
+    const [contractStep, setContractStep] = React.useState({step: '1'});
+    console.log(contractStep)
     const [contractData, setContractData] = React.useState({
         step: 1,
         user: {},
         checkOutDate: '',
         checkInDate: '',
-        equipment: {},
+        equipment: {
+            skis: [],
+            snowboards: [],
+            boots: []
+        }
     })
 
     const handleContractNavigation = (event) => {
-        console.log(event)
-        setContractData({
-            ...contractData,
-            step: 1
+        setContractStep({
+            ...contractStep,
+            step: event.target.id
         })
     }
+
+    const handleContractSubmit = async (event) => {
+        event.preventDefault();
+        console.log('contract submitted')
+      }
 
     return (
         <div>
@@ -39,7 +49,15 @@ const CreateContract = () => {
             </Row>
             <Card id="userSearch" className="text-center">
                 <Card.Body className="d-flex justify-content-between flex-column gap-3">
-                    {!contractData.user.username ? (
+                    {contractStep.step === '1' && <UserSearchForm 
+                        contractData={contractData}
+                        setContractData={setContractData}   
+                    />}
+                    {contractStep.step === '3' && <EquipmentSearch
+                        contractData={contractData}
+                        setContractData={setContractData}
+                    />}
+                    {/* {!contractData.user.username ? (
                         <UserSearchForm 
                         show={userSearchShow}
                         // updateContractData = {updateContractData}
@@ -53,8 +71,9 @@ const CreateContract = () => {
                             contractData={contractData}
                             setContractData={setContractData}
                         />
-                    }
+                    } */}
                 </Card.Body>
+                <button onClick={handleContractSubmit}>Submit Contract</button>
             </Card>
         </div>
     )
