@@ -20,7 +20,6 @@ import "./App.css";
 import { EquipmentProvider } from "../src/utils/EquipmentContext";
 import UserSearchBar from "./pages/UserSearhBar";
 
-
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
@@ -44,21 +43,29 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <EquipmentProvider>
-      <Router>
-        <div>
-          <Header />
-        </div>
-        <StoreProvider>
-          <Switch>
-            <Route exact path="/dashboard" render={() => <Dashboard />} />
-            <Route exact path="/login" render={() => <Login />} />
-            <Route exact path="/customerform" render={() => <CustomerForm />} />
-            <Route exact path="/contract" render={() => <CreateContract />} />
-            <Route exact path="/equipment" render={() => <Equipment />} />
-            <Route exact path="/usersearch" render={() => <UserSearchBar />} />
-          </Switch>
-        </StoreProvider>
-      </Router>
+        <Router>
+          <div>
+            <Header />
+          </div>
+          <StoreProvider>
+            <Switch>
+              <Route exact path="/dashboard" render={() => <Dashboard />} />
+              <Route exact path="/login" render={() => <Login />} />
+              <Route
+                exact
+                path="/customerform"
+                render={() => <CustomerForm />}
+              />
+              <Route exact path="/contract" render={() => <CreateContract />} />
+              <Route exact path="/equipment" render={() => <Equipment />} />
+              <Route
+                exact
+                path="/usersearch"
+                render={() => <UserSearchBar />}
+              />
+            </Switch>
+          </StoreProvider>
+        </Router>
       </EquipmentProvider>
     </ApolloProvider>
   );

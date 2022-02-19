@@ -5,16 +5,14 @@ import { Container } from "react-bootstrap";
 import SingleUser from "../Components/SingleUser";
 
 const UserSearch = () => {
-  const { data, loading, error } = useQuery(QUERY_USERS) 
-    
- 
- 
-  if (loading) return "Loading";
-  if (error) return "error";
+  // const { data, loading, error } = useQuery(QUERY_USERS)
+
+  // if (loading) return "Loading";
+  // if (error) return "error";
 
   return (
     <Container>
-      <SingleUser userData={data} />
+      <SingleUser />
     </Container>
     // <>
     //   <ul>

@@ -1,12 +1,47 @@
 import { useLazyQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { Form, Container, FloatingLabel, Button } from "react-bootstrap";
+import { gql } from "@apollo/client";
+import SingleUserContracts from "../SingleUserContract";
+// import { QUERY_USER } from "../../graphql/queries";
 
-const SingleUser = ({ userData }) => {
+const SingleUser = ({}) => {
   const [formState, setFormState] = useState({
     email: "",
   });
-  const[getUser, { data }] = useLazyQuery()
+
+  const [userState, setUserState] = useState({ userInfo: "" });
+
+  const QUERY_USER = gql`
+    query GetUser($email: String!) {
+      user(email: $email) {
+        username
+        _id
+        email
+        firstName
+        lastName
+        birthDate
+        phone
+        contracts {
+          _id
+          active
+          equipment {
+            boots {
+              _id
+            }
+            skis {
+              _id
+            }
+            snowboards {
+              _id
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const [getUser, { data, error }] = useLazyQuery(QUERY_USER);
 
   const { email } = formState;
 
@@ -17,31 +52,43 @@ const SingleUser = ({ userData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const userResult = await getUser({ variables: { email: email } });
+    console.log(userResult);
+
+    setUserState({
+      ...userState,
+      userInfo: userResult.data.username,
+    });
   };
 
-  
-  return (
-    <Container>
-      <Form id="customerForm" onSubmit={handleSubmit}>
-        <FloatingLabel
-          controlId="floatingInput"
-          label="Email address"
-          className="mb-3"
-        >
-          <Form.Control
-            name="email"
-            type="email"
-            placeholder="name@example.com"
-            defaultValue={email}
-            onChange={handleChange}
-          />
-        </FloatingLabel>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-    </Container>
-  );
+  switch (userState.userInfo) {
+    case "":
+      return (
+        <Container>
+          <Form id="customerForm" onSubmit={handleSubmit}>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Email address"
+              className="mb-3"
+            >
+              <Form.Control
+                name="email"
+                type="email"
+                placeholder="name@example.com"
+                defaultValue={email}
+                onChange={handleChange}
+              />
+            </FloatingLabel>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Container>
+      );
+
+    default:
+      return <SingleUserContracts userResult={data} />;
+  }
 };
 
 export default SingleUser;

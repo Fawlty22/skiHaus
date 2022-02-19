@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { UserSearchForm, EquipmentSearch, ContractSubmit, ContractDateSelection } from '../components/index.js';
+import { UserSearchForm, EquipmentSearch, ContractSubmit, ContractDateSelection } from '../Components';
 import { Card, Row, Col } from "react-bootstrap";
 
 // import { UPDATE_USERS } from '../utils/actions'
