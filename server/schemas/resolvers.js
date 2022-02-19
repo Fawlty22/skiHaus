@@ -6,12 +6,10 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().select("-__v")
-      .populate('contracts')
-      ;
+      return User.find().select("-__v").populate("contracts");
     },
-    user: async (parent, { email }) => {
-      return User.findOne({ email: email }).select("-__v")
+    user: async (parent, args) => {
+      return User.findOne({ email: "email" }).select("-__v");
     },
     boots: async () => {
       return Boot.find().select("-__v");
@@ -35,16 +33,14 @@ const resolvers = {
     //find all contract
     contracts: async () => {
       return await Contract.find()
-      .populate('equipment.boots')
-      .populate('equipment.skis')
-      .populate('equipment.snowboards')
-    }, 
+        .populate("equipment.boots")
+        .populate("equipment.skis")
+        .populate("equipment.snowboards");
+    },
     //find one contract
     contract: async (parent, args) => {
-      return await Contract.findOne({ _id: args.id})
-      
-    }, 
-
+      return await Contract.findOne({ _id: args.id });
+    },
   },
 
   Mutation: {
@@ -60,18 +56,30 @@ const resolvers = {
           new: true,
         });
       }
-    },    
+    },
     addUser: async (parent, args) => {
       const user = await User.create(args);
       return user;
     },
-    editUser: async (parent, { _id, username, firstName, lastName, email, birthDate, phone }) => {
+    editUser: async (
+      parent,
+      { _id, username, firstName, lastName, email, birthDate, phone }
+    ) => {
       const userUpdate = await User.findByIdAndUpdate(
         { _id: _id },
-        { $set: { username: username, firstName: firstName, lastName: lastName, email: email, birthDate: birthDate, phone: phone } },
-        { new:true }
-        )
-        return userUpdate;
+        {
+          $set: {
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            birthDate: birthDate,
+            phone: phone,
+          },
+        },
+        { new: true }
+      );
+      return userUpdate;
     },
     login: async (parent, { username, password }) => {
       console.log("login mutation line 47", username, password);
@@ -94,26 +102,24 @@ const resolvers = {
     addSki: async (parent, args) => {
       const ski = await Ski.create(args);
 
-      return ski; 
+      return ski;
     },
-    updateSki: async (parent, {_id, brand, model, condition}) => {
+    updateSki: async (parent, { _id, brand, model, condition }) => {
       return await Ski.findByIdAndUpdate(
         { _id: _id },
         { $set: { brand: brand, model: model, condition: condition } },
         { new: true }
-      ); 
+      );
     },
     deleteSki: async (parent, { _id }) => {
-      return await Ski.findOneAndDelete(
-        { _id: _id },
-      );
+      return await Ski.findOneAndDelete({ _id: _id });
     },
     addSnowboard: async (parent, args) => {
       const snowboard = await Snowboard.create(args);
 
       return snowboard;
     },
-    updateSnowboard: async (parent, {_id, brand, model, condition}) => {
+    updateSnowboard: async (parent, { _id, brand, model, condition }) => {
       return await Snowboard.findByIdAndUpdate(
         { _id: _id },
         { $set: { brand: brand, model: model, condition: condition } },
@@ -121,16 +127,14 @@ const resolvers = {
       );
     },
     deleteSnowboard: async (parent, { _id }) => {
-      return await Snowboard.findByIdAndDelete(
-        { _id: _id },
-      );
+      return await Snowboard.findByIdAndDelete({ _id: _id });
     },
     addBoot: async (parent, args) => {
       const boot = await Boot.create(args);
 
       return boot;
     },
-    updateBoot: async (parent, {_id, brand, model, condition}) => {
+    updateBoot: async (parent, { _id, brand, model, condition }) => {
       return await Boot.findByIdAndUpdate(
         { _id: _id },
         { $set: { brand: brand, model: model, condition: condition } },
@@ -138,17 +142,15 @@ const resolvers = {
       );
     },
     deleteBoot: async (parent, { _id }) => {
-      return await Boot.findOneAndDelete(
-        { _id: _id },
-      );
+      return await Boot.findOneAndDelete({ _id: _id });
     },
     createContract: async (parent, args) => {
-      console.log('create contract line 102')
-      console.log('args', args)
+      console.log("create contract line 102");
+      console.log("args", args);
 
       const contract = await Contract.create(args);
-      console.log('contract', contract)
-      console.log('_*_*_*_*_*_*_', contract.equipment.boots )
+      console.log("contract", contract);
+      console.log("_*_*_*_*_*_*_", contract.equipment.boots);
 
       const updatedSkis = await Ski.updateMany(
         { _id: { $in: contract.equipment.skis } },
@@ -167,11 +169,10 @@ const resolvers = {
       );
 
       const updatedUser = await User.findOneAndUpdate(
-        { username: args.user }, 
+        { username: args.user },
         { $addToSet: { contracts: contract._id } },
         { new: true }
-      )
-      .populate('contracts');
+      ).populate("contracts");
 
       return updatedUser;
     },
@@ -198,22 +199,27 @@ const resolvers = {
         { $set: { available: true } },
         { new: true }
       );
-        //return new contract
-        return updatedContract;
+      //return new contract
+      return updatedContract;
     },
-    editContract: async (parent, { _id, checkoutOutDate, checkoutInDate, equipment }) => {
+    editContract: async (
+      parent,
+      { _id, checkoutOutDate, checkoutInDate, equipment }
+    ) => {
       const updatedContract = await Contract.findOneAndUpdate(
         { _id: _id },
-        { $set: { checkoutOutDate: checkoutOutDate, checkoutInDate: checkoutInDate, equipment: equipment } },
+        {
+          $set: {
+            checkoutOutDate: checkoutOutDate,
+            checkoutInDate: checkoutInDate,
+            equipment: equipment,
+          },
+        },
         { new: true }
       );
       return updatedContract;
     },
-   
   },
 };
 
 module.exports = resolvers;
-
-
-
