@@ -18,6 +18,7 @@ import { StoreProvider } from "./utils/GlobalContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { EquipmentProvider } from "../src/utils/EquipmentContext";
+import UserSearchBar from "./pages/UserSearhBar";
 
 
 const httpLink = createHttpLink({
@@ -54,6 +55,7 @@ function App() {
             <Route exact path="/customerform" render={() => <CustomerForm />} />
             <Route exact path="/contract" render={() => <CreateContract />} />
             <Route exact path="/equipment" render={() => <Equipment />} />
+            <Route exact path="/usersearch" render={() => <UserSearchBar />} />
           </Switch>
         </StoreProvider>
       </Router>
