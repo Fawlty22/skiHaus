@@ -1,6 +1,36 @@
-body {
+body,
+html {
+  margin: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+#root {
+  height: 100%;
   background-image: url("https://wallpaperaccess.com/full/2005304.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-color: black;
+}
+
+.dashboard-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.dashboard-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

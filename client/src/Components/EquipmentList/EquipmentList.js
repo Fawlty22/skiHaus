@@ -1,41 +1,67 @@
 import React, { useState } from "react";
-// import { useEquipmentContext } from "../../utils/EquipmentContext";
 import { ListGroup, Card } from "react-bootstrap";
+import { CREATE_CONTRACT } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
 
-const EquipmentList = ({ equipmentData, categoryState, setContractData, contractData }) => {
-  let category
-  let equipmentSelected
-  category = categoryState.category.toLowerCase()
-  // if(categoryState) {
-  //   category = categoryState.category.toLowerCase()
-  // }
-  // else {
-  //   category = 'all'
-  // }
-  // console.log(category)
-  // if(category = "all") {
-  //   equipmentSelected = equipmentData
-  // }
-  // else {
-  //   equipmentSelected=equipmentData[category]
-  // }
+const EquipmentList = (
+  { 
+    equipmentData, 
+    categoryState, 
+    setContractData, 
+    contractData,
+    setContractStep,
+    contractStep 
+  }
+) => {
 
-  equipmentSelected=equipmentData[category]
+  //if statement trying to make the equipment list work for Chad's purposes
+  if(!categoryState) {
+    console.log('no categoryState')
+    equipmentSelected = equipmentData
 
-  console.log(category, equipmentSelected)
-  // const { equipment } = useEquipmentContext();
+    const handleEquipmentSubmit = (event) => {
+      console.log(event)
+    }
+
+    return (
+      <>
+        <ul>
+          {equipmentSelected.map((equipment) => (
+            <button 
+              key={equipment._id} 
+              id={equipment._id}
+              onClick={handleEquipmentSubmit}>
+                Brand : {equipment.brand}
+                Model : {equipment.model}
+            </button>
+          ))}
+        </ul>
+      </>
+    );
+  }
+
+  const category = categoryState.category.toLowerCase()
+  const equipmentSelected=equipmentData[category]
 
   const handleEquipmentSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target.id)
     const selectedEquipment = event.target.id
+    const categoryArray = contractData.equipment[category]
+    const updatedCategoryArray = [...categoryArray, selectedEquipment]
+    contractData.equipment[category] = updatedCategoryArray
     setContractData({
-      ...contractData,
-      equipment: selectedEquipment
+      ...contractData
     })
-    console.log(contractData)
   }
 
+  const handleNextPage = (event) => {
+    event.preventDefault();
+    setContractStep({
+      ...contractStep,
+      step: '4'
+    })
+  }
+  
   return (
     <>
       <span>Select the {category} you would like to add</span>
@@ -50,6 +76,7 @@ const EquipmentList = ({ equipmentData, categoryState, setContractData, contract
           </button>
         ))}
       </ul>
+      <button onClick={handleNextPage}>Proceed to Finalize Contract</button>
     </>
   );
 };

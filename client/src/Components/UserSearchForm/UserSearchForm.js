@@ -1,25 +1,34 @@
-import React, { useState } from 'react';
-// import { useCreateContractContext } from '../../utils/CreateContractContext';
+import React, { useState, useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
+import { QUERY_USER } from '../../graphql/queries';
+import { Alert } from 'react-bootstrap'
 
-const UserSearchForm = ({ contractData, userData, setContractData }) => {
-    const [formState, setFormState] = useState({ firstName: '', lastName: '', email: '' });
-    // const [state, dispatch ] = useCreateContractContext();
-    // const { createContractData } = state;
+const UserSearchForm = ({ contractData, setContractData, contractStep, setContractStep }) => {
+    const [formState, setFormState] = useState({ email: '' });
+    const[getUser, { data, error }] = useLazyQuery(QUERY_USER);
+    const[show, setShow] = useState(true)
 
+    useEffect(() => {
+        if (data) {
+            setContractData({
+                ...contractData,
+                user: data.users[0]
+            })
+        }
+    }, [data])
 
-    const handleUserSearch = (event) => {
+    const handleUserSearch = async (event) => {
         event.preventDefault();
-        const selectedUserData = userData.users.map((user) => {
-            // if(formState.username) {
-                if (user.username.toLowerCase().trim() === formState.username.toLowerCase().trim()) {
-                    return user
-                }
-        })[0]
+        const userResult = await getUser({ variables: { 'email': formState.email }})
+        const user = userResult.data.users[0]
         setContractData({
             ...contractData,
-            user: selectedUserData
+            user: user
         })
-        // console.log(contractData)
+        setContractStep({
+            ...contractStep,
+            step: '2'
+        })
     }
 
     const handleChange = (event) => {
@@ -30,17 +39,19 @@ const UserSearchForm = ({ contractData, userData, setContractData }) => {
         });
     };
 
+    // return has a conditionally rendered alert but the query doesn't seem to 
+    //respond with error if the user is not found. 
     return (
         <div>
             <h2>Search For Customer to Begin Contract</h2>
             <form onSubmit={handleUserSearch}>
                 <div className="flex-row space-between my-2">
-                    <label htmlFor="username">Search by username:</label>
+                    <label htmlFor="email">Search by email:</label>
                     <input
-                        placeholder="username"
-                        name="username"
-                        type="username"
-                        id="username"
+                        placeholder="example@example.com"
+                        name="email"
+                        type="email"
+                        id="email"
                         onChange={handleChange}
                     />
                 </div>
@@ -48,6 +59,11 @@ const UserSearchForm = ({ contractData, userData, setContractData }) => {
                     <button type="submit">Search for User</button>
                 </div>
             </form>
+            {error &&
+                <Alert variant="warning" onClose={() => setShow(false)} dismissible>
+                    <span>User Not Found. Please try again</span>
+                </Alert>
+            }
         </div>
     )
 }
