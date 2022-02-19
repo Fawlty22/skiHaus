@@ -1,9 +1,8 @@
 import { useLazyQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { Form, Container, FloatingLabel, Button } from "react-bootstrap";
-import { gql } from "@apollo/client";
 import SingleUserContracts from "../SingleUserContract";
-// import { QUERY_USER } from "../../graphql/queries";
+import { QUERY_USER } from "../../graphql/queries";
 
 const SingleUser = ({}) => {
   const [formState, setFormState] = useState({
@@ -11,35 +10,6 @@ const SingleUser = ({}) => {
   });
 
   const [userState, setUserState] = useState({ userInfo: "" });
-
-  const QUERY_USER = gql`
-    query GetUser($email: String!) {
-      user(email: $email) {
-        username
-        _id
-        email
-        firstName
-        lastName
-        birthDate
-        phone
-        contracts {
-          _id
-          active
-          equipment {
-            boots {
-              _id
-            }
-            skis {
-              _id
-            }
-            snowboards {
-              _id
-            }
-          }
-        }
-      }
-    }
-  `;
 
   const [getUser, { data, error }] = useLazyQuery(QUERY_USER);
 
@@ -51,6 +21,7 @@ const SingleUser = ({}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(email);
 
     const userResult = await getUser({ variables: { email: email } });
     console.log(userResult);

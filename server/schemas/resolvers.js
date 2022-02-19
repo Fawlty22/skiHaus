@@ -8,8 +8,10 @@ const resolvers = {
     users: async () => {
       return User.find().select("-__v").populate("contracts");
     },
-    user: async (parent, args) => {
-      return User.findOne({ email: "email" }).select("-__v");
+    user: async (parent, { email }) => {
+      return User.findOne({ email: email })
+        .populate("contracts")
+        .select("-__v");
     },
     boots: async () => {
       return Boot.find().select("-__v");

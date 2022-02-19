@@ -9,9 +9,30 @@ export const QUERY_EMPLOYEE = gql`
 `;
 
 export const QUERY_USER = gql`
-  query GetUser($email: String!){
+  query GetUser($email: String!) {
     user(email: $email) {
+      username
       _id
+      email
+      firstName
+      lastName
+      birthDate
+      phone
+      contracts {
+        _id
+        active
+        equipment {
+          boots {
+            _id
+          }
+          skis {
+            _id
+          }
+          snowboards {
+            _id
+          }
+        }
+      }
     }
   }
 `;

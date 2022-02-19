@@ -5,6 +5,7 @@ const SingleUserContracts = (userResults) => {
   const user = userResults.userResult.user;
 
   const [contractHistory, setContractHistory] = useState(user.contracts.length);
+  
 
   console.log(contractHistory);
   switch (contractHistory > 0) {
