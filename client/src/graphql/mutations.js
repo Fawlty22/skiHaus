@@ -94,3 +94,37 @@ export const ADDBOOT_MUTATION = gql`
     }
   }
 `;
+
+export const DEACTIVATE_CONTRACT = gql`
+  mutation deactivateContract($id: ID!) {
+    deactivateContract(_id: $id) {
+      _id
+      checkOutDate
+      checkInDate
+      equipment {
+        boots {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+        skis {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+        snowboards {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+      }
+      active
+    }
+  }
+`;
