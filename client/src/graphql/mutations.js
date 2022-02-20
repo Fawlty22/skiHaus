@@ -128,3 +128,59 @@ export const DEACTIVATE_CONTRACT = gql`
     }
   }
 `;
+
+export const UPDATE_SKI = gql`
+  mutation updateSki(
+    $id: ID!
+    $brand: String
+    $model: String
+    $condition: String
+  ) {
+    updateSki(_id: $id, brand: $brand, model: $model, condition: $condition) {
+      _id
+      brand
+      model
+      condition
+      available
+    }
+  }
+`;
+
+export const UPDATE_BOOT = gql`
+  mutation updateBoot(
+    $id: ID!
+    $brand: String
+    $model: String
+    $condition: String
+  ) {
+    updateBoot(_id: $id, brand: $brand, model: $model, condition: $condition) {
+      _id
+      brand
+      model
+      condition
+      available
+    }
+  }
+`;
+
+export const UPDATE_SNOWBOARD = gql`
+  mutation updateSnowboard(
+    $id: ID!
+    $brand: String
+    $model: String
+    $condition: String
+  ) {
+    updateSnowboard(
+      _id: $id
+      brand: $brand
+      model: $model
+      condition: $condition
+    ) {
+      _id
+      brand
+      model
+      condition
+      available
+    }
+  }
+`;

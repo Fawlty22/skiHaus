@@ -94,3 +94,5 @@ export const ALLEQUIPMENT_QUERY = gql`
     }
   }
 `;
+
+

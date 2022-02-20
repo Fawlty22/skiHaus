@@ -23,6 +23,8 @@ const SingleUser = ({}) => {
     e.preventDefault();
 
     const userResult = await getUser({ variables: { email: email } });
+    
+    console.log(userResult);
 
     setUserState({
       ...userState,

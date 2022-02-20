@@ -1,19 +1,23 @@
 import { Modal, Button, Form, FloatingLabel, Alert } from "react-bootstrap";
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADDBOOT_MUTATION } from "../../graphql/mutations";
+import { UPDATE_SNOWBOARD } from "../../graphql/mutations";
 
 const UpdateSnowboardModal = (props) => {
   const [formState, setFormState] = useState({
+    snowboardID: "",
     brand: "",
     model: "",
     condition: "",
   });
 
-  const { brand, model, condition } = formState;
+  const { brand, model, condition, snowboardID } = formState;
 
-  const [addBoot, { error }] = useMutation(ADDBOOT_MUTATION);
+  const [updateSnowboard, { error, data }] = useMutation(UPDATE_SNOWBOARD);
 
+  function resetState() {
+    setFormState({ snowboardID: "", brand: "", model: "", condition: "" });
+  }
   function handleChange(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
     console.log(formState);
@@ -23,8 +27,9 @@ const UpdateSnowboardModal = (props) => {
     e.preventDefault();
 
     try {
-      const newBoot = await addBoot({
+      const updatedSnowboard = await updateSnowboard({
         variables: {
+          id: snowboardID,
           brand: brand,
           model: model,
           condition: condition,
@@ -33,10 +38,11 @@ const UpdateSnowboardModal = (props) => {
           return error;
         },
       });
-      console.log(newBoot);
+      console.log(updatedSnowboard);
     } catch (e) {
       console.log(e);
     }
+    
   };
 
   return (
@@ -48,11 +54,25 @@ const UpdateSnowboardModal = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Enter the neccesary information to create a Boot
+          Enter the Id of the snowboard you would like to update. Then enter
+          what you would like to update.
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form id="addBootForm" onSubmit={handleSubmit}>
+        <Form id="updateSnowbordForm" onSubmit={handleSubmit}>
+          <FloatingLabel
+            controlId="floatingInput"
+            label="snowboardID"
+            className="mb-3"
+          >
+            <Form.Control
+              name="snowboardID"
+              type="text"
+              placeholder="Snowboard ID"
+              defaultValue={snowboardID}
+              onChange={handleChange}
+            />
+          </FloatingLabel>
           <FloatingLabel
             controlId="floatingInput"
             label="brand"
@@ -93,12 +113,13 @@ const UpdateSnowboardModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">Add Boot</Button>
+          <Button type="submit">Update Snowboard</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
         {error && <Alert>{error.message}</Alert>}
+        {data && <Alert>Snowboard Updated</Alert>}
       </Modal.Footer>
     </Modal>
   );

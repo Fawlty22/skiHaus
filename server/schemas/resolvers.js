@@ -11,9 +11,14 @@ const resolvers = {
     user: async (parent, { email }) => {
       return User.findOne({ email: email })
         .populate("contracts")
-        .populate("boots")
-        .populate("snowboards")
-        .populate("skis")
+        .populate([
+          {
+            path: "equipment",
+            path: "boots",
+            populate: { path: "boots" },
+          },
+        ])
+
         .select("-__v");
     },
     boots: async () => {

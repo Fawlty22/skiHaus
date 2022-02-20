@@ -12,7 +12,7 @@ const AddSnowboardModal = (props) => {
 
   const { brand, model, condition } = formState;
 
-  const [addSnowboard, { error }] = useMutation(ADDSNOWBOARD_MUTATION);
+  const [addSnowboard, { error, data }] = useMutation(ADDSNOWBOARD_MUTATION);
 
   function handleChange(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
@@ -98,6 +98,7 @@ const AddSnowboardModal = (props) => {
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
         {error && <Alert>{error.message}</Alert>}
+        {data && <Alert>Snowboard Added</Alert>}
       </Modal.Footer>
     </Modal>
   );

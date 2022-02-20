@@ -11,7 +11,7 @@ const Equipment = () => {
     <>
       <AddEquipmentButtons />
       <UpdateEquipmentButtons />
-      <EquipmentSearch />
+      {/* <EquipmentSearch /> */}
     </>
   );
 };

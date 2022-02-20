@@ -12,7 +12,7 @@ const AddBootModal = (props) => {
 
   const { brand, model, condition } = formState;
 
-  const [addBoot, { error }] = useMutation(ADDBOOT_MUTATION);
+  const [addBoot, { error, data }] = useMutation(ADDBOOT_MUTATION);
 
   function handleChange(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
@@ -99,6 +99,7 @@ const AddBootModal = (props) => {
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
         {error && <Alert>{error.message}</Alert>}
+        {data && <Alert>Boot Added</Alert>}
       </Modal.Footer>
     </Modal>
   );
