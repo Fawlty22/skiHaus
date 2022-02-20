@@ -1,4 +1,4 @@
-import { Form, Button, Container, FloatingLabel } from "react-bootstrap";
+import { Form, Button, Container, Card, FloatingLabel } from "react-bootstrap";
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADDUSER_MUTATION } from "../graphql/mutations.js";
@@ -45,8 +45,10 @@ const CustomerForm = () => {
   };
 
   return (
-    <Container>
-      <Form id="customerForm" onSubmit={handleSubmit}>
+    <Container >
+      <Card bg="dark" className="mt-5" >
+      <Card.Title  className="fw-bolder text-center fs-4 text-info">Please Enter Your Information Here</Card.Title>    
+      <Form id="customerForm" className="m-2" onSubmit={handleSubmit}>
         <FloatingLabel
           controlId="floatingInput"
           label="First Name"
@@ -139,10 +141,11 @@ const CustomerForm = () => {
             onChange={handleChange}
           />
         </FloatingLabel>
-        <Button variant="primary" type="submit">
+        <Button variant="info" type="submit">
           Submit
         </Button>
       </Form>
+      </Card>
     </Container>
   );
 };

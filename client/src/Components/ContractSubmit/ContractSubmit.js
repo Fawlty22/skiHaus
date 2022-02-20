@@ -64,7 +64,7 @@ const ContractSubmit = ({ contractData }) => {
                         <h4>Boots</h4>
                         {contractData.equipment.boots.map((boot) => (
                             <Col>
-                                <span>{boot}</span>
+                                <span key={boot._id}>{boot}</span>
                             </Col>
                         ))}
                     </Col>

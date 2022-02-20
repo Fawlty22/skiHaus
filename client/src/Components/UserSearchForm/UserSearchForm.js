@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { QUERY_USER } from '../../graphql/queries';
+import { QUERY_USERS } from '../../graphql/queries';
 import { Alert } from 'react-bootstrap'
 
 const UserSearchForm = ({ contractData, setContractData, contractStep, setContractStep }) => {
     const [formState, setFormState] = useState({ email: '' });
-    const[getUser, { data, error }] = useLazyQuery(QUERY_USER);
+    const[getUser, { data, error }] = useLazyQuery(QUERY_USERS);
     const[show, setShow] = useState(true)
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const UserSearchForm = ({ contractData, setContractData, contractStep, setContra
     //respond with error if the user is not found. 
     return (
         <div>
-            <h2>Search For Customer to Begin Contract</h2>
+            <h2 style={{textAlign: 'center'}}>Search For Customer to Begin Contract</h2>
             <form onSubmit={handleUserSearch}>
                 <div className="flex-row space-between my-2">
                     <label htmlFor="email">Search by email:</label>

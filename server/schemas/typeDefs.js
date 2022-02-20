@@ -11,15 +11,15 @@ type User {
   email: String
   firstName: String
   lastName: String
-  birthDate: Date
+  birthDate: String
   phone: String
   contracts: [Contract]
 }
 
   type Contract {
     _id: ID
-    checkOutDate: Date
-    checkInDate: Date
+    checkOutDate: String
+    checkInDate: String
     equipment: Equipment
     active: Boolean
   }
@@ -97,7 +97,7 @@ type User {
       firstName: String!
       lastName: String!
       username: String!
-      birthDate: Date!
+      birthDate: String!
       email: String!
       phone: String!
     ): User
@@ -107,7 +107,7 @@ type User {
       firstName: String!
       lastName: String!
       username: String!
-      birthDate: Date!
+      birthDate: String!
       email: String!
       phone: String!
     ): User
@@ -115,8 +115,8 @@ type User {
     createContract(
       active: Boolean
       user: String!
-      checkOutDate: Date!
-      checkInDate: Date!
+      checkOutDate: String!
+      checkInDate: String!
       equipment: EquipmentInput
     ): User
 
@@ -126,8 +126,8 @@ type User {
 
     editContract(
       _id: ID!
-      checkOutDate: Date!
-      checkInDate: Date!
+      checkOutDate: String!
+      checkInDate: String!
       equipment: EquipmentInput
     ): Contract
 
