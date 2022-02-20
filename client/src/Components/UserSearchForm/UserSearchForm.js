@@ -5,12 +5,12 @@ import { Alert, Container, Row, Col, Card } from 'react-bootstrap'
 
 const UserSearchForm = ({ contractData, setContractData, contractStep, setContractStep }) => {
     const [formState, setFormState] = useState({ email: '' });
-    const[getUser, { loading, error, data }] = useLazyQuery(QUERY_USER);
-    const[show, setShow] = useState(true)
+    const [getUser, { loading, error, data }] = useLazyQuery(QUERY_USER);
+    const [show, setShow] = useState(true)
     useEffect(() => {
         if (data) {
             console.log('data exists')
-            if(data.user) {
+            if (data.user) {
                 console.log(data.user)
                 setContractData({
                     ...contractData,
@@ -26,7 +26,7 @@ const UserSearchForm = ({ contractData, setContractData, contractStep, setContra
 
     const handleUserSearch = async (event) => {
         event.preventDefault();
-        await getUser({ 
+        await getUser({
             variables: { email: formState.email }
         })
     }
@@ -43,16 +43,16 @@ const UserSearchForm = ({ contractData, setContractData, contractStep, setContra
     //respond with error if the user is not found. 
     return (
         <Container fluid>
-             <Row className="dashboard-row">
-                 <Col lg={8} className="dashboard-col">
-                    <Card bg="dark" style={{ width: "18rem" }}>
+            <Row className="dashboard-row">
+                <Col lg={8} className="dashboard-col">
+                    <Card bg="dark" style={{ width: "39rem" }}>
                         <Card.Body className="text-center">
                             <Card.Title style={{ color: "violet" }}>
                                 <h2>Search For Customer to Begin Contract</h2>
                             </Card.Title>
                             <form onSubmit={handleUserSearch}>
-                                <div className="flex-row space-between my-2">
-                                    <label htmlFor="email">Search by email:</label>
+                                <Card.Title style={{ color: "violet" }}>
+                                    <label htmlFor="email">Email: </label>
                                     <input
                                         placeholder="example@example.com"
                                         name="email"
@@ -60,22 +60,22 @@ const UserSearchForm = ({ contractData, setContractData, contractStep, setContra
                                         id="email"
                                         onChange={handleChange}
                                     />
-                                </div>
+                                </Card.Title>
                                 <div>
-                                    <button type="submit">Search for User</button>
+                                    <button className="contract-navigation-button" type="submit">Search for User</button>
                                 </div>
                             </form>
                             {data ?
                                 <Alert variant="warning" onClose={() => setShow(false)} dismissible>
                                     <span>User Not Found. Please try again</span>
-                                </Alert>  
+                                </Alert>
                                 : ''
                             }
                         </Card.Body>
                     </Card>
-                 </Col>
-             </Row>
-         </Container>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 

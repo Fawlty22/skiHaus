@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { ListGroup, Card } from "react-bootstrap";
-import { CREATE_CONTRACT } from "../../graphql/mutations";
-import { useMutation } from "@apollo/client";
+import { ListGroup, Card, Col, Row } from "react-bootstrap";
 
 const EquipmentList = (
   { 
@@ -27,13 +25,20 @@ const EquipmentList = (
       <>
         <ul>
           {equipmentSelected.map((equipment) => (
-            <button 
-              key={equipment._id} 
-              id={equipment._id}
-              onClick={handleEquipmentSubmit}>
-                Brand : {equipment.brand}
-                Model : {equipment.model}
-            </button>
+            <Card>
+              <button
+                className="contract-navigation-button"
+                key={equipment._id} 
+                id={equipment._id}
+                onClick={handleEquipmentSubmit}>
+                <span>
+                  Brand : {equipment.brand}
+                </span>
+                <span>
+                  Model : {equipment.model}
+                </span>
+              </button>
+            </Card>
           ))}
         </ul>
       </>
@@ -63,19 +68,28 @@ const EquipmentList = (
   
   return (
     <>
-      <span>Select the {category} you would like to add</span>
-      <ul>
-        {equipmentSelected.map((equipment) => (
-          <button 
-            key={equipment._id} 
-            id={equipment._id}
-            onClick={handleEquipmentSubmit}>
-              Brand : {equipment.brand}
-              Model : {equipment.model}
-          </button>
-        ))}
-      </ul>
-      <button onClick={handleNextPage}>Proceed to Finalize Contract</button>
+      <Col className="dashboard-col">
+        <Card bg="dark" style={{ width: "33rem"}}>
+          <h3 className="span-text">Select the {category} you would like to add</h3>
+          <ul>
+            {equipmentSelected.map((equipment) => (
+              <button
+                className="contract-navigation-button"
+                key={equipment._id} 
+                id={equipment._id}
+                onClick={handleEquipmentSubmit}>
+                  Brand : {equipment.brand}<br />
+                  Model : {equipment.model}
+              </button>
+            ))}
+          </ul>
+        </Card>
+      </Col>
+      <Col className="dashboard-col">
+        <Card bg="dark" style={{ width: "30rem"}}>
+          <button className="contract-navigation-button" onClick={handleNextPage}>Proceed to Finalize Contract</button>
+        </Card>
+      </Col>
     </>
   );
 };

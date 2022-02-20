@@ -28,26 +28,24 @@ const CreateContract = () => {
         })
     }
 
-
-
     return (
-        <div>
-            <Row className="dashboard-row">
-                <Col xs={12} md={4} className="dashboard-col">
+        <Container style={{width: "95%"}}>
+            <Row className="contract-row">
+                <Col className="contract-col">
                     <button class="contract-navigation-button" onClick={handleContractNavigation} type="button" id="1">Select User</button>
                 </Col>
-                <Col>
+                <Col className="contract-col">
                     <button class="contract-navigation-button" onClick={handleContractNavigation} type="button" id="2">Select Dates</button>
                 </Col>
-                <Col>
+                <Col className="contract-col">
                     <button class="contract-navigation-button" onClick={handleContractNavigation} type="button" id="3">Select Equipment</button>
                 </Col>
-                <Col>
+                <Col className="contract-col">
                     <button class="contract-navigation-button" onClick={handleContractNavigation} type="button" id="4">Finalize Contract</button>
                 </Col>
             </Row>
-            <Container xl="4" id="userSearch" className="text-center">
-                <Card.Body className="d-flex justify-content-between flex-column gap-3">
+            <Row >
+                <Card.Body className="contract-body">
                     {contractStep.step === '1' && <UserSearchForm 
                         contractData={contractData}
                         setContractData={setContractData}
@@ -70,8 +68,8 @@ const CreateContract = () => {
                     contractData={contractData} 
                 />}
                 </Card.Body>
-            </Container>
-        </div>
+            </Row>
+        </Container>
     )
 }
 
