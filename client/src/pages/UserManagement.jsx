@@ -21,12 +21,17 @@ const UserManagementPage = () => {
   
   const handleChange = (event) => {
     const { name, value } = event.target;
-    value == '' ? setEmptyLineError(true) : 
-    setEmptyLineError(false) &&
-    setEditUserFormState({
+    if (value == ''){
+      setEmptyLineError(true);
+    } else{
+      setEmptyLineError(false)
+      setEditUserFormState({
       ...editUserFormState,
       [name]: value,
     });
+    }
+    
+    
   };
 
   const handleFormSubmit = async (event) => {
