@@ -21,10 +21,8 @@ const SingleUser = ({}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
 
     const userResult = await getUser({ variables: { email: email } });
-    console.log(userResult);
 
     setUserState({
       ...userState,

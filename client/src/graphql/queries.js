@@ -21,6 +21,8 @@ export const QUERY_USER = gql`
       contracts {
         _id
         active
+        checkOutDate
+        checkInDate
         equipment {
           boots {
             _id
