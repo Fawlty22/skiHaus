@@ -58,8 +58,7 @@ const EquipmentList = (
     event.preventDefault();
     setContractStep({
       ...contractStep,
-      step: '4'
-    })
+      step: '4'    })
   }
   
   return (

@@ -34,3 +34,9 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+.contract-navigation-button {
+  background-color: black;
+  color: #ee82ee;
+  font-size: 1.2rem;
+}
