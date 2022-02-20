@@ -11,8 +11,8 @@ export const QUERY_EMPLOYEE = gql`
 export const QUERY_USER = gql`
   query GetUser($email: String!) {
     user(email: $email) {
-      username
       _id
+      username
       email
       firstName
       lastName
@@ -20,20 +20,32 @@ export const QUERY_USER = gql`
       phone
       contracts {
         _id
-        active
         checkOutDate
         checkInDate
         equipment {
           boots {
             _id
+            brand
+            model
+            condition
+            available
           }
           skis {
             _id
+            brand
+            model
+            condition
+            available
           }
           snowboards {
             _id
+            brand
+            model
+            condition
+            available
           }
         }
+        active
       }
     }
   }

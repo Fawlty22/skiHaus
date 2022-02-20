@@ -1,9 +1,9 @@
-import { Modal, Button, Form, FloatingLabel } from "react-bootstrap";
+import { Modal, Button, Form, FloatingLabel, Alert } from "react-bootstrap";
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADDSNOWBOARD_MUTATION } from "../../graphql/mutations";
+import { ADDBOOT_MUTATION } from "../../graphql/mutations";
 
-const AddSnowboardModal = (props) => {
+const AddBootModal = (props) => {
   const [formState, setFormState] = useState({
     brand: "",
     model: "",
@@ -12,24 +12,28 @@ const AddSnowboardModal = (props) => {
 
   const { brand, model, condition } = formState;
 
-  const [addSnowboard, { error }] = useMutation(ADDSNOWBOARD_MUTATION);
+  const [addBoot, { error }] = useMutation(ADDBOOT_MUTATION);
 
   function handleChange(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
+    console.log(formState);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const newSnowboard = await addSnowboard({
+      const newBoot = await addBoot({
         variables: {
           brand: brand,
           model: model,
           condition: condition,
         },
+        if(error) {
+            return error;
+        }
       });
-      console.log(newSnowboard);
+      console.log(newBoot);
     } catch (e) {
       console.log(e);
     }
@@ -44,11 +48,11 @@ const AddSnowboardModal = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Enter the neccesary information to create a Snowboard
+          Enter the neccesary information to create a Boot
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form id="addSnowboardForm" onSubmit={handleSubmit}>
+        <Form id="addBootForm" onSubmit={handleSubmit}>
           <FloatingLabel
             controlId="floatingInput"
             label="brand"
@@ -89,14 +93,15 @@ const AddSnowboardModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">Add Snowboard</Button>
+          <Button type="submit">Add Boot</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
+        {error && <Alert>{error.message}</Alert>}
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default AddSnowboardModal;
+export default AddBootModal;

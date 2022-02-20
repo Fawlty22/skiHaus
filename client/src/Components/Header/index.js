@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const Header = () => {
   return (
     <Navbar className="d-flex align-items-start bg-dark" bg="light" expand="lg">
-      <Container className="d-flex justify-content-center">
+      <Container className="d-flex">
         <Navbar.Brand
           className="fs-1 fw-bold d-flex text-light"
           to="/dashboard"

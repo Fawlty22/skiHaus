@@ -8,6 +8,7 @@ const ContractList = (userResults, contractType) => {
   const active = userResults.contractType.active;
 
   const [deactivateContract, { error }] = useMutation(DEACTIVATE_CONTRACT);
+  console.log(contracts)
 
   const handleCloseContract = async (e) => {
     e.preventDefault();
@@ -16,7 +17,6 @@ const ContractList = (userResults, contractType) => {
 
     const cancelContractID = contractID[0]._id;
 
-    console.log(cancelContractID);
     try {
       const cancelContract = await deactivateContract({
         variables: {
@@ -47,7 +47,7 @@ const ContractList = (userResults, contractType) => {
                     Boot ID
                     {filteredContract.equipment.boots.map((boot) => (
                       <p key={boot._id} id={boot._id}>
-                        {boot._id}
+                        {boot._id}{boot.brand}
                       </p>
                     ))}
                   </ListGroupItem>

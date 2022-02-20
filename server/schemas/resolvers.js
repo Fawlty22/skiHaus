@@ -11,6 +11,9 @@ const resolvers = {
     user: async (parent, { email }) => {
       return User.findOne({ email: email })
         .populate("contracts")
+        .populate("boots")
+        .populate("snowboards")
+        .populate("skis")
         .select("-__v");
     },
     boots: async () => {
