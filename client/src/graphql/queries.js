@@ -9,7 +9,7 @@ export const QUERY_EMPLOYEE = gql`
 `;
 
 export const QUERY_USER = gql`
-  query GetUser($email: String!) {
+  query user($email: String!) {
     user(email: $email) {
       _id
       username
@@ -44,6 +44,12 @@ export const QUERY_USER = gql`
             condition
             available
           }
+          snowboards{
+            _id
+          }
+          boots{
+            _id
+          }
         }
         active
       }
@@ -67,6 +73,12 @@ export const QUERY_USERS = gql`
         active
         equipment {
           skis {
+            _id
+          }
+          snowboards{
+            _id
+          }
+          boots{
             _id
           }
         }

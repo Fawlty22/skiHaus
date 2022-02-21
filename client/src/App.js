@@ -10,6 +10,7 @@ import { setContext } from "@apollo/client/link/context";
 
 import Dashboard from "./pages/Dashboard";
 import Equipment from "./pages/Equipment";
+import UserManagement from "./pages/UserManagement";
 import Login from "./pages/Login";
 import CustomerForm from "./pages/CustomerForm";
 import Header from "./Components/Header";
@@ -41,32 +42,23 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <EquipmentProvider>
-        <Router>
-          <div>
-            <Header />
-          </div>
-          <StoreProvider>
-            <Switch>
-              <Route exact path="/dashboard" render={() => <Dashboard />} />
-              <Route exact path="/login" render={() => <Login />} />
-              <Route
-                exact
-                path="/customerform"
-                render={() => <CustomerForm />}
-              />
-              <Route exact path="/contract" render={() => <CreateContract />} />
-              <Route exact path="/equipment" render={() => <Equipment />} />
-              <Route
-                exact
-                path="/usersearch"
-                render={() => <UserSearchBar />}
-              />
-            </Switch>
-          </StoreProvider>
-        </Router>
-      </EquipmentProvider>
+    <ApolloProvider client={client} >
+      <Router>
+        <div>
+          <Header />
+        </div>
+        <StoreProvider >
+          <Switch>
+            <Route exact path="/dashboard" render={() => <Dashboard />} />
+            <Route exact path="/login" render={() => <Login />} />
+            <Route exact path="/customerform" render={() => <CustomerForm />} />
+            <Route exact path="/contract" render={() => <CreateContract />} />
+            <Route exact path="/equipment" render={() => <Equipment />} />
+            <Route exact path="/user-management" render={() => <UserManagement />} />
+            <Route exact path="/usersearch" render={() => <UserSearchBar />} />
+          </Switch>
+        </StoreProvider>
+      </Router>
     </ApolloProvider>
   );
 }

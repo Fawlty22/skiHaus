@@ -13,18 +13,23 @@ const EquipmentSearchBar = ({ categoryState, setCategoryState }) => {
 
     return (
         <Container>
-            <Row>
-                <Col>
-                    <h2>
-                        Select an Equipment Category
-                    </h2>
-                    <label htmlFor="equipmentCategory">Select What Type of Equipment to Add</label>
-                    <select onChange={handleCategory} name="equipmentCategory" id="equipmentCategory">
-                        <option value=""></option>
-                        <option value="Skis">Skis</option>
-                        <option value="Snowboards">Snowboards</option>
-                        <option value="Boots">Boots</option>
-                    </select>
+            <Row className="dashboard-row">
+                <Col className="dashboard-col">
+                    <Card bg="dark" style={{ width: "26rem" }}>
+                        <Card.Body className="text-center">
+                            <Card.Title style={{ color: "violet" }}>
+                                <h2>
+                                    <label htmlFor="equipmentCategory">Select What Type of Equipment to Add</label>
+                                </h2>
+                            </Card.Title>
+                            <select onChange={handleCategory} name="equipmentCategory" id="equipmentCategory">
+                                <option value=""></option>
+                                <option value="Skis">Skis</option>
+                                <option value="Snowboards">Snowboards</option>
+                                <option value="Boots">Boots</option>
+                            </select>
+                        </Card.Body>
+                    </Card>
                 </Col>
             </Row>
         </Container>

@@ -6,20 +6,15 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().select("-__v").populate("contracts");
+      return User.find().select("-__v")
     },
     user: async (parent, { email }) => {
-      return User.findOne({ email: email })
-        .populate("contracts")
-        .populate([
-          {
-            path: "equipment",
-            path: "boots",
-            populate: { path: "boots" },
-          },
-        ])
+      return User.findOne({ email: email }).select("-__v")
+      .populate({
+        path: 'contracts'
 
-        .select("-__v");
+    })
+      
     },
     boots: async () => {
       return Boot.find().select("-__v");
@@ -49,8 +44,12 @@ const resolvers = {
     },
     //find one contract
     contract: async (parent, args) => {
-      return await Contract.findOne({ _id: args.id });
-    },
+      return await Contract.findOne({ _id: args.id})
+      .populate('equipment.boots')
+      .populate('equipment.skis')
+      .populate('equipment.snowboards')
+    }, 
+
   },
 
   Mutation: {
