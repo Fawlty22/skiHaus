@@ -55,7 +55,7 @@ function App() {
             <Route exact path="/contract" render={() => <CreateContract />} />
             <Route exact path="/equipment" render={() => <Equipment />} />
             <Route exact path="/user-management" render={() => <UserManagement />} />
-            <Route exact path="/usersearch" render={() => <UserSearchBar />} />
+            <Route exact path="/view-contracts" render={() => <UserSearchBar />} />
           </Switch>
         </StoreProvider>
       </Router>

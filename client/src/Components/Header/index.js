@@ -44,12 +44,6 @@ const Header = () => {
           >
             Equipment
           </Link>
-          <Link
-            style={{ color: "pink", textDecoration: "none" }}
-            to="/usersearch"
-          >
-            User Search
-          </Link>
         </Nav>
       </Container>
     </Navbar>
