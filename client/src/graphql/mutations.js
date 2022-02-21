@@ -38,8 +38,8 @@ export const ADDUSER_MUTATION = gql`
 export const CREATE_CONTRACT = gql`
   mutation createContract(
     $user: String! 
-    $checkOutDate: String! 
-    $checkInDate: String!
+    $checkOutDate: Date! 
+    $checkInDate: Date!
     $equipment:EquipmentInput!) {
       createContract(
         user: $user 
