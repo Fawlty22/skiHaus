@@ -9,7 +9,7 @@ export const QUERY_EMPLOYEE = gql`
 `;
 
 export const QUERY_USER = gql`
-  query user ($email: String!){
+  query user($email: String!) {
     user(email: $email) {
       _id
       username

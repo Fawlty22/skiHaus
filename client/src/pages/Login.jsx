@@ -50,36 +50,7 @@ function Login(props) {
   // }, [data]);
 
   return (
-    // <div>
-    //     <h2>Login</h2>
-    //     <form onSubmit={handleFormSubmit}>
-    //         <div>
-    //             <label htmlFor="username">Username</label>
-    //             <input
-    //                 id="username"
-    //                 type="text"
-    //                 name="username"
-    //                 onChange={handleChange}
-    //             />
-    //         </div>
-    //         <div>
-    //             <label htmlFor="password">Password</label>
-    //     <input
-    //         placeholder="*******"
-    //         name="password"
-    //         type="password"
-    //         id="password"
-    //         onChange={handleChange}
-    //     />
-    // </div>
-    //         {error ? (
-    //             <div>
-    //                 <p>The provided credentials are incorrect</p>
-    //             </div>
-    //         ): null}
-    //         <button>Login</button>
-    //     </form>
-    // </div>
+   
     <Container>
       <Row className="d-flex justify-content-center align-items-center h-50 mt-5">
         <Col xs={10} md={6} >

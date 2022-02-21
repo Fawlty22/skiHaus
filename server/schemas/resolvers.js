@@ -7,8 +7,6 @@ const resolvers = {
   Query: {
     users: async () => {
       return User.find().select("-__v")
-      .populate('contracts')
-      ;
     },
     user: async (parent, { email }) => {
       return User.findOne({ email: email }).select("-__v")

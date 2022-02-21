@@ -18,8 +18,8 @@ type User {
 
   type Contract {
     _id: ID
-    checkOutDate: String
-    checkInDate: String
+    checkOutDate: Date
+    checkInDate: Date
     equipment: Equipment
     active: Boolean
   }
@@ -115,8 +115,8 @@ type User {
     createContract(
       active: Boolean
       user: String!
-      checkOutDate: String!
-      checkInDate: String!
+      checkOutDate: Date!
+      checkInDate: Date!
       equipment: EquipmentInput
     ): User
 
@@ -126,8 +126,8 @@ type User {
 
     editContract(
       _id: ID!
-      checkOutDate: String!
-      checkInDate: String!
+      checkOutDate: Date!
+      checkInDate: Date!
       equipment: EquipmentInput
     ): Contract
 
