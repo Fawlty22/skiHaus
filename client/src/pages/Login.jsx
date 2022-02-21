@@ -5,6 +5,7 @@ import Auth from '../utils/auth';
 import { useStoreContext } from '../utils/GlobalContext';
 import useEmployeeReducer from '../utils/reducers';
 import { UPDATE_EMPLOYEE } from '../utils/actions';
+import { Form, Button, Container, FloatingLabel } from "react-bootstrap";
 
 function Login(props) {
     const [state, dispatch] = useStoreContext();
@@ -26,6 +27,7 @@ function Login(props) {
         }
         catch (e) {
             console.log(e);
+           
         }
     };
 
@@ -36,7 +38,8 @@ function Login(props) {
             [name]: value,
         });
     };
-
+ 
+    
     // useEffect(() => {
     //     if (data && data.login) {
     //         props.setEmployee({ token: data.login.token, employee: data.login.author });
@@ -44,37 +47,47 @@ function Login(props) {
     // }, [data]);
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleFormSubmit}>
-                <div>
-                    <label htmlFor="username">Username</label>
-                    <input
-                        id="username"
-                        type="text"
-                        name="username"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        placeholder="*******"
-                        name="password"
-                        type="password"
-                        id="password"
-                        onChange={handleChange}
-                    />
-                </div>
-                {error ? (
-                    <div>
-                        <p>The provided credentials are incorrect</p>
-                    </div>
-                ): null}
-                <button>Login</button>
-            </form>
-        </div>
+        <Container>
+        <h1>Log In</h1>
+        <Form id="employeeForm" onSubmit={handleFormSubmit}>
+  
+          <FloatingLabel
+            controlId="floatingInput"
+            label="username"
+            className="mb-3"
+          >
+            <Form.Control
+              name="username"
+              type="text"
+              placeholder="User Name"
+            
+              onChange={handleChange}
+            />
+          </FloatingLabel>
+          <FloatingLabel
+            controlId="floatingInput"
+            label="password"
+            className="mb-3"
+          >
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="Password"
+             
+              onChange={handleChange}
+            />
+          </FloatingLabel>
+  
+  
+  
+          <Button variant="primary" type="submit">
+            Log In
+          </Button>
+        </Form>
+      </Container>
+     
     );
+   
 };
 
 export default Login;

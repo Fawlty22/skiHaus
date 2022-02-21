@@ -94,3 +94,19 @@ export const ADDBOOT_MUTATION = gql`
     }
   }
 `;
+export const ADD_EMPLOYEE = gql`
+  mutation addEmployee(
+    $username: String!
+    $password: String!
+  ) {
+    addEmployee(
+      username: $username
+      password: $password
+    ) {
+      token
+      employee {
+        _id
+      }
+    }
+  }
+`;

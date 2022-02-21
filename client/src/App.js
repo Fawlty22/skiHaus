@@ -14,9 +14,11 @@ import Login from "./pages/Login";
 import CustomerForm from "./pages/CustomerForm";
 import Header from "./components/Header";
 import CreateContract from "./pages/CreateContract.jsx";
+import AddEmployeeForm  from "./pages/AddEmployeeForm";
 import { StoreProvider } from "./utils/GlobalContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -48,6 +50,7 @@ function App() {
           <Switch>
             <Route exact path="/dashboard" render={() => <Dashboard />} />
             <Route exact path="/login" render={() => <Login />} />
+            <Route exact path="/new-employee" render={() => <AddEmployeeForm />} />
             <Route exact path="/customerform" render={() => <CustomerForm />} />
             <Route exact path="/contract" render={() => <CreateContract />} />
             <Route exact path="/equipment" render={() => <Equipment />} />

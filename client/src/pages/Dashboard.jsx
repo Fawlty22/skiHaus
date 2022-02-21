@@ -20,7 +20,10 @@ const Dashboard = () => {
 
   return (
     <Container fluid>
+      
       <Row className="dashboard-row">
+
+
         <Col xs={12} md={4} className="dashboard-col">
           <Card bg="dark" style={{ width: "18rem" }}>
             <Link style={{ textDecoration: "none" }} to="/contract">

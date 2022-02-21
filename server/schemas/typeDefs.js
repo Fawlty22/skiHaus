@@ -92,6 +92,7 @@ type User {
     updateEmployee(username: String!, password: String!): Employee
 
     login(username: String!, password: String!): Auth
+    
 
     addUser(
       firstName: String!
