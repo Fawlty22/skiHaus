@@ -10,6 +10,11 @@ const resolvers = {
     },
     user: async (parent, { email }) => {
       return User.findOne({ email: email }).select("-__v")
+      .populate({
+        path: 'contracts'
+
+    })
+      
     },
     boots: async () => {
       return Boot.find().select("-__v");
@@ -40,7 +45,9 @@ const resolvers = {
     //find one contract
     contract: async (parent, args) => {
       return await Contract.findOne({ _id: args.id})
-      
+      .populate('equipment.boots')
+      .populate('equipment.skis')
+      .populate('equipment.snowboards')
     }, 
 
   },

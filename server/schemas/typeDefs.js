@@ -11,7 +11,7 @@ type User {
   email: String
   firstName: String
   lastName: String
-  birthDate: Date
+  birthDate: String
   phone: String
   contracts: [Contract]
 }
@@ -97,7 +97,7 @@ type User {
       firstName: String!
       lastName: String!
       username: String!
-      birthDate: Date!
+      birthDate: String!
       email: String!
       phone: String!
     ): User
@@ -107,7 +107,7 @@ type User {
       firstName: String!
       lastName: String!
       username: String!
-      birthDate: Date!
+      birthDate: String!
       email: String!
       phone: String!
     ): User

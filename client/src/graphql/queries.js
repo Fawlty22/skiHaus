@@ -26,6 +26,12 @@ export const QUERY_USER = gql`
           skis {
             _id
           }
+          snowboards{
+            _id
+          }
+          boots{
+            _id
+          }
         }
       }
     }
@@ -48,6 +54,12 @@ export const QUERY_USERS = gql`
         active
         equipment {
           skis {
+            _id
+          }
+          snowboards{
+            _id
+          }
+          boots{
             _id
           }
         }

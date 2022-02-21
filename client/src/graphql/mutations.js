@@ -16,7 +16,6 @@ export const ADDUSER_MUTATION = gql`
     $firstName: String!
     $lastName: String!
     $username: String!
-    $password: String!
     $birthDate: String!
     $email: String!
     $phone: String!
@@ -25,7 +24,6 @@ export const ADDUSER_MUTATION = gql`
       firstName: $firstName
       lastName: $lastName
       username: $username
-      password: $password
       birthDate: $birthDate
       email: $email
       phone: $phone
@@ -34,6 +32,31 @@ export const ADDUSER_MUTATION = gql`
     }
   }
 `;
+
+export const EDIT_USER = gql`
+  mutation editUser(
+      $_id: ID!
+      $firstName: String!
+      $lastName: String!
+      $username: String!
+      $birthDate: String!
+      $email: String!
+      $phone: String!
+  ) {
+    editUser(
+      _id: $_id
+      firstName: $firstName
+      lastName: $lastName
+      username: $username
+      birthDate: $birthDate
+      email: $email
+      phone: $phone
+    ) {
+      email
+    }
+  }
+`;
+
 
 export const CREATE_CONTRACT = gql`
   mutation createContract(

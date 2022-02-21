@@ -70,7 +70,7 @@ const ContractSubmit = ({ contractData }) => {
                         <Card.Body className="card-body">
                             <ul>
                                 {contractData.equipment.skis.map((ski) => (
-                                    <li key={ski._id}>{ski}</li>
+                                    <li key={ski}>{ski}</li>
                                 ))}
                             </ul>
                         </Card.Body>
@@ -84,7 +84,7 @@ const ContractSubmit = ({ contractData }) => {
                         <Card.Body className="card-body">
                             <ul>
                                 {contractData.equipment.snowboards.map((snowboard) => (
-                                    <li key={snowboard._id}>{snowboard}</li>
+                                    <li key={snowboard}>{snowboard}</li>
                                 ))}
                             </ul>
                         </Card.Body>
@@ -98,7 +98,7 @@ const ContractSubmit = ({ contractData }) => {
                         <Card.Body className="card-body">
                             <ul>
                                 {contractData.equipment.boots.map((boot) => (
-                                    <li key={boot._id}>{boot}</li>
+                                    <li key={boot}>{boot}</li>
                                 ))}
                             </ul>
                         </Card.Body>
