@@ -56,13 +56,13 @@ const UserManagementSearch = ({
       >
         <Container>
           <Row className="my-2 w-100">
-            <Col xs={3}>
+            <Col xs={12} sm={4}>
               <label className="" htmlFor="email">
                 Please Enter a Customer's <br/>Email Address:
               </label>
             </Col>
 
-            <Col xs={8} >
+            <Col xs={12} sm={6} >
               <input
                 className="form-control"
                 placeholder="Email here..."
@@ -74,8 +74,8 @@ const UserManagementSearch = ({
               />
             </Col>
 
-            <Col xs={1}>
-              <Button variant="info" className="" type="submit">
+            <Col sm={2}>
+              <Button variant="info" className="" type=" submit">
                 Search
               </Button>
             </Col>
