@@ -13,12 +13,12 @@ import Equipment from "./pages/Equipment";
 import UserManagement from "./pages/UserManagement";
 import Login from "./pages/Login";
 import CustomerForm from "./pages/CustomerForm";
-import Header from "./Components/Header";
+import Header from "./components/Header";
 import CreateContract from "./pages/CreateContract.jsx";
 import { StoreProvider } from "./utils/GlobalContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { EquipmentProvider } from "../src/utils/EquipmentContext";
+
 import UserSearchBar from "./pages/UserSearhBar";
 
 const httpLink = createHttpLink({

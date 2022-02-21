@@ -9,52 +9,46 @@ export const QUERY_EMPLOYEE = gql`
 `;
 
 export const QUERY_USER = gql`
-  query user($email: String!) {
-    user(email: $email) {
+query user($email: String!) {
+  user(email: $email) {
+    _id
+    username
+    email
+    firstName
+    lastName
+    birthDate
+    phone
+    contracts {
       _id
-      username
-      email
-      firstName
-      lastName
-      birthDate
-      phone
-      contracts {
-        _id
-        checkOutDate
-        checkInDate
-        equipment {
-          boots {
-            _id
-            brand
-            model
-            condition
-            available
-          }
-          skis {
-            _id
-            brand
-            model
-            condition
-            available
-          }
-          snowboards {
-            _id
-            brand
-            model
-            condition
-            available
-          }
-          snowboards{
-            _id
-          }
-          boots{
-            _id
-          }
+      checkOutDate
+      checkInDate
+      equipment {
+        boots {
+          _id
+          brand
+          model
+          condition
+          available
         }
-        active
+        skis {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+        snowboards {
+          _id
+          brand
+          model
+          condition
+          available
+        }
       }
+      active
     }
   }
+}
 `;
 
 export const QUERY_USERS = gql`

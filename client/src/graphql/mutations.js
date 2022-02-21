@@ -28,20 +28,26 @@ export const ADDUSER_MUTATION = gql`
       email: $email
       phone: $phone
     ) {
+      _id
       username
+      email
+      firstName
+      lastName
+      birthDate
+      phone
     }
   }
 `;
 
 export const EDIT_USER = gql`
   mutation editUser(
-      $_id: ID!
-      $firstName: String!
-      $lastName: String!
-      $username: String!
-      $birthDate: String!
-      $email: String!
-      $phone: String!
+    $_id: ID!
+    $firstName: String!
+    $lastName: String!
+    $username: String!
+    $birthDate: String!
+    $email: String!
+    $phone: String!
   ) {
     editUser(
       _id: $_id
@@ -57,23 +63,49 @@ export const EDIT_USER = gql`
   }
 `;
 
-
 export const CREATE_CONTRACT = gql`
   mutation createContract(
-    $user: String! 
-    $checkOutDate: Date! 
+    $user: String!
+    $checkOutDate: Date!
     $checkInDate: Date!
-    $equipment:EquipmentInput!) {
-      createContract(
-        user: $user 
-        checkOutDate: $checkOutDate 
-        checkInDate: $checkInDate
-        equipment: $equipment) {
-          _id
-          username
-          contracts {
+    $equipment: EquipmentInput!
+  ) {
+    createContract(
+      user: $user
+      checkOutDate: $checkOutDate
+      checkInDate: $checkInDate
+      equipment: $equipment
+    ) {
+      _id
+      username
+      email
+      phone
+      firstName
+      lastName
+      contracts {
+        _id
+        active
+        equipment {
+          boots {
             _id
+            brand
             model
+            condition
+            available
+          }
+          skis {
+            _id
+            brand
+            model
+            condition
+            available
+          }
+          snowboards {
+            _id
+            brand
+            model
+            condition
+            available
           }
         }
       }

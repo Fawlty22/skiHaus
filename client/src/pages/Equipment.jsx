@@ -1,10 +1,10 @@
 import React from "react";
-import css from "../equipment.css";
+
 import {
   EquipmentSearch,
   AddEquipmentButtons,
   UpdateEquipmentButtons,
-} from "../Components";
+} from "../components";
 
 const Equipment = () => {
   return (

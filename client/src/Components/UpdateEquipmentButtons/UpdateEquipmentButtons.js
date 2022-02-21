@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import { UpdateSkiModal, UpdateSnowboardModal, UpdateBootModal } from "../";
+import { UpdateSkiModal, UpdateSnowboardModal, UpdateBootModal } from "..";
 
 const UpdateEquipmentButtons = () => {
   const [updateSkimodalShow, setupdateSkiModalShow] = React.useState(false);
