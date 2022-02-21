@@ -20,8 +20,8 @@ console.log(data)
             Select A Contract Below
           </ListGroup.Item>
           {/* map here to dynamically create the contracts coming back today */}
-          {data?.contracts.map((each) => (
-            <Link key={each._id}  style={{ textDecoration: "none" }} to={`/contracts/${each._id}`}>
+          {data?.contracts.map((each, index) => (
+            <Link key={each._id} className={`${index == data.contracts.length - 1 ? 'rounded-bottom' : ''}`} style={{ textDecoration: "none" }} to={`/contracts/${each._id}`}>
               <ListGroup.Item className="bg-secondary text-white">{each._id}</ListGroup.Item>
             </Link>
           ))}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Card, ListGroup, Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_CONTRACT } from "../../graphql/queries";
@@ -68,6 +68,9 @@ const SingleContractComponent = () => {
           ))}
         </ListGroup>
       </Card>
+      <Button className="bg-info text-black fw-bold">
+Deactivate Contract
+      </Button>
     </Card>
   );
 };
