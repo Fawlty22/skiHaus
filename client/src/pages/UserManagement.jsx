@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { UserManagementSearch } from "../components/index.js";
+import  UserManagementSearch  from "../components/UserManagementSearch";
 import { EDIT_USER } from "../graphql/mutations";
 
 const UserManagementPage = () => {

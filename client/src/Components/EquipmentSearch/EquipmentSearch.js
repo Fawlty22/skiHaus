@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 import { useQuery } from '@apollo/client';
 import { ALLEQUIPMENT_QUERY } from '../../graphql/queries';

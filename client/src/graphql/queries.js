@@ -13,30 +13,43 @@ export const QUERY_USER = gql`
     user(email: $email) {
       _id
       username
+      email
       firstName
       lastName
-      email
       birthDate
       phone
       contracts {
+        _id
         checkOutDate
         checkInDate
-        active
         equipment {
+          boots {
+            _id
+            brand
+            model
+            condition
+            available
+          }
           skis {
             _id
+            brand
+            model
+            condition
+            available
           }
-          snowboards{
+          snowboards {
             _id
-          }
-          boots{
-            _id
+            brand
+            model
+            condition
+            available
           }
         }
+        active
       }
     }
   }
-`
+`;
 
 export const QUERY_USERS = gql`
   {
@@ -56,10 +69,10 @@ export const QUERY_USERS = gql`
           skis {
             _id
           }
-          snowboards{
+          snowboards {
             _id
           }
-          boots{
+          boots {
             _id
           }
         }
@@ -89,33 +102,69 @@ export const ALLEQUIPMENT_QUERY = gql`
 `;
 
 export const QUERY_CONTRACTS = gql`
-contracts {
-  _id
-  checkOutDate
-  checkInDate
-  equipment {
-    boots {
+{
+    contracts {
       _id
-      brand
-      model
-      condition
-      available
-    }
-    skis {
-      _id
-      brand
-      model
-      condition
-      available
-    }
-    snowboards {
-      _id
-      brand
-      model
-      condition
-      available
+      checkOutDate
+      checkInDate
+      active
+      equipment {
+        boots {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+        skis {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+        snowboards {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+      }
     }
   }
-  active
+`;
+
+export const QUERY_CONTRACT = gql`
+query contract($_id: ID!) {
+  contract(_id: $_id) {
+    _id
+    checkOutDate
+    checkInDate
+    active
+    equipment {
+      boots {
+        _id
+        brand
+        model
+        condition
+        available
+      }
+      skis {
+        _id
+        brand
+        model
+        condition
+        available
+      }
+      snowboards {
+        _id
+        model
+        brand
+        condition
+        available
+      }
+    }
+  }
 }
-`
+`;
