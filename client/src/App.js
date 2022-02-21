@@ -19,6 +19,8 @@ import { StoreProvider } from "./utils/GlobalContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+import UserSearchBar from "./pages/UserSearhBar";
+
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
@@ -53,6 +55,7 @@ function App() {
             <Route exact path="/contract" render={() => <CreateContract />} />
             <Route exact path="/equipment" render={() => <Equipment />} />
             <Route exact path="/user-management" render={() => <UserManagement />} />
+            <Route exact path="/usersearch" render={() => <UserSearchBar />} />
           </Switch>
         </StoreProvider>
       </Router>

@@ -70,7 +70,6 @@ type User {
     employee: Employee
   }
 
-
   type Query {
     users: [User]
     user(email: String!): User
@@ -83,10 +82,7 @@ type User {
     boots: [Boot]
   }
 
-  
-
   type Mutation {
-
     addEmployee(username: String!, password: String!): Auth
 
     updateEmployee(username: String!, password: String!): Employee
@@ -120,9 +116,7 @@ type User {
       equipment: EquipmentInput
     ): User
 
-    deactivateContract(
-      _id: ID!
-    ): Contract
+    deactivateContract(_id: ID!): Contract
 
     editContract(
       _id: ID!
@@ -132,15 +126,19 @@ type User {
     ): Contract
 
     addSki(brand: String!, model: String!, condition: String!): Ski
-    updateSki(_id: ID!, brand: String!, model: String!, condition: String!): Ski
+    updateSki(_id: ID!, brand: String, model: String, condition: String): Ski
     deleteSki(_id: ID!): Ski
     addSnowboard(brand: String!, model: String!, condition: String!): Snowboard
-    updateSnowboard(_id: ID!, brand: String!, model: String!, condition: String!): Snowboard
+    updateSnowboard(
+      _id: ID!
+      brand: String
+      model: String
+      condition: String
+    ): Snowboard
     deleteSnowboard(_id: ID!): Snowboard
     addBoot(brand: String!, model: String!, condition: String!): Boot
-    updateBoot(_id: ID!, brand: String!, model: String!, condition: String!): Boot
+    updateBoot(_id: ID!, brand: String, model: String, condition: String): Boot
     deleteBoot(_id: ID!): Boot
-
   }
 `;
 

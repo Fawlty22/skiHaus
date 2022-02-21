@@ -8,14 +8,12 @@ const CustomerForm = () => {
     firstName: "",
     lastName: "",
     username: "",
-    password: "",
     birthDate: "",
     email: "",
     phone: "",
   });
 
-  const { firstName, lastName, birthDate, email, phone, username, password } =
-    formState;
+  const { firstName, lastName, birthDate, email, phone, username } = formState;
 
   const [addUser, { error }] = useMutation(ADDUSER_MUTATION);
 
@@ -35,7 +33,6 @@ const CustomerForm = () => {
           email: email,
           phone: phone,
           username: username,
-          password: password,
         },
       });
       console.log(newUser);
@@ -86,19 +83,6 @@ const CustomerForm = () => {
             type="text"
             placeholder="User Name"
             defaultValue={username}
-            onChange={handleChange}
-          />
-        </FloatingLabel>
-        <FloatingLabel
-          controlId="floatingInput"
-          label="password"
-          className="mb-3"
-        >
-          <Form.Control
-            name="password"
-            type="password"
-            placeholder="Password"
-            defaultValue={password}
             onChange={handleChange}
           />
         </FloatingLabel>
