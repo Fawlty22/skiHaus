@@ -9,9 +9,7 @@ const UserSearchForm = ({ contractData, setContractData, contractStep, setContra
     const [show, setShow] = useState(true)
     useEffect(() => {
         if (data) {
-            console.log('data exists')
             if (data.user) {
-                console.log(data.user)
                 setContractData({
                     ...contractData,
                     user: data.user

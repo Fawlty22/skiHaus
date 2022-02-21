@@ -32,16 +32,16 @@ const CreateContract = () => {
         <Container style={{width: "95%"}}>
             <Row className="contract-row">
                 <Col className="contract-col">
-                    <button class="contract-navigation-button" onClick={handleContractNavigation} type="button" id="1">Select User</button>
+                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="1">Select User</button>
                 </Col>
                 <Col className="contract-col">
-                    <button class="contract-navigation-button" onClick={handleContractNavigation} type="button" id="2">Select Dates</button>
+                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="2">Select Dates</button>
                 </Col>
                 <Col className="contract-col">
-                    <button class="contract-navigation-button" onClick={handleContractNavigation} type="button" id="3">Select Equipment</button>
+                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="3">Select Equipment</button>
                 </Col>
                 <Col className="contract-col">
-                    <button class="contract-navigation-button" onClick={handleContractNavigation} type="button" id="4">Finalize Contract</button>
+                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="4">Finalize Contract</button>
                 </Col>
             </Row>
             <Row >

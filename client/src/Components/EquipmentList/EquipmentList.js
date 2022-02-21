@@ -69,7 +69,7 @@ const EquipmentList = (
   return (
     <>
       <Col className="dashboard-col">
-        <Card bg="dark" style={{ width: "33rem"}}>
+        <Card className="equipment-card" bg="dark" style={{ width: "45rem"}}>
           <h3 className="span-text">Select the {category} you would like to add</h3>
           <ul>
             {equipmentSelected.map((equipment) => (
@@ -83,11 +83,16 @@ const EquipmentList = (
               </button>
             ))}
           </ul>
+          <button 
+            className="contract-navigation-button" 
+            onClick={handleNextPage}>
+            Proceed to Finalize Contract
+          </button>
         </Card>
       </Col>
       <Col className="dashboard-col">
         <Card bg="dark" style={{ width: "30rem"}}>
-          <button className="contract-navigation-button" onClick={handleNextPage}>Proceed to Finalize Contract</button>
+          
         </Card>
       </Col>
     </>

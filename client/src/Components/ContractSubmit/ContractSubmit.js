@@ -21,91 +21,94 @@ const ContractSubmit = ({ contractData }) => {
     }
 
     return (
-        <div>
-            <Container>
-                <Row className="contract-row">
-                    <Card bg="dark" style={{ width: "40rem", margin: "1rem" }}>
+        <Card bg="dark">
+            <Row className="contract-row">
+                <Card.Title style={{ color: "violet" }}>
+                    <h2> Review contract details before submitting</h2>
+                </Card.Title>
+            </Row>
+            <Row className="contract-row">
+                <Card className="contract-card" bg="dark" style={{ width: "15rem" }}>
+                    <Card.Title style={{ color: "violet" }}>
+                        <h3>User Details</h3>
+                    </Card.Title>
+                    <Card.Body className="card-body">
+                        <span>
+                            Name: {contractData.user.firstName} {contractData.user.lastName}
+                        </span>
+                    </Card.Body>
+                </Card>
+                <Card className="contract-card" bg="dark" style={{ width: "15rem" }}>
+                    <Card.Title style={{ color: "violet" }}>
+                        <h3>Check Out Date</h3>
+                    </Card.Title>
+                    <Card.Body className="card-body">
+                        <span>{contractData.checkOutDate}</span>
+                    </Card.Body>
+                </Card>
+                <Card className="contract-card" bg="dark" style={{ width: "15rem" }}>
+                    <Card.Title style={{ color: "violet" }}>
+                        <h3>Check In Date</h3>
+                    </Card.Title>
+                    <Card.Body className="card-body">
+                        <span>{contractData.checkInDate}</span>
+                    </Card.Body>
+                </Card>
+            </Row>
+            <Row className="contract-row">
+                <Card.Title style={{ color: "violet" }}>
+                    <h3>Equipment:</h3>
+                </Card.Title>
+
+            </Row>
+            <Row className="contract-row">
+                <Col className="dashboard-col">
+                    <Card className="equipment-card" bg="dark" style={{ width: "15rem" }}>
                         <Card.Title style={{ color: "violet" }}>
-                            <h2> Review contract details before submitting</h2>
+                            <h4>Skis</h4>
                         </Card.Title>
-                    </Card>
-                </Row>
-                <Row className="contract-row">
-                    <Card className="contract-card" bg="dark" style={{ width: "15rem" }}>
-                        <Card.Title style={{ color: "violet" }}>
-                            <h3>User Details</h3>
-                        </Card.Title>
-                        <Card.Body style={{ color: "violet" }}>
-                            <span>
-                                Name: {contractData.user.firstName} {contractData.user.lastName}
-                            </span>
-                        </Card.Body>
-                    </Card>
-                    <Card className="contract-card" bg="dark" style={{ width: "15rem" }}>
-                        <Card.Title style={{ color: "violet" }}>
-                            <h3>Check Out Date</h3>
-                        </Card.Title>
-                        <Card.Body style={{ color: "violet" }}>
-                            <span>{contractData.checkOutDate}</span>
-                        </Card.Body>
-                    </Card>
-                    <Card className="contract-card" bg="dark" style={{ width: "15rem" }}>
-                        <Card.Title style={{ color: "violet" }}>
-                            <h3>Check In Date</h3>
-                        </Card.Title>
-                        <Card.Body style={{ color: "violet" }}>
-                            <span>{contractData.checkInDate}</span>
-                        </Card.Body>
-                    </Card>
-                </Row>
-                <Row className="contract-row">
-                    <Card bg="dark" style={{ width: "15rem" }}>
-                        <Card.Title style={{ color: "violet" }}>
-                            <h3>Equipment:</h3>
-                        </Card.Title>
-                    </Card>
-                </Row>
-                <Row className="contract-row">
-                    <Col className="dashboard-col">
-                        <Card bg="dark" style={{ width: "15rem" }}>
-                            <Card.Title style={{ color: "violet" }}>
-                                <h4>Skis</h4>
-                            </Card.Title>
-                            <Card.Body style={{ color: "violet" }}>
+                        <Card.Body className="card-body">
+                            <ul>
                                 {contractData.equipment.skis.map((ski) => (
-                                    <span>{ski}</span>
+                                    <li key={ski._id}>{ski}</li>
                                 ))}
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col className="dashboard-col">
-                        <Card bg="dark" style={{ width: "15rem" }}>
-                            <Card.Title style={{ color: "violet" }}>
-                                <h4>Snowboards</h4>
-                            </Card.Title>
-                            <Card.Body style={{ color: "violet" }}>
+                            </ul>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col className="dashboard-col">
+                    <Card className="equipment-card" bg="dark" style={{ width: "15rem" }}>
+                        <Card.Title style={{ color: "violet" }}>
+                            <h4>Snowboards</h4>
+                        </Card.Title>
+                        <Card.Body className="card-body">
+                            <ul>
                                 {contractData.equipment.snowboards.map((snowboard) => (
-                                    <span>{snowboard}</span>
+                                    <li key={snowboard._id}>{snowboard}</li>
                                 ))}
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col className="dashboard-col">
-                        <Card bg="dark" style={{ width: "15rem" }}>
-                            <Card.Title style={{ color: "violet" }}>
-                                <h4>Boots</h4>
-                            </Card.Title>
-                            <Card.Body style={{ color: "violet" }}>
+                            </ul>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col className="dashboard-col">
+                    <Card className="equipment-card" bg="dark" style={{ width: "15rem" }}>
+                        <Card.Title style={{ color: "violet" }}>
+                            <h4>Boots</h4>
+                        </Card.Title>
+                        <Card.Body className="card-body">
+                            <ul>
                                 {contractData.equipment.boots.map((boot) => (
-                                    <span>{boot}</span>
+                                    <li key={boot._id}>{boot}</li>
                                 ))}
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
-            <button className="contract-navigation-button" onClick={handleContractSubmit}>Submit Contract</button>
-        </div>
+                            </ul>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+            <Row className="contract-row">
+                <button className="contract-navigation-button" onClick={handleContractSubmit}>Submit Contract</button>
+            </Row>
+        </Card>
     )
 }
 

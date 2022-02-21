@@ -54,7 +54,7 @@ const ContractDateSelection = ({ contractData, setContractData, setContractStep,
                     </Card>
                 </Col>
             </Row>
-            <button class="contract-navigation-button" onClick={handleNextPage}>Submit Dates</button>
+            <button className="contract-navigation-button" onClick={handleNextPage}>Submit Dates</button>
         </div>
     )
 }

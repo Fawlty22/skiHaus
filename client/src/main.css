@@ -49,6 +49,7 @@ code {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 95%;
 }
 
 .contract-col {
@@ -63,6 +64,7 @@ code {
   color: #ee82ee;
   font-size: 1.2rem;
   margin: .5rem;
+  width: 12rem;
 }
 
 .contract-card {
@@ -71,10 +73,20 @@ code {
   height: 6rem;
 }
 
+.equipment-card {
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
 .span-text {
   background-color: #212529;
   display: inline-block;
   color: #ee82ee;
+}
+
+.card-body {
+  color: #ee82ee;
+  padding: 0;
 }
 
 
