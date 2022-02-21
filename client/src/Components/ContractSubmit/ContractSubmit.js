@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_CONTRACT } from '../../graphql/mutations';
 
 const ContractSubmit = ({ contractData }) => {
-    const [createContract] = useMutation(CREATE_CONTRACT);
+    const [createContract, { data, loading, error }] = useMutation(CREATE_CONTRACT);
 
     const handleContractSubmit = async (event) => {
         event.preventDefault();
