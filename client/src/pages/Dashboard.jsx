@@ -1,15 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
-import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ListGroup from "react-bootstrap/ListGroup";
+import {Card, Container, Row, Col, ListGroup } from "react-bootstrap";
+import ReturningToday from "../components/ReturningToday"
 
 const Dashboard = () => {
   let employee = Auth.getProfile();
   console.log(employee);
+
+   
+
+
+
+
+
+
 
   //I have commented out the login logic for development purposes.
 
@@ -98,24 +103,7 @@ const Dashboard = () => {
       </Row>
       <Row className="dashboard-row">
         <Col xs={12} md={4} className="dashboard-col">
-          <Card bg="dark" style={{ width: "18rem" }} className="p-2" >
-            {/* This link will be instead inside a .map() that populates the contracts returning today.  We dont want the whole card to link, just the contract id's.  */}
-            <Link style={{ textDecoration: "none" }} to="/returning">
-              <Card.Body className="text-center">
-                <Card.Title style={{ color: "violet" }}>
-                  Returning Today
-                </Card.Title>
-                <ListGroup>
-                  <ListGroup.Item style={{background: 'violet'}}>Contract's'</ListGroup.Item>
-                  {/* map here to dynamically create the contracts coming back today */}
-                  <ListGroup.Item>Contract ID#</ListGroup.Item>
-                  <ListGroup.Item>Contract ID#</ListGroup.Item>
-                  <ListGroup.Item>Contract ID#</ListGroup.Item>
-                  <ListGroup.Item>Contract ID#</ListGroup.Item>
-                </ListGroup>
-              </Card.Body>
-            </Link>
-          </Card>
+          <ReturningToday />>
         </Col>
       </Row>
     </Container>

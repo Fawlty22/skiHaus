@@ -5,6 +5,7 @@ import EquipmentSearchBar from "./EquipmentSearchBar";
 import ContractSubmit from "./ContractSubmit";
 import ContractDateSelection from "./ContractDateSelection";
 import UserManagementSearch from "./UserManagementSearch"
+import ReturningToday from "./ReturningToday"
 
 export { 
     UserSearchForm, 
@@ -13,5 +14,6 @@ export {
     EquipmentList, 
     ContractSubmit,
     ContractDateSelection,
-    UserManagementSearch
+    UserManagementSearch,
+    ReturningToday
 }

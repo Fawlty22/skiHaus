@@ -87,3 +87,35 @@ export const ALLEQUIPMENT_QUERY = gql`
     }
   }
 `;
+
+export const QUERY_CONTRACTS = gql`
+contracts {
+  _id
+  checkOutDate
+  checkInDate
+  equipment {
+    boots {
+      _id
+      brand
+      model
+      condition
+      available
+    }
+    skis {
+      _id
+      brand
+      model
+      condition
+      available
+    }
+    snowboards {
+      _id
+      brand
+      model
+      condition
+      available
+    }
+  }
+  active
+}
+`
