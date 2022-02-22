@@ -7,7 +7,7 @@ const SingleContractPage = () => {
 
 
 return(
-    <div className="d-flex justify-content-center p-3">
+    <div className="d-flex justify-content-center overflow-none p-3">
         <SingleContractComponent />
     </div>
 
