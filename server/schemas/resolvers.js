@@ -83,14 +83,11 @@ const resolvers = {
 
   Mutation: {
     addEmployee: async (parent, args, context) => {
-      if (context.employee) {
+      
         const employee = await Employee.create(args);
         const token = signToken(employee);
 
         return { token, employee };
-      } else {
-        throw new AuthenticationError('You are not authorized to perform this action')
-      }
     },
     updateEmployee: async (parent, args, context) => {
       if (context.employee) {
