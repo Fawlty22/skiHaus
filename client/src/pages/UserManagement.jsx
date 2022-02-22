@@ -1,11 +1,8 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
-import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Card, Container, Button, Form } from 'react-bootstrap'
 import  UserManagementSearch  from "../components/UserManagementSearch";
 import { EDIT_USER } from "../graphql/mutations";
 
@@ -15,9 +12,13 @@ const UserManagementPage = () => {
   const [editUserFormState, setEditUserFormState] = useState();
   const [emptyLineError, setEmptyLineError] = useState(false);
   const [editUser, { error }] = useMutation(EDIT_USER);
-  // console.log("userInfo", userInfo);
-  // console.log("editUserFormState", editUserFormState);
-  console.log("emptyLine", emptyLineError);
+
+  let employee = Auth.getProfile();
+  
+  // redirect to login if valid token is not present
+  if (!employee) {
+    return <Redirect to={"/login"} />
+  }
   
   const handleChange = (event) => {
     const { name, value } = event.target;

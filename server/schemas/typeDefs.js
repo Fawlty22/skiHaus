@@ -115,6 +115,7 @@ type User {
       checkOutDate: Date!
       checkInDate: Date!
       equipment: EquipmentInput
+      username: String!
     ): User
 
     deactivateContract(_id: ID!): Contract

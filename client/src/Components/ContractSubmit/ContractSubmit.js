@@ -6,19 +6,20 @@ import { CREATE_CONTRACT } from '../../graphql/mutations';
 const ContractSubmit = ({ contractData }) => {
     const [createContract, { data, loading, error }] = useMutation(CREATE_CONTRACT);
     const [show, setShow] = useState(false);
-
+    console.log('contract data', contractData)
     useEffect(() => {
         if (data) {
             setShow(true)
         }
     })
-
+    console.log('contractData line 15 contractsubmit', contractData)
     const handleContractSubmit = async (event) => {
         event.preventDefault();
         const mutationResponse = await createContract({
             variables: {
                 active: 'True',
                 user: contractData.user._id,
+                username: contractData.user.username,
                 checkInDate: contractData.checkInDate,
                 checkOutDate: contractData.checkOutDate,
                 equipment: contractData.equipment

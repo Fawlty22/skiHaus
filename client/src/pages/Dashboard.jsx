@@ -6,7 +6,6 @@ import ReturningToday from "../components/ReturningToday"
 
 const Dashboard = () => {
   let employee = Auth.getProfile();
-  console.log(employee);
 
   //I have commented out the login logic for development purposes.
 

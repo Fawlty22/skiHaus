@@ -24,7 +24,6 @@ const CreateContract = () => {
     })
 
     let employee = Auth.getProfile();
-    console.log(employee);
   
     // redirect to login if valid token is not present
     if (!employee) {

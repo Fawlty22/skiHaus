@@ -8,10 +8,13 @@ const SingleUser = ({}) => {
   const [formState, setFormState] = useState({
     email: "",
   });
-
+  
   const [userState, setUserState] = useState({ userInfo: "" });
+  
+  console.log(userState)
 
   const [getUser, { data, error }] = useLazyQuery(QUERY_USER);
+  console.log(data)
 
   const { email } = formState;
 
@@ -23,8 +26,7 @@ const SingleUser = ({}) => {
     e.preventDefault();
 
     const userResult = await getUser({ variables: { email: email } });
-    
-    console.log(userResult);
+    console.log(userResult)
 
     setUserState({
       ...userState,
