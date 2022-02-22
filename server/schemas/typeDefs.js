@@ -17,6 +17,7 @@ type User {
 }
 
   type Contract {
+    user: User
     _id: ID
     checkOutDate: Date
     checkInDate: Date
@@ -110,7 +111,7 @@ type User {
 
     createContract(
       active: Boolean
-      user: String!
+      user: ID!
       checkOutDate: Date!
       checkInDate: Date!
       equipment: EquipmentInput

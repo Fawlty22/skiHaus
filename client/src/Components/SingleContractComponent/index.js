@@ -12,16 +12,28 @@ const SingleContractComponent = () => {
   console.log(data);
 
   return (
-    <Card className="w-50 mt-5 p-2 bg-dark text-center text-info">
-        {loading && <h2> LOADING... PLEASE WAIT...</h2>}
-        
-      <Card.Title className="fw-bold fs-3">*Customers Name*'s Contract</Card.Title>
+    <>
+    {loading && <h2> LOADING... PLEASE WAIT...</h2>}
+    {data && <Card className="w-50 p-2 bg-dark text-center text-info">
+      <Card.Title className="fw-bold fs-3">{data.contract.user.firstName} {data.contract.user.lastName}'s Contract</Card.Title>
       <Card className="my-2 text-black  p-1" style={{ backgroundColor: "violet" }}>
         <Card.Title className="fw-bold text-black fs-4">Personal Info</Card.Title>
         <ListGroup>
           <ListGroup.Item className="bg-dark fw-bold text-info">Name</ListGroup.Item>
           <ListGroup.Item className="bg-secondary text-white">
-            Matthew Keys
+            {data.contract.user.firstName} {data.contract.user.lastName}
+          </ListGroup.Item>
+          <ListGroup.Item className="bg-dark fw-bold text-info">Email</ListGroup.Item>
+          <ListGroup.Item className="bg-secondary text-white">
+            {data.contract.user.email} 
+          </ListGroup.Item>
+          <ListGroup.Item className="bg-dark fw-bold text-info">Phone Number</ListGroup.Item>
+          <ListGroup.Item className="bg-secondary text-white">
+            {data.contract.user.phone} 
+          </ListGroup.Item>
+          <ListGroup.Item className="bg-dark fw-bold text-info">Birthdate</ListGroup.Item>
+          <ListGroup.Item className="bg-secondary text-white">
+            {data.contract.user.birthDate} 
           </ListGroup.Item>
         </ListGroup>
       </Card>
@@ -71,7 +83,8 @@ const SingleContractComponent = () => {
       <Button className="bg-info text-black fw-bold">
 Deactivate Contract
       </Button>
-    </Card>
+    </Card>}
+    </>
   );
 };
 

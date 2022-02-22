@@ -108,6 +108,15 @@ export const QUERY_CONTRACTS = gql`
       checkOutDate
       checkInDate
       active
+      user {
+        _id
+        username
+        email
+        firstName
+        lastName
+        birthDate
+        phone
+      }
       equipment {
         boots {
           _id
@@ -139,6 +148,15 @@ export const QUERY_CONTRACT = gql`
 query contract($_id: ID!) {
   contract(_id: $_id) {
     _id
+    user {
+      _id
+      username
+      email
+      firstName
+      lastName
+      birthDate
+      phone
+    }
     checkOutDate
     checkInDate
     active

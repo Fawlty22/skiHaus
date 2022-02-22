@@ -37,7 +37,8 @@ const resolvers = {
       return await Contract.find()
         .populate("equipment.boots")
         .populate("equipment.skis")
-        .populate("equipment.snowboards");
+        .populate("equipment.snowboards")
+        .populate("user");
     },
     //find one contract
     contract: async (parent, args) => {
@@ -45,7 +46,8 @@ const resolvers = {
       return await Contract.findOne({ _id: args._id })
         .populate("equipment.boots")
         .populate("equipment.skis")
-        .populate("equipment.snowboards");
+        .populate("equipment.snowboards")
+        .populate("user");
     },
   },
 
