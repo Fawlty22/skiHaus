@@ -39,13 +39,13 @@ module.exports = (
   };
 
   const dateObj = new Date(timestamp);
-  console.log('date', dateObj)
+  
   const formattedMonth = months[dateObj.getMonth()];
 
   const dayOfMonth = dateSuffix
-    ? addDateSuffix(dateObj.getDate() + 1 )
-    : dateObj.getDate() + 1;
-    console.log('day', dayOfMonth)
+    ? addDateSuffix(dateObj.getDate()  )
+    : dateObj.getDate() ;
+    
   const year = dateObj.getFullYear();
   const formattedTimeStamp = `${formattedMonth} ${dayOfMonth}, ${year} `;
 
