@@ -51,11 +51,13 @@ const resolvers = {
   },
 
   Mutation: {
-    addEmployee: async (parent, args) => {
-      const employee = await Employee.create(args);
-      const token = signToken(employee);
+    addEmployee: async (parent, args, context) => {
+      if (context.employee) {
+        const employee = await Employee.create(args);
+        const token = signToken(employee);
 
-      return { token, employee };
+        return { token, employee };
+      }
     },
     updateEmployee: async (parent, args, context) => {
       if (context.employee) {

@@ -5,23 +5,15 @@ import {Card, Container, Row, Col } from "react-bootstrap";
 import ReturningToday from "../components/ReturningToday"
 
 const Dashboard = () => {
-  // let employee = Auth.getProfile();
-  // console.log(employee);
-
-   
-
-
-
-
-
-
+  let employee = Auth.getProfile();
+  console.log(employee);
 
   //I have commented out the login logic for development purposes.
 
-  // redirect to login if error in a query, not defined yet
-  // if (!employee) {
-  //   return <Redirect to={"/login"} />
-  // }
+  // redirect to login if error in a query
+  if (!employee) {
+    return <Redirect to={"/login"} />
+  }
 
   return (
     <Container fluid>
