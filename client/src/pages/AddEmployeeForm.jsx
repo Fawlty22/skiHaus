@@ -2,18 +2,18 @@ import { Form, Button, Container, FloatingLabel } from "react-bootstrap";
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_EMPLOYEE } from "../graphql/mutations.js";
-import Modal from "../components/ModalEmployee"
 
-const CustomerForm = () => {
+
+const AddEmployee = () => {
   const [formState, setFormState] = useState({
-  
+
     username: "",
     password: "",
 
-  
+
   });
 
-  
+
 
   const [addUser, { error, loading }] = useMutation(ADD_EMPLOYEE);
 
@@ -36,7 +36,7 @@ const CustomerForm = () => {
         },
       });
       if (!loading && !error) {
-       return Modal(); 
+       
       }
     } catch (e) {
       console.log(e);
@@ -85,4 +85,4 @@ const CustomerForm = () => {
   );
 };
 
-export default CustomerForm;
+export default AddEmployee;
