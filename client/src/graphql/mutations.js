@@ -69,12 +69,14 @@ export const CREATE_CONTRACT = gql`
     $checkOutDate: Date!
     $checkInDate: Date!
     $equipment: EquipmentInput!
+    $username: String!
   ) {
     createContract(
       user: $user
       checkOutDate: $checkOutDate
       checkInDate: $checkInDate
       equipment: $equipment
+      username: $username
     ) {
       _id
       username

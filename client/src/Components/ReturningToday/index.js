@@ -7,7 +7,9 @@ import dateFormat from "../../utils/dateFormat";
 
 const ReturningToday = () => {
   //query for contracts 
-  const { loading, data } = useQuery(QUERY_CONTRACTS);
+  const { loading, data, error } = useQuery(QUERY_CONTRACTS);
+  console.log(data)
+
   
 
   return (
@@ -23,7 +25,7 @@ const ReturningToday = () => {
             const today = new Date();
             const todayFormatted = dateFormat(today).replace(/\s+/g, "");
             const eachDateFormatted = each.checkInDate.replace(/\s+/g, "")
-            //This IF statement renders contracts if theyre coming back today.  If you remove it, returningToday shows all contracts
+            //This IF statement renders contracts if they're coming back today.  If you remove it, returningToday shows all contracts
             if(eachDateFormatted === todayFormatted && each.active == true)
               return (
                 <Link

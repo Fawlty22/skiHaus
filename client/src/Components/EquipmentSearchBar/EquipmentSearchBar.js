@@ -3,6 +3,7 @@ import { Card, Container, Row, Col } from 'react-bootstrap';
 
 const EquipmentSearchBar = ({ categoryState, setCategoryState }) => {
     const handleCategory = (event) => {
+        event.preventDefault()
         const dropDownIndex = event.target.options.selectedIndex
         const category = event.target.options[dropDownIndex].innerText;
         setCategoryState({

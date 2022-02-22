@@ -23,13 +23,12 @@ const CreateContract = () => {
         }
     })
 
-    // let employee = Auth.getProfile();
-    // console.log(employee);
+    let employee = Auth.getProfile();
   
     // redirect to login if valid token is not present
-    // if (!employee) {
-    //   return <Redirect to={"/login"} />
-    // }
+    if (!employee) {
+      return <Redirect to={"/login"} />
+    }
 
 
     const handleContractNavigation = (event) => {
@@ -43,16 +42,21 @@ const CreateContract = () => {
         <Container style={{width: "95%"}}>
             <Row className="contract-row">
                 <Col className="contract-col">
-                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="1">Select User</button>
+                    <button 
+                        className={`contract-navigation-button ${contractStep.step === '1' && 'navActive'}`} 
+                        onClick={handleContractNavigation} 
+                        type="button" id="1"
+                    >Select User
+                    </button>
                 </Col>
                 <Col className="contract-col">
-                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="2">Select Dates</button>
+                    <button className={`contract-navigation-button ${contractStep.step === '2' && 'navActive'}`} onClick={handleContractNavigation} type="button" id="2">Select Dates</button>
                 </Col>
                 <Col className="contract-col">
-                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="3">Select Equipment</button>
+                    <button className={`contract-navigation-button ${contractStep.step === '3' && 'navActive'}`} onClick={handleContractNavigation} type="button" id="3">Select Equipment</button>
                 </Col>
                 <Col className="contract-col">
-                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="4">Finalize Contract</button>
+                    <button className={`contract-navigation-button ${contractStep.step === '4' && 'navActive'}`} onClick={handleContractNavigation} type="button" id="4">Finalize Contract</button>
                 </Col>
             </Row>
             <Row >
@@ -75,9 +79,9 @@ const CreateContract = () => {
                         contractStep={contractStep}
                         setContractStep={setContractStep}
                     />}
-                {contractStep.step ==='4' && <ContractSubmit 
-                    contractData={contractData} 
-                />}
+                    {contractStep.step ==='4' && <ContractSubmit 
+                        contractData={contractData} 
+                    />}
                 </Card.Body>
             </Row>
         </Container>

@@ -68,6 +68,10 @@ code {
   width: 12rem;
 }
 
+.navActive {
+  color: #0dcaf0;
+}
+
 .contract-card {
   padding: 0;
   margin: 0;
