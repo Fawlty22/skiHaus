@@ -18,6 +18,7 @@ import AddEmployeeForm  from "./pages/AddEmployeeForm";
 import { StoreProvider } from "./utils/GlobalContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Auth from "./utils/auth"
 
 
 const httpLink = createHttpLink({
@@ -40,6 +41,7 @@ const client = new ApolloClient({
 });
 
 function App() {
+  
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -47,14 +49,15 @@ function App() {
           <Header />
         </div>
         <StoreProvider>
-          <Switch>
+          {(Auth.loggedIn()) ? <Switch>
             <Route exact path="/dashboard" render={() => <Dashboard />} />
-            <Route exact path="/login" render={() => <Login />} />
             <Route exact path="/new-employee" render={() => <AddEmployeeForm />} />
             <Route exact path="/customerform" render={() => <CustomerForm />} />
             <Route exact path="/contract" render={() => <CreateContract />} />
             <Route exact path="/equipment" render={() => <Equipment />} />
-          </Switch>
+          </Switch> : <Switch> 
+          <Route exact path="/login" render={() => <Login />} />
+            </Switch>} 
         </StoreProvider>
       </Router>
     </ApolloProvider>
