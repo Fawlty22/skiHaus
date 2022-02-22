@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from "react-router-dom";
 import { UserSearchForm, EquipmentSearch, ContractSubmit, ContractDateSelection } from '../components/index.js';
 import { Card, Row, Col, Container } from "react-bootstrap";
+import Auth from '../utils/auth'
 
 // import { UPDATE_USERS } from '../utils/actions'
 // import { CreateContractStoreProvider, useCreateContractContext } from '../utils/CreateContractContext';
@@ -20,6 +22,15 @@ const CreateContract = () => {
             boots: []
         }
     })
+
+    // let employee = Auth.getProfile();
+    // console.log(employee);
+  
+    // redirect to login if valid token is not present
+    // if (!employee) {
+    //   return <Redirect to={"/login"} />
+    // }
+
 
     const handleContractNavigation = (event) => {
         setContractStep({

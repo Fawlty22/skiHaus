@@ -1,19 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Auth from "../utils/auth";
-import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ListGroup from "react-bootstrap/ListGroup";
+import { Card, Container, Row, Col, ListGroup } from 'react-bootstrap'
 
 const Dashboard = () => {
-  let employee = Auth.getProfile();
-  console.log(employee);
+  // let employee = Auth.getProfile();
+  // console.log(employee);
 
   //I have commented out the login logic for development purposes.
 
-  // // redirect to login if error in a query, not defined yet
+  // redirect to login if error in a query, not defined yet
   // if (!employee) {
   //   return <Redirect to={"/login"} />
   // }

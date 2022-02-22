@@ -78,6 +78,11 @@ code {
   margin: 0;
   align-items: center;
 }
+
+.equipment-list {
+  padding: 0;
+}
+
 .span-text {
   background-color: #212529;
   display: inline-block;

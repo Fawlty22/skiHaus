@@ -10,8 +10,6 @@ import { UPDATE_EMPLOYEE } from "../utils/actions";
 function Login(props) {
   const [state, dispatch] = useStoreContext();
   const [formState, setFormState] = useState({ username: "", password: "" });
-  // const [username, setUsername] = useState('');
-  // const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION);
   const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION);
 
   const handleFormSubmit = async (event) => {
