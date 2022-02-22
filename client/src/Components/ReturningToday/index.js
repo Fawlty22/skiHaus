@@ -6,7 +6,7 @@ import { QUERY_CONTRACTS } from "../../graphql/queries";
 import dateFormat from "../../utils/dateFormat";
 
 const ReturningToday = () => {
-  //query for contracts and filter through for the ones coming back today.
+  //query for contracts 
   const { loading, data } = useQuery(QUERY_CONTRACTS);
 
   return (
