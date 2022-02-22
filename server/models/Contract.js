@@ -3,6 +3,10 @@ const EquipmentSchema = require('./Equipment');
 
 const contractSchema = new Schema(
     {
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
         checkOutDate: {
             type: Date,
             required: true

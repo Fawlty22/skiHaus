@@ -17,6 +17,7 @@ type User {
 }
 
   type Contract {
+    user: User
     _id: ID
     checkOutDate: Date
     checkInDate: Date
