@@ -54,6 +54,7 @@ const CustomerForm = () => {
           <Form.Control
             name="firstName"
             type="text"
+          
             placeholder="First Name"
             defaultValue={firstName}
             onChange={handleChange}

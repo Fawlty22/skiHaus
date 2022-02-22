@@ -10,45 +10,20 @@ const Header = () => {
           to="/dashboard"
         >
           <Link
+            className="text-info"
             to="/dashboard"
-            style={{ textDecoration: "none", color: "pink" }}
+            style={{ textDecoration: "none" }}
           >
             Ski Haus
           </Link>
         </Navbar.Brand>
         <Nav className="align-items-end gap-3">
           <Link
-            style={{ color: "pink", textDecoration: "none" }}
-            to="/customerform"
+            className="text-info fw-bold"
+            style={{ textDecoration: "none" }}
+            to="/login"
           >
-            Customer Form
-          </Link>
-          <Link
-            style={{ color: "pink", textDecoration: "none" }}
-            to="/dashboard"
-          >
-            Dashboard
-          </Link>
-          <Link style={{ color: "pink", textDecoration: "none" }} to="/login">
             Login
-          </Link>
-          <Link
-            style={{ color: "pink", textDecoration: "none" }}
-            to="/contract"
-          >
-            Contract
-          </Link>
-          <Link
-            style={{ color: "pink", textDecoration: "none" }}
-            to="/equipment"
-          >
-            Equipment
-          </Link>
-          <Link
-            style={{ color: "pink", textDecoration: "none" }}
-            to="/usersearch"
-          >
-            User Search
           </Link>
         </Nav>
       </Container>

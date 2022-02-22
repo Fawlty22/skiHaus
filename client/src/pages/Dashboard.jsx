@@ -1,11 +1,20 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Auth from "../utils/auth";
-import { Card, Container, Row, Col, ListGroup } from 'react-bootstrap'
+import {Card, Container, Row, Col } from "react-bootstrap";
+import ReturningToday from "../components/ReturningToday"
 
 const Dashboard = () => {
   // let employee = Auth.getProfile();
   // console.log(employee);
+
+   
+
+
+
+
+
+
 
   //I have commented out the login logic for development purposes.
 
@@ -21,7 +30,7 @@ const Dashboard = () => {
           <Card bg="dark" style={{ width: "18rem" }} className="p-2">
             <Link style={{ textDecoration: "none" }} to="/contract">
               <Card.Body className="text-center">
-                <Card.Title style={{ color: "violet" }}>
+                <Card.Title className="text-info">
                   Create New Contract
                 </Card.Title>
               </Card.Body>{" "}
@@ -33,7 +42,7 @@ const Dashboard = () => {
           <Card bg="dark" style={{ width: "18rem" }} className="p-2" >
             <Link style={{ textDecoration: "none" }} to="/new-employee">
               <Card.Body className="text-center">
-                <Card.Title style={{ color: "violet" }}>
+                <Card.Title className="text-info">
                   Create New Employee
                 </Card.Title>
               </Card.Body>
@@ -45,7 +54,7 @@ const Dashboard = () => {
           <Card bg="dark" style={{ width: "18rem" }} className="p-2" >
             <Link style={{ textDecoration: "none" }} to="/customerform">
               <Card.Body className="text-center">
-                <Card.Title style={{ color: "violet" }}>
+                <Card.Title className="text-info">
                   Customer Form
                 </Card.Title>
               </Card.Body>
@@ -59,7 +68,7 @@ const Dashboard = () => {
           <Card bg="dark" style={{ width: "18rem" }} className="p-2" >
             <Link style={{ textDecoration: "none" }} to="/equipment">
               <Card.Body className="text-center">
-                <Card.Title style={{ color: "violet" }}>
+                <Card.Title className="text-info">
                   Equipment Management
                 </Card.Title>
               </Card.Body>
@@ -71,7 +80,7 @@ const Dashboard = () => {
           <Card bg="dark" style={{ width: "18rem" }} className="p-2" >
             <Link style={{ textDecoration: "none" }} to="/view-contracts">
               <Card.Body className="text-center">
-                <Card.Title style={{ color: "violet" }}>
+                <Card.Title className="text-info">
                   View Contracts
                 </Card.Title>
               </Card.Body>
@@ -84,7 +93,7 @@ const Dashboard = () => {
             {" "}
             <Link style={{ textDecoration: "none" }} to="/user-management">
               <Card.Body className="text-center">
-                <Card.Title style={{ color: "violet" }}>
+                <Card.Title className="text-info">
                   User Management
                 </Card.Title>
               </Card.Body>
@@ -94,24 +103,7 @@ const Dashboard = () => {
       </Row>
       <Row className="dashboard-row">
         <Col xs={12} md={4} className="dashboard-col">
-          <Card bg="dark" style={{ width: "18rem" }} className="p-2" >
-            {/* This link will be instead inside a .map() that populates the contracts returning today.  We dont want the whole card to link, just the contract id's.  */}
-            <Link style={{ textDecoration: "none" }} to="/returning">
-              <Card.Body className="text-center">
-                <Card.Title style={{ color: "violet" }}>
-                  Returning Today
-                </Card.Title>
-                <ListGroup>
-                  <ListGroup.Item style={{background: 'violet'}}>Contract's'</ListGroup.Item>
-                  {/* map here to dynamically create the contracts coming back today */}
-                  <ListGroup.Item>Contract ID#</ListGroup.Item>
-                  <ListGroup.Item>Contract ID#</ListGroup.Item>
-                  <ListGroup.Item>Contract ID#</ListGroup.Item>
-                  <ListGroup.Item>Contract ID#</ListGroup.Item>
-                </ListGroup>
-              </Card.Body>
-            </Link>
-          </Card>
+          <ReturningToday />
         </Col>
       </Row>
     </Container>

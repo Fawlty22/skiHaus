@@ -76,7 +76,7 @@ type User {
     user(email: String!): User
     employee: Employee
     employees: [Employee]
-    contract(id: ID!): Contract
+    contract(_id: ID!): Contract
     contracts: [Contract]
     skis: [Ski]
     snowboards: [Snowboard]
@@ -111,7 +111,7 @@ type User {
 
     createContract(
       active: Boolean
-      user: String!
+      user: ID!
       checkOutDate: Date!
       checkInDate: Date!
       equipment: EquipmentInput

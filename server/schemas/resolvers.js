@@ -42,7 +42,7 @@ const resolvers = {
     },
     //find one contract
     contract: async (parent, args) => {
-      return await Contract.findOne({ _id: args.id })
+      return await Contract.findOne({ _id: args._id })
         .populate("equipment.boots")
         .populate("equipment.skis")
         .populate("equipment.snowboards")
@@ -152,12 +152,10 @@ const resolvers = {
       return await Boot.findOneAndDelete({ _id: _id });
     },
     createContract: async (parent, args) => {
-      console.log("create contract line 102");
-      console.log("args", args);
+    
 
       const contract = await Contract.create(args);
-      console.log("contract", contract);
-      console.log("_*_*_*_*_*_*_", contract.equipment.boots);
+      
 
       const updatedSkis = await Ski.updateMany(
         { _id: { $in: contract.equipment.skis } },
