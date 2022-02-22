@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { AuthenticationError } = require("apollo-server-express");
 
 const secret = 'mysecretsshhhhh';
 const expiration = '2h';
@@ -8,6 +9,7 @@ module.exports = {
   authMiddleware: function ({ req }) {
     // allows token to be sent via req.body, req.query, or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
+    console.log(token)
 
     // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
@@ -15,6 +17,7 @@ module.exports = {
     }
 
     if (!token) {
+      // throw new AuthenticationError('You must be logged in');
       return req;
     }
 

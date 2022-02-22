@@ -5,8 +5,8 @@ import { Alert, Container, Row, Col, Card } from 'react-bootstrap'
 
 const UserSearchForm = ({ contractData, setContractData, contractStep, setContractStep }) => {
     const [formState, setFormState] = useState({ email: '' });
-    const [getUser, { loading, error, data }] = useLazyQuery(QUERY_USER);
-    const [show, setShow] = useState(true)
+    const [getUser, { data }] = useLazyQuery(QUERY_USER);
+    const [show, setShow] = useState(false)
     useEffect(() => {
         if (data) {
             if (data.user) {
@@ -18,6 +18,8 @@ const UserSearchForm = ({ contractData, setContractData, contractStep, setContra
                     ...contractStep,
                     step: '2'
                 })
+            } else {
+                setShow(true)
             }
         }
     }, [data])
@@ -63,12 +65,9 @@ const UserSearchForm = ({ contractData, setContractData, contractStep, setContra
                                     <button className="contract-navigation-button" type="submit">Search for User</button>
                                 </div>
                             </form>
-                            {data ?
-                                <Alert variant="warning" onClose={() => setShow(false)} dismissible>
-                                    <span>User Not Found. Please try again</span>
-                                </Alert>
-                                : ''
-                            }
+                            <Alert show={show} variant="warning" onClose={() => setShow(false)} dismissible>
+                                <span>User Not Found. Please try again</span>
+                            </Alert>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -78,3 +77,10 @@ const UserSearchForm = ({ contractData, setContractData, contractStep, setContra
 }
 
 export default UserSearchForm
+
+// {data ?
+//     <Alert variant="warning" onClose={() => setShow(false)} dismissible>
+//         <span>User Not Found. Please try again</span>
+//     </Alert>
+//     : ''
+// }
