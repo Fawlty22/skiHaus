@@ -5,61 +5,97 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    users: async () => {
-      return User.find().select("-__v");
+    users: async (parent, args, context) => {
+      if (context.employee) {
+        return User.find().select("-__v").populate('contracts');
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    user: async (parent, { email }) => {
-      return User.findOne({ email: email }).select("-__v").populate({
-        path: "contracts",
-      });
+    user: async (parent, { email }, context) => {
+      if (context.employee) {
+        return User.findOne({ email: email }).select("-__v").populate('contracts');
+      } else {
+        throw new AuthenticationError('You are not authorized')
+      } 
     },
-    boots: async () => {
-      return Boot.find().select("-__v");
+    boots: async (parent, args, context) => {
+      if (context.employee) {
+        return Boot.find().select("-__v");
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    skis: async () => {
-      return Ski.find().select("-__v");
+    skis: async (parent, args, context) => {
+      if (context.employee) {
+        return Ski.find().select("-__v");
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    snowboards: async () => {
-      return Snowboard.find().select("-__v");
+    snowboards: async (parent, args, context) => {
+      if (context.employee) {
+        return Snowboard.find().select("-__v");
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
     employee: async (parent, args, context) => {
       if (context.employee) {
         const employee = await Employee.findById(context.employee._id);
         return employee;
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
       }
-      throw new AuthenticationError("Not logged in");
     },
-    employees: async () => {
-      return await Employee.find();
+    employees: async (parent, args, context) => {
+      if (context.employee) {
+        return await Employee.find();
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
     //find all contract
-    contracts: async () => {
-      return await Contract.find()
-        .populate("equipment.boots")
-        .populate("equipment.skis")
-        .populate("equipment.snowboards");
+    contracts: async (parent, args, context) => {
+      if (context.employee) {
+        return await Contract.find()
+          .populate("equipment.boots")
+          .populate("equipment.skis")
+          .populate("equipment.snowboards")
+          .populate("user");
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
     //find one contract
-    contract: async (parent, args) => {
-      return await Contract.findOne({ _id: args.id })
-        .populate("equipment.boots")
-        .populate("equipment.skis")
-        .populate("equipment.snowboards");
-    },
+    contract: async (parent, args, context) => {
+      if (context.employee) {
+        return await Contract.findOne({ _id: args._id })
+          .populate("equipment.boots")
+          .populate("equipment.skis")
+          .populate("equipment.snowboards")
+          .populate("user");
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
+    }
   },
 
   Mutation: {
-    addEmployee: async (parent, args) => {
-      const employee = await Employee.create(args);
-      const token = signToken(employee);
+    addEmployee: async (parent, args, context) => {
+      
+        const employee = await Employee.create(args);
+        const token = signToken(employee);
 
-      return { token, employee };
+        return { token, employee };
     },
     updateEmployee: async (parent, args, context) => {
       if (context.employee) {
         return await Employee.findByIdAndUpdate(context.employee._id, args, {
           new: true,
         });
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
       }
     },
     addUser: async (parent, args) => {
@@ -68,26 +104,30 @@ const resolvers = {
     },
     editUser: async (
       parent,
-      { _id, username, firstName, lastName, email, birthDate, phone }
+      { _id, username, firstName, lastName, email, birthDate, phone },
+      context
     ) => {
-      const userUpdate = await User.findByIdAndUpdate(
-        { _id: _id },
-        {
-          $set: {
-            username: username,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            birthDate: birthDate,
-            phone: phone,
+      if (context.employee) {
+        const userUpdate = await User.findByIdAndUpdate(
+          { _id: _id },
+          {
+            $set: {
+              username: username,
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              birthDate: birthDate,
+              phone: phone,
+            },
           },
-        },
-        { new: true }
-      );
-      return userUpdate;
+          { new: true }
+        );
+        return userUpdate;
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
     login: async (parent, { username, password }) => {
-      console.log("login mutation line 47", username, password);
       const employee = await Employee.findOne({ username });
 
       if (!employee) {
@@ -104,125 +144,168 @@ const resolvers = {
 
       return { token, employee };
     },
-    addSki: async (parent, args) => {
-      const ski = await Ski.create(args);
+    addSki: async (parent, args, context) => {
+      if (context.employee) {
+        const ski = await Ski.create(args);
 
-      return ski;
+        return ski;
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    updateSki: async (parent, { _id, brand, model, condition }) => {
-      return await Ski.findByIdAndUpdate(
-        { _id: _id },
-        { $set: { brand: brand, model: model, condition: condition } },
-        { new: true }
-      );
+    updateSki: async (parent, { _id, brand, model, condition }, context) => {
+      if (context.employee) {
+        return await Ski.findByIdAndUpdate(
+          { _id: _id },
+          { $set: { brand: brand, model: model, condition: condition } },
+          { new: true }
+        );
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    deleteSki: async (parent, { _id }) => {
-      return await Ski.findOneAndDelete({ _id: _id });
+    deleteSki: async (parent, { _id }, context) => {
+      if (context.employee) {
+        return await Ski.findOneAndDelete({ _id: _id });
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    addSnowboard: async (parent, args) => {
-      const snowboard = await Snowboard.create(args);
+    addSnowboard: async (parent, args, context) => {
+      if (context.employee) {
+        const snowboard = await Snowboard.create(args);
 
-      return snowboard;
+        return snowboard;
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    updateSnowboard: async (parent, { _id, brand, model, condition }) => {
-      return await Snowboard.findByIdAndUpdate(
-        { _id: _id },
-        { $set: { brand: brand, model: model, condition: condition } },
-        { new: true }
-      );
+    updateSnowboard: async (parent, { _id, brand, model, condition }, context) => {
+      if (context.employee) {
+        return await Snowboard.findByIdAndUpdate(
+          { _id: _id },
+          { $set: { brand: brand, model: model, condition: condition } },
+          { new: true }
+        );
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    deleteSnowboard: async (parent, { _id }) => {
-      return await Snowboard.findByIdAndDelete({ _id: _id });
+    deleteSnowboard: async (parent, { _id }, context) => {
+      if (context.employee) {
+        return await Snowboard.findByIdAndDelete({ _id: _id });
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    addBoot: async (parent, args) => {
-      const boot = await Boot.create(args);
+    addBoot: async (parent, args, context) => {
+      if (context.employee) {
+        const boot = await Boot.create(args);
 
-      return boot;
+        return boot;
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    updateBoot: async (parent, { _id, brand, model, condition }) => {
-      return await Boot.findByIdAndUpdate(
-        { _id: _id },
-        { $set: { brand: brand, model: model, condition: condition } },
-        { new: true }
-      );
+    updateBoot: async (parent, { _id, brand, model, condition }, context) => {
+      if (context.employee) {
+        return await Boot.findByIdAndUpdate(
+          { _id: _id },
+          { $set: { brand: brand, model: model, condition: condition } },
+          { new: true }
+        );
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    deleteBoot: async (parent, { _id }) => {
-      return await Boot.findOneAndDelete({ _id: _id });
+    deleteBoot: async (parent, { _id }, context) => {
+      if (context.employee) {
+        return await Boot.findOneAndDelete({ _id: _id });
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    createContract: async (parent, args) => {
-      console.log("create contract line 102");
-      console.log("args", args);
+    createContract: async (parent, args, context) => {
+      if (context.employee) {
+        const contract = await Contract.create(args);
+        const updatedSkis = await Ski.updateMany(
+          { _id: { $in: contract.equipment.skis } },
+          { $set: { available: false } },
+          { new: true }
+        );
+        const updatedSnowboards = await Snowboard.updateMany(
+          { _id: { $in: contract.equipment.snowboards } },
+          { $set: { available: false } },
+          { new: true }
+        );
+        const updatedBoots = await Boot.updateMany(
+          { _id: { $in: contract.equipment.boots } },
+          { $set: { available: false } },
+          { new: true }
+        );
+        console.log(args)
+        const updatedUser = await User.findOneAndUpdate(
+          { username: args.username },
+          { $addToSet: { contracts: contract._id } },
+          { new: true }
+        ).populate("contracts");
 
-      const contract = await Contract.create(args);
-      console.log("contract", contract);
-      console.log("_*_*_*_*_*_*_", contract.equipment.boots);
-
-      const updatedSkis = await Ski.updateMany(
-        { _id: { $in: contract.equipment.skis } },
-        { $set: { available: false } },
-        { new: true }
-      );
-      const updatedSnowboards = await Snowboard.updateMany(
-        { _id: { $in: contract.equipment.snowboards } },
-        { $set: { available: false } },
-        { new: true }
-      );
-      const updatedBoots = await Boot.updateMany(
-        { _id: { $in: contract.equipment.boots } },
-        { $set: { available: false } },
-        { new: true }
-      );
-
-      const updatedUser = await User.findOneAndUpdate(
-        { username: args.user },
-        { $addToSet: { contracts: contract._id } },
-        { new: true }
-      ).populate("contracts");
-
-      return updatedUser;
+        return updatedUser;
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
-    deactivateContract: async (parent, args) => {
-      //find contract by ID
-      const updatedContract = await Contract.findOneAndUpdate(
-        { _id: args._id },
-        { $set: { active: false } },
-        { new: true }
-      );
-      //update each piece of gear in each array
-      const updatedSkis = await Ski.updateMany(
-        { _id: { $in: updatedContract.equipment.skis } },
-        { $set: { available: true } },
-        { new: true }
-      );
-      const updatedSnowboards = await Snowboard.updateMany(
-        { _id: { $in: updatedContract.equipment.snowboards } },
-        { $set: { available: true } },
-        { new: true }
-      );
-      const updatedBoots = await Boot.updateMany(
-        { _id: { $in: updatedContract.equipment.boots } },
-        { $set: { available: true } },
-        { new: true }
-      );
-      //return new contract
-      return updatedContract;
+    deactivateContract: async (parent, args, context) => {
+      if (context.employee) {
+        //find contract by ID
+        const updatedContract = await Contract.findOneAndUpdate(
+          { _id: args._id },
+          { $set: { active: false } },
+          { new: true }
+        );
+        //update each piece of gear in each array
+        const updatedSkis = await Ski.updateMany(
+          { _id: { $in: updatedContract.equipment.skis } },
+          { $set: { available: true } },
+          { new: true }
+        );
+        const updatedSnowboards = await Snowboard.updateMany(
+          { _id: { $in: updatedContract.equipment.snowboards } },
+          { $set: { available: true } },
+          { new: true }
+        );
+        const updatedBoots = await Boot.updateMany(
+          { _id: { $in: updatedContract.equipment.boots } },
+          { $set: { available: true } },
+          { new: true }
+        );
+        //return new contract
+        return updatedContract;
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
     editContract: async (
       parent,
-      { _id, checkoutOutDate, checkoutInDate, equipment }
+      { _id, checkoutOutDate, checkoutInDate, equipment },
+      context
     ) => {
-      const updatedContract = await Contract.findOneAndUpdate(
-        { _id: _id },
-        {
-          $set: {
-            checkoutOutDate: checkoutOutDate,
-            checkoutInDate: checkoutInDate,
-            equipment: equipment,
+      if (context.employee) {
+        const updatedContract = await Contract.findOneAndUpdate(
+          { _id: _id },
+          {
+            $set: {
+              checkoutOutDate: checkoutOutDate,
+              checkoutInDate: checkoutInDate,
+              equipment: equipment,
+            },
           },
-        },
-        { new: true }
-      );
-      return updatedContract;
+          { new: true }
+        );
+        return updatedContract;
+      } else {
+        throw new AuthenticationError('You are not authorized to perform this action')
+      }
     },
   },
 };

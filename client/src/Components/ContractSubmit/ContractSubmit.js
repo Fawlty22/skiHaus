@@ -1,17 +1,25 @@
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { CREATE_CONTRACT } from '../../graphql/mutations';
 
 const ContractSubmit = ({ contractData }) => {
     const [createContract, { data, loading, error }] = useMutation(CREATE_CONTRACT);
-
+    const [show, setShow] = useState(false);
+    console.log('contract data', contractData)
+    useEffect(() => {
+        if (data) {
+            setShow(true)
+        }
+    })
+    console.log('contractData line 15 contractsubmit', contractData)
     const handleContractSubmit = async (event) => {
         event.preventDefault();
         const mutationResponse = await createContract({
             variables: {
                 active: 'True',
-                user: contractData.user.username,
+                user: contractData.user._id,
+                username: contractData.user.username,
                 checkInDate: contractData.checkInDate,
                 checkOutDate: contractData.checkOutDate,
                 equipment: contractData.equipment
@@ -21,6 +29,7 @@ const ContractSubmit = ({ contractData }) => {
     }
 
     return (
+        <>
         <Card bg="dark">
             <Row className="contract-row">
                 <Card.Title style={{ color: "violet" }}>
@@ -109,6 +118,10 @@ const ContractSubmit = ({ contractData }) => {
                 <button className="contract-navigation-button" onClick={handleContractSubmit}>Submit Contract</button>
             </Row>
         </Card>
+        <Alert show={show} variant="success">
+            <p>Contract successfully created</p>
+        </Alert>
+        </>
     )
 }
 

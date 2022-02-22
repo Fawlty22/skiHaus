@@ -65,16 +65,18 @@ export const EDIT_USER = gql`
 
 export const CREATE_CONTRACT = gql`
   mutation createContract(
-    $user: String!
+    $user: ID!
     $checkOutDate: Date!
     $checkInDate: Date!
     $equipment: EquipmentInput!
+    $username: String!
   ) {
     createContract(
       user: $user
       checkOutDate: $checkOutDate
       checkInDate: $checkInDate
       equipment: $equipment
+      username: $username
     ) {
       _id
       username

@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import Equipment from "./pages/Equipment";
 import UserManagement from "./pages/UserManagement";
 import Login from "./pages/Login";
+import SingleContractPage from "./pages/SingleContractPage";
 import CustomerForm from "./pages/CustomerForm";
 import Header from "./components/Header";
 import CreateContract from "./pages/CreateContract.jsx";
@@ -49,6 +50,7 @@ function App() {
         </div>
         <StoreProvider >
           <Switch>
+            <Route exact path ="/" render={() => <Dashboard />} />
             <Route exact path="/dashboard" render={() => <Dashboard />} />
             <Route exact path="/login" render={() => <Login />} />
             <Route exact path="/customerform" render={() => <CustomerForm />} />
@@ -56,6 +58,7 @@ function App() {
             <Route exact path="/equipment" render={() => <Equipment />} />
             <Route exact path="/user-management" render={() => <UserManagement />} />
             <Route exact path="/view-contracts" render={() => <UserSearchBar />} />
+            <Route exact path="/contracts/:id" render={() => <SingleContractPage />} />
           </Switch>
         </StoreProvider>
       </Router>

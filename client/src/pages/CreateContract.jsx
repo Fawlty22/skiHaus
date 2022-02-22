@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from "react-router-dom";
 import { UserSearchForm, EquipmentSearch, ContractSubmit, ContractDateSelection } from '../components/index.js';
 import { Card, Row, Col, Container } from "react-bootstrap";
+import Auth from '../utils/auth'
 
 // import { UPDATE_USERS } from '../utils/actions'
 // import { CreateContractStoreProvider, useCreateContractContext } from '../utils/CreateContractContext';
@@ -21,6 +23,14 @@ const CreateContract = () => {
         }
     })
 
+    let employee = Auth.getProfile();
+  
+    // redirect to login if valid token is not present
+    if (!employee) {
+      return <Redirect to={"/login"} />
+    }
+
+
     const handleContractNavigation = (event) => {
         setContractStep({
             ...contractStep,
@@ -32,16 +42,21 @@ const CreateContract = () => {
         <Container style={{width: "95%"}}>
             <Row className="contract-row">
                 <Col className="contract-col">
-                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="1">Select User</button>
+                    <button 
+                        className={`contract-navigation-button ${contractStep.step === '1' && 'navActive'}`} 
+                        onClick={handleContractNavigation} 
+                        type="button" id="1"
+                    >Select User
+                    </button>
                 </Col>
                 <Col className="contract-col">
-                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="2">Select Dates</button>
+                    <button className={`contract-navigation-button ${contractStep.step === '2' && 'navActive'}`} onClick={handleContractNavigation} type="button" id="2">Select Dates</button>
                 </Col>
                 <Col className="contract-col">
-                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="3">Select Equipment</button>
+                    <button className={`contract-navigation-button ${contractStep.step === '3' && 'navActive'}`} onClick={handleContractNavigation} type="button" id="3">Select Equipment</button>
                 </Col>
                 <Col className="contract-col">
-                    <button className="contract-navigation-button" onClick={handleContractNavigation} type="button" id="4">Finalize Contract</button>
+                    <button className={`contract-navigation-button ${contractStep.step === '4' && 'navActive'}`} onClick={handleContractNavigation} type="button" id="4">Finalize Contract</button>
                 </Col>
             </Row>
             <Row >
@@ -64,9 +79,9 @@ const CreateContract = () => {
                         contractStep={contractStep}
                         setContractStep={setContractStep}
                     />}
-                {contractStep.step ==='4' && <ContractSubmit 
-                    contractData={contractData} 
-                />}
+                    {contractStep.step ==='4' && <ContractSubmit 
+                        contractData={contractData} 
+                    />}
                 </Card.Body>
             </Row>
         </Container>

@@ -3,12 +3,11 @@ import { Button, Card } from "react-bootstrap";
 import ContractList from "../ContractList";
 
 const SingleUserContracts = (userResults) => {
+  console.log('SingleUserContract line 6', userResults)
   const user = userResults.userResult.user;
 
   const [contractHistory, setContractHistory] = useState(user.contracts.length);
   const [contractType, setContractType] = useState({ active: "" });
-  // const [pastContracts, setPastContracts] = useState(false);
-  console.log(contractType);
   const activeContractController = (e) => {
     e.preventDefault();
 
@@ -16,7 +15,6 @@ const SingleUserContracts = (userResults) => {
       ...contractType,
       active: "true",
     });
-    console.log(contractType);
   };
   const pastContractController = (e) => {
     e.preventDefault();

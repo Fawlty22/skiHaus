@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { AuthenticationError } = require("apollo-server-express");
 
 const secret = 'mysecretsshhhhh';
 const expiration = '2h';
@@ -15,16 +16,16 @@ module.exports = {
     }
 
     if (!token) {
+      // throw new AuthenticationError('You must be logged in');
       return req;
     }
 
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
-      req.user = data;
+      req.employee = data;
     } catch {
       console.log('Invalid token');
     }
-
     return req;
   },
   signToken: function({ username, email, _id }) {
