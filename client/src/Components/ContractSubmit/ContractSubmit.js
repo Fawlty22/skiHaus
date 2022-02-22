@@ -1,10 +1,17 @@
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { CREATE_CONTRACT } from '../../graphql/mutations';
 
 const ContractSubmit = ({ contractData }) => {
     const [createContract, { data, loading, error }] = useMutation(CREATE_CONTRACT);
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        if (data) {
+            setShow(true)
+        }
+    })
 
     const handleContractSubmit = async (event) => {
         event.preventDefault();
@@ -21,6 +28,7 @@ const ContractSubmit = ({ contractData }) => {
     }
 
     return (
+        <>
         <Card bg="dark">
             <Row className="contract-row">
                 <Card.Title style={{ color: "violet" }}>
@@ -109,6 +117,10 @@ const ContractSubmit = ({ contractData }) => {
                 <button className="contract-navigation-button" onClick={handleContractSubmit}>Submit Contract</button>
             </Row>
         </Card>
+        <Alert show={show} variant="success">
+            <p>Contract successfully created</p>
+        </Alert>
+        </>
     )
 }
 

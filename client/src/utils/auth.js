@@ -33,7 +33,6 @@ class AuthService {
   login(idToken) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
-    console.log('line 33 auth.js login function')
     window.location.assign('/dashboard');
   }
 
