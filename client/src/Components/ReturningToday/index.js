@@ -8,6 +8,7 @@ import dateFormat from "../../utils/dateFormat";
 const ReturningToday = () => {
   //query for contracts 
   const { loading, data } = useQuery(QUERY_CONTRACTS);
+  
 
   return (
     <Card bg="dark" style={{ width: "18rem" }} className="p-2">
@@ -23,7 +24,7 @@ const ReturningToday = () => {
             const todayFormatted = dateFormat(today).replace(/\s+/g, "");
             const eachDateFormatted = each.checkInDate.replace(/\s+/g, "")
             //This IF statement renders contracts if theyre coming back today.  If you remove it, returningToday shows all contracts
-            if(eachDateFormatted === todayFormatted)
+            if(eachDateFormatted === todayFormatted && each.active == true)
               return (
                 <Link
                   key={each._id}
