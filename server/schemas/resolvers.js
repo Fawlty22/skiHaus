@@ -17,7 +17,7 @@ const resolvers = {
         return User.findOne({ email: email }).select("-__v").populate('contracts');
       } else {
         throw new AuthenticationError('You are not authorized')
-      } 
+      }
     },
     boots: async (parent, args, context) => {
       if (context.employee) {
@@ -83,14 +83,10 @@ const resolvers = {
 
   Mutation: {
     addEmployee: async (parent, args, context) => {
-      if (context.employee) {
-        const employee = await Employee.create(args);
-        const token = signToken(employee);
+      const employee = await Employee.create(args);
+      const token = signToken(employee);
 
-        return { token, employee };
-      } else {
-        throw new AuthenticationError('You are not authorized to perform this action')
-      }
+      return { token, employee };
     },
     updateEmployee: async (parent, args, context) => {
       if (context.employee) {
