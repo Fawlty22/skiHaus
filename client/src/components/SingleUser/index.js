@@ -40,8 +40,8 @@ const SingleUser = ({ userData }) => {
 
   const userSelect = async (e) => {
     e.preventDefault(e);
-
-    const newEmail = e.target.textContent;
+    console.log(e.target.attributes[1].value);
+    const newEmail = e.target.attributes[1].value;
 
     const userResult = await getUser({ variables: { email: newEmail } });
 
@@ -83,12 +83,13 @@ const SingleUser = ({ userData }) => {
             <ListGroup className="p-1 m-1 gap-1">
               {userData.map((user) => (
                 <Button
+                  data-email={user.email}
                   className="bg-info text-black fw-bold"
                   type="click"
                   onClick={userSelect}
                   key={user.email}
                 >
-                  {user.email}
+                  {user.firstName} {user.lastName}
                 </Button>
               ))}
             </ListGroup>
