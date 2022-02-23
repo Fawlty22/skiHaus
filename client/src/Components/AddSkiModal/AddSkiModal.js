@@ -32,11 +32,12 @@ const AddSkiModal = (props) => {
         if(error) {
           return error;
         },
-    });
-    console.log(newSki)
+      });
+      document.getElementById("addBootForm").reset();
     } catch (e) {
       console.log(e);
     }
+    props.onHide();
   };
 
   return (
