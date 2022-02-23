@@ -105,3 +105,25 @@ code {
   align-items: center;
   border: none;
 }
+
+/*contract list css*/
+
+#contractListContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#contractListCard {
+  align-items: center;
+  width: 90%;
+}
+
+#contractListCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#contractCardEquipment {
+  width: 90%;
+}

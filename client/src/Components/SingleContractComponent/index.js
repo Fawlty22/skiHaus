@@ -7,6 +7,7 @@ import { DEACTIVATE_CONTRACT } from "../../graphql/mutations";
 
 const SingleContractComponent = () => {
   const { id } = useParams();
+  console.log(id);
   const { loading, data } = useQuery(QUERY_CONTRACT, {
     variables: { _id: id },
   });

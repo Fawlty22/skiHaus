@@ -39,6 +39,7 @@ const UpdateBootModal = (props) => {
     } catch (e) {
       console.log(e);
     }
+    props.onHide()
   };
 
   return (

@@ -30,10 +30,15 @@ const AddBootModal = (props) => {
           condition: condition,
         },
         if(error) {
-            return error;
-        }
+          return error;
+        },
       });
-      console.log(newBoot);
+      setFormState({
+        brand: "",
+        model: "",
+        condition: "",
+      });
+      document.getElementById("addBootForm").reset();
     } catch (e) {
       console.log(e);
     }
