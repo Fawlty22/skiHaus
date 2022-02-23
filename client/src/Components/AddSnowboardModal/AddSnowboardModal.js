@@ -95,11 +95,15 @@ const AddSnowboardModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
+          <Button className="bg-info text-black fw-bold" type="submit">
+            Add Snowboard
+          </Button>
         </Form>
       </Modal.Body>
       <Modal.Footer className="bg-dark">
-        <Button className="bg-info text-black fw-bold" type="submit">Add Snowboard</Button>
-        <Button className="bg-info text-black fw-bold" onClick={props.onHide}>Close</Button>
+        <Button className="bg-info text-black fw-bold" onClick={props.onHide}>
+          Close
+        </Button>
         {error && <Alert>{error.message}</Alert>}
         {data && <Alert>Snowboard Added</Alert>}
       </Modal.Footer>
