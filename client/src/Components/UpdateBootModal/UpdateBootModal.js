@@ -35,16 +35,10 @@ const UpdateBootModal = (props) => {
           return error;
         },
       });
-      setFormState({
-        brand: "",
-        model: "",
-        condition: "",
-      });
-      document.getElementById("updateBootForm").reset();
+      props.onHide();
     } catch (e) {
       console.log(e);
     }
-    props.onHide()
   };
 
   return (
@@ -54,13 +48,16 @@ const UpdateBootModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+      <Modal.Header className="bg-dark text-center" closeButton>
+        <Modal.Title
+          className="p-2 bg-dark text-center text-info "
+          id="contained-modal-title-vcenter"
+        >
           Enter the Id of the boots you would like to update. Then enter what
           you would like to update.
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="bg-dark">
         <Form id="addBootForm" onSubmit={handleSubmit}>
           <FloatingLabel
             controlId="floatingInput"
@@ -115,11 +112,15 @@ const UpdateBootModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">Update Boot</Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+      <Modal.Footer className="bg-dark">
+        <Button className="bg-info text-black fw-bold" type="submit">
+          Update Boot
+        </Button>
+        <Button className="bg-info text-black fw-bold" onClick={props.onHide}>
+          Close
+        </Button>
         {error && <Alert>{error.message}</Alert>}
         {data && <Alert>Boot Updated</Alert>}
       </Modal.Footer>

@@ -33,12 +33,7 @@ const AddBootModal = (props) => {
           return error;
         },
       });
-      setFormState({
-        brand: "",
-        model: "",
-        condition: "",
-      });
-      document.getElementById("addBootForm").reset();
+      props.onHide();
     } catch (e) {
       console.log(e);
     }
@@ -51,12 +46,15 @@ const AddBootModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+      <Modal.Header className="bg-dark text-center" closeButton>
+        <Modal.Title
+          className="p-2 bg-dark text-center text-info "
+          id="contained-modal-title-vcenter"
+        >
           Enter the neccesary information to create a Boot
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="bg-dark">
         <Form id="addBootForm" onSubmit={handleSubmit}>
           <FloatingLabel
             controlId="floatingInput"
@@ -98,11 +96,15 @@ const AddBootModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">Add Boot</Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+      <Modal.Footer className="bg-dark">
+        <Button className="bg-info text-black fw-bold" type="submit">
+          Add Boot
+        </Button>
+        <Button className="bg-info text-black fw-bold" onClick={props.onHide}>
+          Close
+        </Button>
         {error && <Alert>{error.message}</Alert>}
         {data && <Alert>Boot Added</Alert>}
       </Modal.Footer>

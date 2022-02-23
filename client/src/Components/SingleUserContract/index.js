@@ -28,7 +28,7 @@ const SingleUserContracts = (userResults) => {
   switch (contractHistory > 0) {
     case true:
       return (
-        <Container id="contractListCardContainer"className="w-50 p-2 bg-dark text-center text-info ">
+        <Container id="contractListCardContainer" className="w-50 p-2 bg-dark text-center text-info ">
           <Card.Header className="fw-bold fs-3">
             {user.firstName.toUpperCase()} {user.lastName.toUpperCase()}
           </Card.Header>

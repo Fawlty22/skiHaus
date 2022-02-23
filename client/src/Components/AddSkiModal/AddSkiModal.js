@@ -9,7 +9,7 @@ const AddSkiModal = (props) => {
     model: "",
     condition: "",
   });
-
+  console.log(formState);
   const { brand, model, condition } = formState;
 
   const [addSki, { error, data }] = useMutation(ADDSKI_MUTATION);
@@ -33,16 +33,10 @@ const AddSkiModal = (props) => {
           return error;
         },
       });
-      setFormState({
-        brand: "",
-        model: "",
-        condition: "",
-      });
-      document.getElementById("addSkiForm").reset();
+      props.onHide();
     } catch (e) {
       console.log(e);
     }
-    props.onHide();
   };
 
   return (
@@ -52,12 +46,15 @@ const AddSkiModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+      <Modal.Header className="bg-dark text-center" closeButton>
+        <Modal.Title
+          className="p-2 bg-dark text-center text-info "
+          id="contained-modal-title-vcenter"
+        >
           Enter the neccesary information to create a Ski
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="bg-dark">
         <Form id="addSkiForm" onSubmit={handleSubmit}>
           <FloatingLabel
             controlId="floatingInput"
@@ -72,7 +69,6 @@ const AddSkiModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-
           <FloatingLabel
             controlId="floatingInput"
             label="model"
@@ -99,11 +95,15 @@ const AddSkiModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">Add Ski</Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+      <Modal.Footer className="bg-dark">
+        <Button className="bg-info text-black fw-bold" type="submit">
+          Add Ski
+        </Button>
+        <Button className="bg-info text-black fw-bold" onClick={props.onHide}>
+          Close
+        </Button>
         {error && <Alert>{error.message}</Alert>}
         {data && <Alert>Ski Added</Alert>}
       </Modal.Footer>

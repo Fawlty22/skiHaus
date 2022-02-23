@@ -35,16 +35,10 @@ const UpdateSkiModal = (props) => {
           return error;
         },
       });
-      setFormState({
-        brand: "",
-        model: "",
-        condition: "",
-      });
-      document.getElementById("updateSkiForm").reset();
+      props.onHide();
     } catch (e) {
       console.log(e);
     }
-    props.onHide();
   };
 
   return (
@@ -54,13 +48,16 @@ const UpdateSkiModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+      <Modal.Header className="bg-dark text-center" closeButton>
+        <Modal.Title
+          className="p-2 bg-dark text-center text-info "
+          id="contained-modal-title-vcenter"
+        >
           Enter the Id of the skis you would like to update. Then enter what you
           would like to update.
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="bg-dark">
         <Form id="updateSkiForm" onSubmit={handleSubmit}>
           <FloatingLabel
             controlId="floatingInput"
@@ -115,11 +112,15 @@ const UpdateSkiModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">Update Ski</Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+      <Modal.Footer className="bg-dark">
+        <Button className="bg-info text-black fw-bold" type="submit">
+          Update Ski
+        </Button>
+        <Button className="bg-info text-black fw-bold" onClick={props.onHide}>
+          Close
+        </Button>
         {error && <Alert>{error.message}</Alert>}
         {data && <Alert>Ski Updated</Alert>}
       </Modal.Footer>

@@ -52,7 +52,7 @@ const SingleUser = ({}) => {
                 onChange={handleChange}
               />
             </FloatingLabel>
-            <Button variant="primary" type="submit">
+            <Button className="bg-info text-black fw-bold" variant="primary" type="submit">
               Submit
             </Button>
           </Form>
