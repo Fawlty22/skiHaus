@@ -24,7 +24,7 @@ const UserSearch = () => {
     const userData = data.users;
 
     return (
-      <Container id="contractListContainer">
+      <Container classname="d-flex justify-content-center flex-column">
         <SingleUser userData={userData} />
       </Container>
     );

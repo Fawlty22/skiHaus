@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Button, Card, Container, Title } from "react-bootstrap";
+import { Button, Card, Container, ListGroup, Title } from "react-bootstrap";
 import ContractList from "../ContractList";
 
 const SingleUserContracts = (userResults) => {
-  console.log("SingleUserContract line 6", userResults);
+  // console.log("SingleUserContract line 6", userResults);
   const user = userResults.userResult.user;
-
-  const [contractHistory, setContractHistory] = useState(user.contracts.length);
+  const contracts = user.contracts;
+  // console.log(user);
+  // console.log(contracts);
+  const [contractHistory, setContractHistory] = useState(contracts.length);
   const [contractType, setContractType] = useState({ active: "" });
   const activeContractController = (e) => {
     e.preventDefault();
@@ -28,19 +30,37 @@ const SingleUserContracts = (userResults) => {
   switch (contractHistory > 0) {
     case true:
       return (
-        <Container id="contractListCardContainer" className="w-50 p-2 bg-dark text-center text-info ">
-          <Card.Header className="fw-bold fs-3">
-            {user.firstName.toUpperCase()} {user.lastName.toUpperCase()}
-          </Card.Header>
-          {contractType.active && (
-            <ContractList userResults={user} contractType={contractType} />
-          )}
-          <Button type="click" onClick={activeContractController}>
-            Active Contracts
-          </Button>
-          <Button type="click" onClick={pastContractController}>
-            Past Contracts
-          </Button>
+        <Container className="d-flex flex-column align-items-center w-50 p-2 bg-dark text-center text-info ">
+          <Card className="bg-dark w-100">
+            <Card.Header className="fw-bold fs-3">
+              {user.firstName.toUpperCase()} {user.lastName.toUpperCase()}
+            </Card.Header>
+            {contractType.active && (
+              <ContractList
+                contractResults={contracts}
+                userResults={user}
+                contractType={contractType}
+              />
+            )}
+            <Card.Footer className="bg-dark d-flex">
+              <ListGroup className="flex-row w-100 justify-content-around">
+                <Button
+                  className="bg-info text-black fw-bold"
+                  type="click"
+                  onClick={activeContractController}
+                >
+                  Active Contracts
+                </Button>
+                <Button
+                  className="bg-info text-black fw-bold"
+                  type="click"
+                  onClick={pastContractController}
+                >
+                  Past Contracts
+                </Button>
+              </ListGroup>
+            </Card.Footer>
+          </Card>
         </Container>
       );
     case false:

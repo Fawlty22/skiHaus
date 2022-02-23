@@ -6,12 +6,12 @@ import {
   FloatingLabel,
   Button,
   ListGroup,
+  Card,
 } from "react-bootstrap";
 import SingleUserContracts from "../SingleUserContract";
 import { QUERY_USER } from "../../graphql/queries";
 
 const SingleUser = ({ userData }) => {
-  console.log(userData);
   const user = userData;
   const [formState, setFormState] = useState({
     email: "",
@@ -31,7 +31,6 @@ const SingleUser = ({ userData }) => {
     e.preventDefault();
 
     const userResult = await getUser({ variables: { email: email } });
-    // console.log(userResult);
 
     setUserState({
       ...userState,
@@ -41,11 +40,10 @@ const SingleUser = ({ userData }) => {
 
   const userSelect = async (e) => {
     e.preventDefault(e);
-    console.log(e.target.textContent);
+
     const newEmail = e.target.textContent;
-    console.log(newEmail);
+
     const userResult = await getUser({ variables: { email: newEmail } });
-    console.log(userResult);
 
     setUserState({
       ...userState,
@@ -57,7 +55,7 @@ const SingleUser = ({ userData }) => {
     case "":
       return (
         <>
-          <Container>
+          <Container className="mb-5">
             <Form id="customerForm" onSubmit={handleSubmit}>
               <FloatingLabel
                 controlId="floatingInput"
@@ -81,15 +79,20 @@ const SingleUser = ({ userData }) => {
               </Button>
             </Form>
           </Container>
-          <Container>
-            <ListGroup>
+          <Card className="bg-dark">
+            <ListGroup className="p-1 m-1 gap-1">
               {userData.map((user) => (
-                <Button type="click" onClick={userSelect} key={user.email}>
+                <Button
+                  className="bg-info text-black fw-bold"
+                  type="click"
+                  onClick={userSelect}
+                  key={user.email}
+                >
                   {user.email}
                 </Button>
               ))}
             </ListGroup>
-          </Container>
+          </Card>
         </>
       );
 
