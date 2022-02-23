@@ -42,7 +42,7 @@ const UpdateSnowboardModal = (props) => {
     } catch (e) {
       console.log(e);
     }
-    
+    props.onHide()
   };
 
   return (

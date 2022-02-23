@@ -39,6 +39,7 @@ const UpdateSkiModal = (props) => {
     } catch (e) {
       console.log(e);
     }
+    props.onHide();
   };
 
   return (

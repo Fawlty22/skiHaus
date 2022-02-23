@@ -32,11 +32,12 @@ const AddSkiModal = (props) => {
         if(error) {
           return error;
         },
-    });
-    console.log(newSki)
+      });
+      console.log(newSki);
     } catch (e) {
       console.log(e);
     }
+    props.onHide()
   };
 
   return (
@@ -93,7 +94,9 @@ const AddSkiModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">Add Ski</Button>
+          <Button type="submit">
+            Add Ski
+          </Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
