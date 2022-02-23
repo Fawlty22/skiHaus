@@ -83,10 +83,11 @@ const resolvers = {
 
   Mutation: {
     addEmployee: async (parent, args, context) => {
-      const employee = await Employee.create(args);
-      const token = signToken(employee);
+      
+        const employee = await Employee.create(args);
+        const token = signToken(employee);
 
-      return { token, employee };
+        return { token, employee };
     },
     updateEmployee: async (parent, args, context) => {
       if (context.employee) {

@@ -4,6 +4,9 @@ import EquipmentList from "./EquipmentList";
 import EquipmentSearchBar from "./EquipmentSearchBar";
 import ContractSubmit from "./ContractSubmit";
 import ContractDateSelection from "./ContractDateSelection";
+import addEmployeeForm from "./AddEmployeeForm";
+
+
 import UserManagementSearch from "./UserManagementSearch";
 import ReturningToday from "./ReturningToday";
 import AddBootModal from "./AddBootModal";
@@ -33,5 +36,6 @@ export {
   UpdateEquipmentButtons,
   UserManagementSearch,
   ReturningToday,
-  SingleContractComponent
+  SingleContractComponent,
+  addEmployeeForm
 };
