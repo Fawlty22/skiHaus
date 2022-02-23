@@ -10,6 +10,7 @@ const EquipmentList = (
     setContractStep,
     contractStep 
   }
+
 ) => {
   //if statement trying to make the equipment list work for Chad's purposes
   if(!categoryState) {
@@ -19,7 +20,7 @@ const EquipmentList = (
     const handleEquipmentSubmit = (event) => {
       console.log(event)
     }
-
+  
     return (
       <>
         <ul className="equipment-list">
@@ -64,6 +65,13 @@ const EquipmentList = (
       ...contractStep,
       step: '4'})
   }
+
+  let equipmentAvailable = []
+  equipmentSelected.forEach((equipment) => {
+    if(equipment.available) {
+      equipmentAvailable.push(equipment)
+    } 
+  })
   
   return (
     <>
@@ -71,7 +79,7 @@ const EquipmentList = (
         <Card className="equipment-card" bg="dark" style={{ width: "45rem"}}>
           <h3 className="span-text">Select the {category} you would like to add</h3>
           <ul className="equipment-list">
-            {equipmentSelected.map((equipment) => (
+            {equipmentAvailable.map((equipment) => ( 
               <button
                 className="contract-navigation-button"
                 key={equipment._id} 
@@ -87,11 +95,6 @@ const EquipmentList = (
             onClick={handleNextPage}>
             Proceed to Finalize Contract
           </button>
-        </Card>
-      </Col>
-      <Col className="dashboard-col">
-        <Card bg="dark" style={{ width: "30rem"}}>
-          
         </Card>
       </Col>
     </>

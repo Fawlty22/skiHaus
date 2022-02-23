@@ -28,8 +28,6 @@ const ContractSubmit = ({ contractData }) => {
         console.log(mutationResponse)
     }
 
-    console.log(contractData)
-
     return (
         <>
         <Card className="body-card bg-dark">
