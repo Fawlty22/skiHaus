@@ -47,8 +47,8 @@ const AddEmployee = () => {
   };
 
   return (
-    <Container>
-      <h1>Add New Employee</h1>
+    <Container className="mt-5 card bg-dark">
+      <h1 className="fw-bolder text-center fs-4 text-info " >Add New Employee</h1>
       <Form id="employeeForm" onSubmit={handleSubmit}>
 
         <FloatingLabel
@@ -77,7 +77,7 @@ const AddEmployee = () => {
             onChange={handleChange}
           />
         </FloatingLabel>
-        <Button variant="primary" type="submit" onClick={() => setOpenModal(true)}>
+        <Button variant="info" type="submit" size="lg" onClick={() => setOpenModal(true)}>
           Add New Employee
         </Button>
     {openModal &&    <Modal closeModal={setOpenModal} />}

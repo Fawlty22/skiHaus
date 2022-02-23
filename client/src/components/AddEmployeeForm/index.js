@@ -34,8 +34,9 @@ const addEmployeeForm = () => {
             </div>
 
 
-            <div className="flex-row flex-end">
-              <button type="submit">Add New Employee</button>
+
+            <div className="d-grid gap-2">
+              <button type="submit" variant="primary" size="lg">Add New Employee</button>
             </div>
           </form>
         </div>
