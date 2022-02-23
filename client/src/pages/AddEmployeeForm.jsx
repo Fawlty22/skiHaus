@@ -1,7 +1,8 @@
 import { Form, Button, Container, FloatingLabel } from "react-bootstrap";
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_EMPLOYEE } from "../graphql/mutations.js";
+import Modal from "../components/AddEmployeeModal"
 
 
 const AddEmployee = () => {
@@ -12,8 +13,8 @@ const AddEmployee = () => {
 
 
   });
-
-
+  
+ const[openModal, setOpenModal] = useState(false);
 
   const [addUser, { error, loading }] = useMutation(ADD_EMPLOYEE);
 
@@ -36,11 +37,13 @@ const AddEmployee = () => {
         },
       });
       if (!loading && !error) {
+        
        
       }
     } catch (e) {
       console.log(e);
     }
+ 
   };
 
   return (
@@ -74,12 +77,12 @@ const AddEmployee = () => {
             onChange={handleChange}
           />
         </FloatingLabel>
-
-
-
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={() => setOpenModal(true)}>
           Add New Employee
         </Button>
+    {openModal &&    <Modal closeModal={setOpenModal} />}
+
+ 
       </Form>
     </Container>
   );
