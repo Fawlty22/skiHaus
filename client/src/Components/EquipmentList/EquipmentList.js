@@ -11,7 +11,6 @@ const EquipmentList = (
     contractStep 
   }
 ) => {
-
   //if statement trying to make the equipment list work for Chad's purposes
   if(!categoryState) {
     console.log('no categoryState')
@@ -63,7 +62,7 @@ const EquipmentList = (
     event.preventDefault();
     setContractStep({
       ...contractStep,
-      step: '4'    })
+      step: '4'})
   }
   
   return (

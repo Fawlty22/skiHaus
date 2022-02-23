@@ -7,7 +7,6 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-
 import Dashboard from "./pages/Dashboard";
 import Equipment from "./pages/Equipment";
 import UserManagement from "./pages/UserManagement";
@@ -17,13 +16,12 @@ import CustomerForm from "./pages/CustomerForm";
 import Header from "./components/Header";
 import CreateContract from "./pages/CreateContract.jsx";
 import AddEmployeeForm  from "./pages/AddEmployeeForm";
+import UserSearchBar from "./pages/UserSearhBar";
 import { StoreProvider } from "./utils/GlobalContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Auth from "./utils/auth"
 
 
-import UserSearchBar from "./pages/UserSearhBar";
 
 const httpLink = createHttpLink({
   uri: "/graphql",

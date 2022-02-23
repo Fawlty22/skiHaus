@@ -6,13 +6,13 @@ import { CREATE_CONTRACT } from '../../graphql/mutations';
 const ContractSubmit = ({ contractData }) => {
     const [createContract, { data, loading, error }] = useMutation(CREATE_CONTRACT);
     const [show, setShow] = useState(false);
-    console.log('contract data', contractData)
+
     useEffect(() => {
         if (data) {
             setShow(true)
         }
     })
-    console.log('contractData line 15 contractsubmit', contractData)
+    
     const handleContractSubmit = async (event) => {
         event.preventDefault();
         const mutationResponse = await createContract({
@@ -28,12 +28,14 @@ const ContractSubmit = ({ contractData }) => {
         console.log(mutationResponse)
     }
 
+    console.log(contractData)
+
     return (
         <>
-        <Card bg="dark">
-            <Row className="contract-row">
-                <Card.Title style={{ color: "violet" }}>
-                    <h2> Review contract details before submitting</h2>
+        <Card className="body-card bg-dark">
+            <Row className="contract-row contract-heading">
+                <Card.Title>
+                    <h2 className="contract-heading-text"> Review contract details before submitting</h2>
                 </Card.Title>
             </Row>
             <Row className="contract-row">
@@ -47,6 +49,8 @@ const ContractSubmit = ({ contractData }) => {
                         </span>
                     </Card.Body>
                 </Card>
+            </Row>
+            <Row className="contract-row">
                 <Card className="contract-card" bg="dark" style={{ width: "15rem" }}>
                     <Card.Title style={{ color: "violet" }}>
                         <h3>Check Out Date</h3>
@@ -64,14 +68,13 @@ const ContractSubmit = ({ contractData }) => {
                     </Card.Body>
                 </Card>
             </Row>
-            <Row className="contract-row">
-                <Card.Title style={{ color: "violet" }}>
-                    <h3>Equipment:</h3>
+            <Row className="contract-row contract-heading">
+                <Card.Title>
+                    <h3 className="contract-heading-text">Equipment:</h3>
                 </Card.Title>
-
             </Row>
             <Row className="contract-row">
-                <Col className="dashboard-col">
+            {contractData.equipment.skis[0] && <Col className="dashboard-col">
                     <Card className="equipment-card" bg="dark" style={{ width: "15rem" }}>
                         <Card.Title style={{ color: "violet" }}>
                             <h4>Skis</h4>
@@ -84,8 +87,8 @@ const ContractSubmit = ({ contractData }) => {
                             </ul>
                         </Card.Body>
                     </Card>
-                </Col>
-                <Col className="dashboard-col">
+                </Col>}
+                {contractData.equipment.snowboards[0] &&<Col className="dashboard-col">
                     <Card className="equipment-card" bg="dark" style={{ width: "15rem" }}>
                         <Card.Title style={{ color: "violet" }}>
                             <h4>Snowboards</h4>
@@ -98,8 +101,8 @@ const ContractSubmit = ({ contractData }) => {
                             </ul>
                         </Card.Body>
                     </Card>
-                </Col>
-                <Col className="dashboard-col">
+                </Col>}
+                {contractData.equipment.boots[0] && <Col className="dashboard-col">
                     <Card className="equipment-card" bg="dark" style={{ width: "15rem" }}>
                         <Card.Title style={{ color: "violet" }}>
                             <h4>Boots</h4>
@@ -112,7 +115,7 @@ const ContractSubmit = ({ contractData }) => {
                             </ul>
                         </Card.Body>
                     </Card>
-                </Col>
+                </Col>}
             </Row>
             <Row className="contract-row">
                 <button className="contract-navigation-button" onClick={handleContractSubmit}>Submit Contract</button>
