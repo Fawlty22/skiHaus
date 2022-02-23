@@ -33,11 +33,11 @@ const AddSkiModal = (props) => {
           return error;
         },
       });
-      console.log(newSki);
+      document.getElementById("addBootForm").reset();
     } catch (e) {
       console.log(e);
     }
-    props.onHide()
+    props.onHide();
   };
 
   return (
@@ -94,9 +94,7 @@ const AddSkiModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">
-            Add Ski
-          </Button>
+          <Button type="submit">Add Ski</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>

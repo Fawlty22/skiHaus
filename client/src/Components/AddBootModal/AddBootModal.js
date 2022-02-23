@@ -33,8 +33,12 @@ const AddBootModal = (props) => {
           return error;
         },
       });
-      console.log(newBoot);
-      props.onHide()
+      setFormState({
+        brand: "",
+        model: "",
+        condition: "",
+      });
+      document.getElementById("addBootForm").reset();
     } catch (e) {
       console.log(e);
     }
@@ -94,9 +98,7 @@ const AddBootModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">
-            Add Boot
-          </Button>
+          <Button type="submit">Add Boot</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
