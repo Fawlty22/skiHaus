@@ -73,9 +73,26 @@ export const QUERY_USERS = gql`
             _id
           }
           boots {
-            _id
+            _ids
           }
         }
+      }
+    }
+  }
+`;
+
+export const QUERY_USERS_CONTRACTS = gql`
+  query users {
+    users {
+      _id
+      username
+      email
+      firstName
+      lastName
+      birthDate
+      phone
+      contracts {
+        _id
       }
     }
   }
@@ -84,16 +101,19 @@ export const QUERY_USERS = gql`
 export const ALLEQUIPMENT_QUERY = gql`
   {
     skis {
+      available
       brand
       model
       _id
     }
     snowboards {
+      available
       brand
       model
       _id
     }
     boots {
+      available
       brand
       model
       _id
@@ -102,7 +122,7 @@ export const ALLEQUIPMENT_QUERY = gql`
 `;
 
 export const QUERY_CONTRACTS = gql`
-{
+  {
     contracts {
       _id
       checkOutDate
@@ -145,44 +165,44 @@ export const QUERY_CONTRACTS = gql`
 `;
 
 export const QUERY_CONTRACT = gql`
-query contract($_id: ID!) {
-  contract(_id: $_id) {
-    _id
-    user {
+  query contract($_id: ID!) {
+    contract(_id: $_id) {
       _id
-      username
-      email
-      firstName
-      lastName
-      birthDate
-      phone
-    }
-    checkOutDate
-    checkInDate
-    active
-    equipment {
-      boots {
+      user {
         _id
-        brand
-        model
-        condition
-        available
+        username
+        email
+        firstName
+        lastName
+        birthDate
+        phone
       }
-      skis {
-        _id
-        brand
-        model
-        condition
-        available
-      }
-      snowboards {
-        _id
-        model
-        brand
-        condition
-        available
+      checkOutDate
+      checkInDate
+      active
+      equipment {
+        boots {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+        skis {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+        snowboards {
+          _id
+          model
+          brand
+          condition
+          available
+        }
       }
     }
   }
-}
 `;

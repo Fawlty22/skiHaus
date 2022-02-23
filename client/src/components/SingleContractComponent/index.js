@@ -10,7 +10,6 @@ const SingleContractComponent = () => {
   const { loading, data } = useQuery(QUERY_CONTRACT, {
     variables: { _id: id },
   });
-  console.log(data);
 
   const [deactivateContract, { error, contractData }] =
     useMutation(DEACTIVATE_CONTRACT);

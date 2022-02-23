@@ -38,6 +38,19 @@ code {
 
 /* Contract Styling */
 
+.body-card {
+  align-items: center;
+  justify-content: center;
+}
+
+.contract-heading {
+  background-color: #6c757d;
+}
+
+.contract-heading-text {
+  color: #0dcaf0
+}
+
 .contract-body {
   justify-content: space-between;
   flex-direction: column;
@@ -50,7 +63,7 @@ code {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 95%;
+  width: 100%;
 }
 
 .contract-col {
@@ -74,14 +87,17 @@ code {
 
 .contract-card {
   padding: 0;
-  margin: 0;
-  height: 6rem;
+  margin: 0.2rem;
+  height: auto;
+  border-color: #0dcaf0;
 }
 
 .equipment-card {
   padding: 0;
-  margin: 0;
+  height: auto;
+  margin: 0.2rem;
   align-items: center;
+  border-color: #0dcaf0;
 }
 
 .equipment-list {
@@ -103,5 +119,15 @@ code {
   margin: auto;
   width: 50%;
   align-items: center;
+  border: none;
+}
+
+/*contract list css*/
+
+.modal-header {
+  border: none;
+}
+
+.modal-footer {
   border: none;
 }

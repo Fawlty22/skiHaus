@@ -7,7 +7,6 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-
 import Dashboard from "./pages/Dashboard";
 import Equipment from "./pages/Equipment";
 import UserManagement from "./pages/UserManagement";
@@ -17,13 +16,12 @@ import CustomerForm from "./pages/CustomerForm";
 import Header from "./components/Header";
 import CreateContract from "./pages/CreateContract.jsx";
 import AddEmployeeForm  from "./pages/AddEmployeeForm";
+import UserSearchBar from "./pages/UserSearhBar";
 import { StoreProvider } from "./utils/GlobalContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Auth from "./utils/auth"
 
 
-import UserSearchBar from "./pages/UserSearhBar";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -47,12 +45,12 @@ const client = new ApolloClient({
 function App() {
   
   return (
-    <ApolloProvider client={client} >
+    <ApolloProvider client={client}>
       <Router>
         <div>
           <Header />
         </div>
-        <StoreProvider >
+        <StoreProvider>
           <Switch>
             <Route exact path ="/" render={() => <Dashboard />} />
             <Route exact path ="/login" render={() => <Login />} />
@@ -61,9 +59,21 @@ function App() {
             <Route exact path="/customerform" render={() => <CustomerForm />} />
             <Route exact path="/contract" render={() => <CreateContract />} />
             <Route exact path="/equipment" render={() => <Equipment />} />
-            <Route exact path="/user-management" render={() => <UserManagement />} />
-            <Route exact path="/view-contracts" render={() => <UserSearchBar />} />
-            <Route exact path="/contracts/:id" render={() => <SingleContractPage />} />
+            <Route
+              exact
+              path="/user-management"
+              render={() => <UserManagement />}
+            />
+            <Route
+              exact
+              path="/view-contracts"
+              render={() => <UserSearchBar />}
+            />
+            <Route
+              exact
+              path="/contracts/:id"
+              render={() => <SingleContractPage />}
+            />
           </Switch>
         </StoreProvider>
       </Router>
