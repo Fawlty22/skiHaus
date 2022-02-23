@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from "react-router-dom";
-import { UserSearchForm, EquipmentSearch, ContractSubmit, ContractDateSelection } from '../components/index.js';
+import { UserSearchForm, EquipmentSearch, ContractSubmit, ContractDateSelection } from '../components';
 import { Card, Row, Col, Container } from "react-bootstrap";
 import Auth from '../utils/auth'
 
