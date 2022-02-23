@@ -7,8 +7,9 @@ import { Form, Button, Container, Card, FloatingLabel } from "react-bootstrap";
 function Modal({ closeModal }) {
     return (
        <>
-       
+  
         <div>
+            
              <div className="modalContainer bg-dark">
                  <div className="titleCloseBtn">
                  <button onClick={() => closeModal(false)}> x </button>
@@ -32,12 +33,13 @@ function Modal({ closeModal }) {
          
          </div>
          
+         
     
          
        </div>
-       <div className="modalBackground"></div>
+       <Container className="modalBackground">  </Container> 
        
-          <Container className="modalBackground">  </Container> 
+         
      </>
      )
     
