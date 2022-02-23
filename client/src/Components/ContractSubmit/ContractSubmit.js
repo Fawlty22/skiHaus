@@ -1,17 +1,25 @@
-import React from 'react';
-import { Container, Row, Col, } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { CREATE_CONTRACT } from '../../graphql/mutations';
 
 const ContractSubmit = ({ contractData }) => {
-    const [createContract] = useMutation(CREATE_CONTRACT);
-
+    const [createContract, { data, loading, error }] = useMutation(CREATE_CONTRACT);
+    const [show, setShow] = useState(false);
+    console.log('contract data', contractData)
+    useEffect(() => {
+        if (data) {
+            setShow(true)
+        }
+    })
+    console.log('contractData line 15 contractsubmit', contractData)
     const handleContractSubmit = async (event) => {
         event.preventDefault();
         const mutationResponse = await createContract({
             variables: {
                 active: 'True',
-                user: contractData.user.username,
+                user: contractData.user._id,
+                username: contractData.user.username,
                 checkInDate: contractData.checkInDate,
                 checkOutDate: contractData.checkOutDate,
                 equipment: contractData.equipment
@@ -21,57 +29,99 @@ const ContractSubmit = ({ contractData }) => {
     }
 
     return (
-        <div>
-            <h2> Review contract details before submitting</h2>
-            <Container>
-                <Row>
-                    <Col>
+        <>
+        <Card bg="dark">
+            <Row className="contract-row">
+                <Card.Title style={{ color: "violet" }}>
+                    <h2> Review contract details before submitting</h2>
+                </Card.Title>
+            </Row>
+            <Row className="contract-row">
+                <Card className="contract-card" bg="dark" style={{ width: "15rem" }}>
+                    <Card.Title style={{ color: "violet" }}>
                         <h3>User Details</h3>
+                    </Card.Title>
+                    <Card.Body className="card-body">
                         <span>
                             Name: {contractData.user.firstName} {contractData.user.lastName}
                         </span>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
+                    </Card.Body>
+                </Card>
+                <Card className="contract-card" bg="dark" style={{ width: "15rem" }}>
+                    <Card.Title style={{ color: "violet" }}>
                         <h3>Check Out Date</h3>
+                    </Card.Title>
+                    <Card.Body className="card-body">
                         <span>{contractData.checkOutDate}</span>
-                    </Col>
-                    <Col>
+                    </Card.Body>
+                </Card>
+                <Card className="contract-card" bg="dark" style={{ width: "15rem" }}>
+                    <Card.Title style={{ color: "violet" }}>
                         <h3>Check In Date</h3>
+                    </Card.Title>
+                    <Card.Body className="card-body">
                         <span>{contractData.checkInDate}</span>
-                    </Col>
-                </Row>
-                <Row>
+                    </Card.Body>
+                </Card>
+            </Row>
+            <Row className="contract-row">
+                <Card.Title style={{ color: "violet" }}>
                     <h3>Equipment:</h3>
-                    <Col>
-                        <h4>Skis</h4>
-                        {contractData.equipment.skis.map((ski) => (
-                            <Col>
-                                <span>{ski}</span>
-                            </Col>
-                        ))}
-                    </Col>
-                    <Col>
-                        <h4>Snowboards</h4>
-                        {contractData.equipment.snowboards.map((snowboard) => (
-                            <Col>
-                                <span>{snowboard}</span>
-                            </Col>
-                        ))}
-                    </Col>
-                    <Col>
-                        <h4>Boots</h4>
-                        {contractData.equipment.boots.map((boot) => (
-                            <Col>
-                                <span>{boot}</span>
-                            </Col>
-                        ))}
-                    </Col>
-                </Row>
-            </Container>
-            <button onClick={handleContractSubmit}>Submit Contract</button>
-        </div>
+                </Card.Title>
+
+            </Row>
+            <Row className="contract-row">
+                <Col className="dashboard-col">
+                    <Card className="equipment-card" bg="dark" style={{ width: "15rem" }}>
+                        <Card.Title style={{ color: "violet" }}>
+                            <h4>Skis</h4>
+                        </Card.Title>
+                        <Card.Body className="card-body">
+                            <ul>
+                                {contractData.equipment.skis.map((ski) => (
+                                    <li key={ski}>{ski}</li>
+                                ))}
+                            </ul>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col className="dashboard-col">
+                    <Card className="equipment-card" bg="dark" style={{ width: "15rem" }}>
+                        <Card.Title style={{ color: "violet" }}>
+                            <h4>Snowboards</h4>
+                        </Card.Title>
+                        <Card.Body className="card-body">
+                            <ul>
+                                {contractData.equipment.snowboards.map((snowboard) => (
+                                    <li key={snowboard}>{snowboard}</li>
+                                ))}
+                            </ul>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col className="dashboard-col">
+                    <Card className="equipment-card" bg="dark" style={{ width: "15rem" }}>
+                        <Card.Title style={{ color: "violet" }}>
+                            <h4>Boots</h4>
+                        </Card.Title>
+                        <Card.Body className="card-body">
+                            <ul>
+                                {contractData.equipment.boots.map((boot) => (
+                                    <li key={boot}>{boot}</li>
+                                ))}
+                            </ul>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+            <Row className="contract-row">
+                <button className="contract-navigation-button" onClick={handleContractSubmit}>Submit Contract</button>
+            </Row>
+        </Card>
+        <Alert show={show} variant="success">
+            <p>Contract successfully created</p>
+        </Alert>
+        </>
     )
 }
 

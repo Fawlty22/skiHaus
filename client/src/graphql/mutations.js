@@ -16,7 +16,6 @@ export const ADDUSER_MUTATION = gql`
     $firstName: String!
     $lastName: String!
     $username: String!
-    $password: String!
     $birthDate: String!
     $email: String!
     $phone: String!
@@ -25,41 +24,95 @@ export const ADDUSER_MUTATION = gql`
       firstName: $firstName
       lastName: $lastName
       username: $username
-      password: $password
       birthDate: $birthDate
       email: $email
       phone: $phone
     ) {
       _id
+      username
+      email
+      firstName
+      lastName
+      birthDate
+      phone
+    }
+  }
+`;
+
+export const EDIT_USER = gql`
+  mutation editUser(
+    $_id: ID!
+    $firstName: String!
+    $lastName: String!
+    $username: String!
+    $birthDate: String!
+    $email: String!
+    $phone: String!
+  ) {
+    editUser(
+      _id: $_id
+      firstName: $firstName
+      lastName: $lastName
+      username: $username
+      birthDate: $birthDate
+      email: $email
+      phone: $phone
+    ) {
+      email
     }
   }
 `;
 
 export const CREATE_CONTRACT = gql`
   mutation createContract(
-    $user: String! 
-    $checkOutDate: String! 
-    $checkInDate: String!
-    $equipment:EquipmentInput!) {
-      createContract(
-        user: $user 
-        checkOutDate: $checkOutDate 
-        checkInDate: $checkInDate
-        equipment: $equipment) {
-          _id
-          username
-          contracts {
+    $user: ID!
+    $checkOutDate: Date!
+    $checkInDate: Date!
+    $equipment: EquipmentInput!
+    $username: String!
+  ) {
+    createContract(
+      user: $user
+      checkOutDate: $checkOutDate
+      checkInDate: $checkInDate
+      equipment: $equipment
+      username: $username
+    ) {
+      _id
+      username
+      email
+      phone
+      firstName
+      lastName
+      contracts {
+        _id
+        active
+        equipment {
+          boots {
             _id
-            active
-            equipment {
-              skis {
-                _id
-                model
-              }
-            }
+            brand
+            model
+            condition
+            available
+          }
+          skis {
+            _id
+            brand
+            model
+            condition
+            available
+          }
+          snowboards {
+            _id
+            brand
+            model
+            condition
+            available
           }
         }
+      }
     }
+  }
 `;
 
 export const ADDSKI_MUTATION = gql`
@@ -107,6 +160,96 @@ export const ADD_EMPLOYEE = gql`
       employee {
         _id
       }
+    }
+  }
+`;
+
+export const DEACTIVATE_CONTRACT = gql`
+  mutation deactivateContract($id: ID!) {
+    deactivateContract(_id: $id) {
+      _id
+      checkOutDate
+      checkInDate
+      equipment {
+        boots {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+        skis {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+        snowboards {
+          _id
+          brand
+          model
+          condition
+          available
+        }
+      }
+      active
+    }
+  }
+`;
+
+export const UPDATE_SKI = gql`
+  mutation updateSki(
+    $id: ID!
+    $brand: String
+    $model: String
+    $condition: String
+  ) {
+    updateSki(_id: $id, brand: $brand, model: $model, condition: $condition) {
+      _id
+      brand
+      model
+      condition
+      available
+    }
+  }
+`;
+
+export const UPDATE_BOOT = gql`
+  mutation updateBoot(
+    $id: ID!
+    $brand: String
+    $model: String
+    $condition: String
+  ) {
+    updateBoot(_id: $id, brand: $brand, model: $model, condition: $condition) {
+      _id
+      brand
+      model
+      condition
+      available
+    }
+  }
+`;
+
+export const UPDATE_SNOWBOARD = gql`
+  mutation updateSnowboard(
+    $id: ID!
+    $brand: String
+    $model: String
+    $condition: String
+  ) {
+    updateSnowboard(
+      _id: $id
+      brand: $brand
+      model: $model
+      condition: $condition
+    ) {
+      _id
+      brand
+      model
+      condition
+      available
     }
   }
 `;
