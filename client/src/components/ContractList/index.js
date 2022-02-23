@@ -4,21 +4,21 @@ import { Card, ListGroup, ListGroupItem, Button, Alert } from "react-bootstrap";
 import { DEACTIVATE_CONTRACT } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
 
-const ContractList = (userResults, contractType) => {
-  const contracts = userResults.userResults.contracts;
+const ContractList = (userResults, contractType, contractResults) => {
+  const user = userResults;
+  const contracts = userResults.contractResults;
   const active = userResults.contractType.active;
-
+  console.log(contracts);
   const [deactivateContract, error, data] = useMutation(DEACTIVATE_CONTRACT);
-  console.log(userResults);
 
   const handlePastContractBtn = async () => {};
 
   const handleCloseContract = async (e) => {
-    e.preventDefault();
+    e.preventDefault(e);
+    console.log(e.target.attributes[1].value);
+    const contractID = e.target.attributes[1].value;
 
-    const contractID = contracts.filter((array) => array.active);
-
-    const cancelContractID = contractID[0]._id;
+    const cancelContractID = contractID;
 
     try {
       const cancelContract = await deactivateContract({
@@ -38,17 +38,12 @@ const ContractList = (userResults, contractType) => {
           {contracts
             .filter((array) => array.active)
             .map((filteredContract) => (
-              <Card
-                id="contractListCard"
-                className="my-2 text-black  p-1"
-                style={{ backgroundColor: "violet" }}
-              >
+              <Card className="bg-dark my-2 text-black w-90 align-items-center p-1">
                 <Card.Header className="bg-dark fw-bold text-warning">
                   Return Date {filteredContract.checkInDate}
-                  {filteredContract._id}
                 </Card.Header>
-                <ListGroup id="contractCardEquipment">
-                  <Card.Title className="fw-bold text-black fs-4">
+                <ListGroup>
+                  <Card.Title className="fw-bold fs-3 text-info">
                     Equipment
                   </Card.Title>
                   <ListGroupItem className="bg-dark fw-bold text-info">
@@ -83,11 +78,14 @@ const ContractList = (userResults, contractType) => {
                     ))}
                   </ListGroupItem>
 
-                  <Button type="click" onClick={handleCloseContract}>
+                  <Button
+                    data-contractid={filteredContract._id}
+                    className="mt-3 bg-info text-black fw-bold border-0"
+                    type="click"
+                    onClick={handleCloseContract}
+                  >
                     Close Rental
                   </Button>
-                  {error && <Alert>{error.message}</Alert>}
-                  {data && <Alert>Contract Closed</Alert>}
                 </ListGroup>
               </Card>
             ))}
@@ -96,18 +94,23 @@ const ContractList = (userResults, contractType) => {
     case "false":
       return (
         <>
-          <ListGroup>
-            {contracts
-              .filter((array) => !array.active)
-              .map((filteredContract) => (
-                <Link
-                  key={filteredContract._id}
-                  to={`/contracts/${filteredContract._id}`}
-                >
-                  <ListGroup.Item>{filteredContract._id}</ListGroup.Item>
-                </Link>
-              ))}
-          </ListGroup>
+          <Card.Body className="bg-dark">
+            <ListGroup>
+              {contracts
+                .filter((array) => !array.active)
+                .map((filteredContract) => (
+                  <Link
+                    key={filteredContract._id}
+                    to={`/contracts/${filteredContract._id}`}
+                  >
+                    <Button className="bg-info text-black fw-bold">
+                      Check Out Date: {filteredContract.checkOutDate} Check In
+                      Date: {filteredContract.checkInDate}
+                    </Button>
+                  </Link>
+                ))}
+            </ListGroup>
+          </Card.Body>
         </>
       );
   }

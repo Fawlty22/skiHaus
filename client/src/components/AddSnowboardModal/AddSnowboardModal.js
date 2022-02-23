@@ -32,11 +32,10 @@ const AddSnowboardModal = (props) => {
           return error;
         },
       });
-      console.log(newSnowboard);
+      props.onHide();
     } catch (e) {
       console.log(e);
     }
-    props.onHide()
   };
 
   return (
@@ -46,12 +45,15 @@ const AddSnowboardModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+      <Modal.Header className="bg-dark text-center" closeButton>
+        <Modal.Title
+          className="p-2 bg-dark text-center text-info "
+          id="contained-modal-title-vcenter"
+        >
           Enter the neccesary information to create a Snowboard
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="bg-dark">
         <Form id="addSnowboardForm" onSubmit={handleSubmit}>
           <FloatingLabel
             controlId="floatingInput"
@@ -93,13 +95,15 @@ const AddSnowboardModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">
+          <Button className="bg-info text-black fw-bold" type="submit">
             Add Snowboard
           </Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+      <Modal.Footer className="bg-dark">
+        <Button className="bg-info text-black fw-bold" onClick={props.onHide}>
+          Close
+        </Button>
         {error && <Alert>{error.message}</Alert>}
         {data && <Alert>Snowboard Added</Alert>}
       </Modal.Footer>
