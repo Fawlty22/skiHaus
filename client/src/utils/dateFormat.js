@@ -43,8 +43,9 @@ module.exports = (
   const formattedMonth = months[dateObj.getMonth()];
 
   const dayOfMonth = dateSuffix
-    ? addDateSuffix(dateObj.getDate()  )
-    : dateObj.getDate() ;
+  //this is where the weird date +1 or -1 problem is happening
+    ? addDateSuffix(dateObj.getDate() - 1)
+    : dateObj.getDate() - 1;
     
   const year = dateObj.getFullYear();
   const formattedTimeStamp = `${formattedMonth} ${dayOfMonth}, ${year} `;
