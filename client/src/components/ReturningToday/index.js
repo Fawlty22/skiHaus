@@ -25,6 +25,9 @@ const ReturningToday = () => {
             const today = new Date();
             const todayFormatted = dateFormat(today).replace(/\s+/g, "");
             const eachDateFormatted = each.checkInDate.replace(/\s+/g, "")
+            console.log('eachDateFormatted', eachDateFormatted)
+            console.log('todayFormatted', todayFormatted)
+
             //This IF statement renders contracts if they're coming back today.  If you remove it, returningToday shows all contracts
             if(eachDateFormatted === todayFormatted && each.active == true)
               return (
