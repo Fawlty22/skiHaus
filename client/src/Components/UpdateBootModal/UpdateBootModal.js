@@ -35,7 +35,12 @@ const UpdateBootModal = (props) => {
           return error;
         },
       });
-      console.log(updatedBoot);
+      setFormState({
+        brand: "",
+        model: "",
+        condition: "",
+      });
+      document.getElementById("updateBootForm").reset();
     } catch (e) {
       console.log(e);
     }

@@ -33,7 +33,12 @@ const AddSkiModal = (props) => {
           return error;
         },
       });
-      document.getElementById("addBootForm").reset();
+      setFormState({
+        brand: "",
+        model: "",
+        condition: "",
+      });
+      document.getElementById("addSkiForm").reset();
     } catch (e) {
       console.log(e);
     }

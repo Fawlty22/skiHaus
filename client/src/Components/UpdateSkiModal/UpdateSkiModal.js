@@ -35,7 +35,12 @@ const UpdateSkiModal = (props) => {
           return error;
         },
       });
-      console.log(updatedSki);
+      setFormState({
+        brand: "",
+        model: "",
+        condition: "",
+      });
+      document.getElementById("updateSkiForm").reset();
     } catch (e) {
       console.log(e);
     }

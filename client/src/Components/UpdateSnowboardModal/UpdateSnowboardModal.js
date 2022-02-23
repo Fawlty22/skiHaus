@@ -38,7 +38,12 @@ const UpdateSnowboardModal = (props) => {
           return error;
         },
       });
-      console.log(updatedSnowboard);
+      setFormState({
+        brand: "",
+        model: "",
+        condition: "",
+      });
+      document.getElementById("updateSnowboardForm").reset();
     } catch (e) {
       console.log(e);
     }

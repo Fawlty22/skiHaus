@@ -32,11 +32,15 @@ const AddSnowboardModal = (props) => {
           return error;
         },
       });
-      console.log(newSnowboard);
+      setFormState({
+        brand: "",
+        model: "",
+        condition: "",
+      });
+      document.getElementById("addSnowboardForm").reset();
     } catch (e) {
       console.log(e);
     }
-    props.onHide()
   };
 
   return (
@@ -93,9 +97,7 @@ const AddSnowboardModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">
-            Add Snowboard
-          </Button>
+          <Button type="submit">Add Snowboard</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
