@@ -2,20 +2,18 @@
   "name": "rental-shop",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "16.13.x",
-    "npm": "8.1.x"
-  },
   "dependencies": {
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "node server/server.js",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "seed": "cd server && npm run seed",
     "develop": "concurrently \"cd server && npm run nodemon\" \"cd client && npm run start\""
   },
   "eslintConfig": {
