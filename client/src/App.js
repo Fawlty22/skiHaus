@@ -55,6 +55,7 @@ function App() {
         <StoreProvider >
           <Switch>
             <Route exact path ="/" render={() => <Dashboard />} />
+            <Route exact path ="/login" render={() => <Login />} />
             <Route exact path="/dashboard" render={() => <Dashboard />} />
             <Route exact path="/new-employee" render={() => <AddEmployeeForm />} />
             <Route exact path="/customerform" render={() => <CustomerForm />} />
