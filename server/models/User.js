@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const bcrypt = require("bcrypt");
 
 const userSchema = new Schema(
   {
@@ -38,9 +37,9 @@ const userSchema = new Schema(
     contracts: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Contract'
-      }
-    ]
+        ref: "Contract",
+      },
+    ],
   },
   {
     toJSON: {

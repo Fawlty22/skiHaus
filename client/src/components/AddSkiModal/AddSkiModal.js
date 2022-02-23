@@ -1,28 +1,29 @@
 import { Modal, Button, Form, FloatingLabel, Alert } from "react-bootstrap";
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADDSNOWBOARD_MUTATION } from "../../graphql/mutations";
+import { ADDSKI_MUTATION } from "../../graphql/mutations";
 
-const AddSnowboardModal = (props) => {
+const AddSkiModal = (props) => {
   const [formState, setFormState] = useState({
     brand: "",
     model: "",
     condition: "",
   });
-
+  console.log(formState);
   const { brand, model, condition } = formState;
 
-  const [addSnowboard, { error, data }] = useMutation(ADDSNOWBOARD_MUTATION);
+  const [addSki, { error, data }] = useMutation(ADDSKI_MUTATION);
 
   function handleChange(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
+    console.log(formState);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const newSnowboard = await addSnowboard({
+      const newSki = await addSki({
         variables: {
           brand: brand,
           model: model,
@@ -32,11 +33,10 @@ const AddSnowboardModal = (props) => {
           return error;
         },
       });
-      console.log(newSnowboard);
+      props.onHide();
     } catch (e) {
       console.log(e);
     }
-    props.onHide()
   };
 
   return (
@@ -46,13 +46,16 @@ const AddSnowboardModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Enter the neccesary information to create a Snowboard
+      <Modal.Header className="bg-dark text-center" closeButton>
+        <Modal.Title
+          className="p-2 bg-dark text-center text-info "
+          id="contained-modal-title-vcenter"
+        >
+          Enter the neccesary information to create a Ski
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <Form id="addSnowboardForm" onSubmit={handleSubmit}>
+      <Modal.Body className="bg-dark">
+        <Form id="addSkiForm" onSubmit={handleSubmit}>
           <FloatingLabel
             controlId="floatingInput"
             label="brand"
@@ -66,7 +69,6 @@ const AddSnowboardModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-
           <FloatingLabel
             controlId="floatingInput"
             label="model"
@@ -93,18 +95,20 @@ const AddSnowboardModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">
-            Add Snowboard
+          <Button className="bg-info text-black fw-bold" type="submit">
+            Add Ski
           </Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+      <Modal.Footer className="bg-dark">
+        <Button className="bg-info text-black fw-bold" onClick={props.onHide}>
+          Close
+        </Button>
         {error && <Alert>{error.message}</Alert>}
-        {data && <Alert>Snowboard Added</Alert>}
+        {data && <Alert>Ski Added</Alert>}
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default AddSnowboardModal;
+export default AddSkiModal;

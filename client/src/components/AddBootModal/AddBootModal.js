@@ -1,19 +1,18 @@
 import { Modal, Button, Form, FloatingLabel, Alert } from "react-bootstrap";
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UPDATE_SKI } from "../../graphql/mutations";
+import { ADDBOOT_MUTATION } from "../../graphql/mutations";
 
-const UpdateSkiModal = (props) => {
+const AddBootModal = (props) => {
   const [formState, setFormState] = useState({
-    skiID: "",
     brand: "",
     model: "",
     condition: "",
   });
 
-  const { brand, model, condition, skiID } = formState;
+  const { brand, model, condition } = formState;
 
-  const [updateSki, { error, data }] = useMutation(UPDATE_SKI);
+  const [addBoot, { error, data }] = useMutation(ADDBOOT_MUTATION);
 
   function handleChange(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
@@ -24,9 +23,8 @@ const UpdateSkiModal = (props) => {
     e.preventDefault();
 
     try {
-      const updatedSki = await updateSki({
+      const newBoot = await addBoot({
         variables: {
-          id: skiID,
           brand: brand,
           model: model,
           condition: condition,
@@ -35,11 +33,10 @@ const UpdateSkiModal = (props) => {
           return error;
         },
       });
-      console.log(updatedSki);
+      props.onHide();
     } catch (e) {
       console.log(e);
     }
-    props.onHide();
   };
 
   return (
@@ -49,27 +46,16 @@ const UpdateSkiModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Enter the Id of the skis you would like to update. Then enter what you
-          would like to update.
+      <Modal.Header className="bg-dark text-center" closeButton>
+        <Modal.Title
+          className="p-2 bg-dark text-center text-info "
+          id="contained-modal-title-vcenter"
+        >
+          Enter the neccesary information to create a Boot
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <Form id="updateSkiForm" onSubmit={handleSubmit}>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="skiID"
-            className="mb-3"
-          >
-            <Form.Control
-              name="skiID"
-              type="text"
-              placeholder="Ski ID"
-              defaultValue={skiID}
-              onChange={handleChange}
-            />
-          </FloatingLabel>
+      <Modal.Body className="bg-dark">
+        <Form id="addBootForm" onSubmit={handleSubmit}>
           <FloatingLabel
             controlId="floatingInput"
             label="brand"
@@ -110,16 +96,20 @@ const UpdateSkiModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">Update Ski</Button>
+          <Button className="bg-info text-black fw-bold" type="submit">
+            Add Boot
+          </Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+      <Modal.Footer className="bg-dark">
+        <Button className="bg-info text-black fw-bold" onClick={props.onHide}>
+          Close
+        </Button>
         {error && <Alert>{error.message}</Alert>}
-        {data && <Alert>Ski Updated</Alert>}
+        {data && <Alert>Boot Added</Alert>}
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default UpdateSkiModal;
+export default AddBootModal;

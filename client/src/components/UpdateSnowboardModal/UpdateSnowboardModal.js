@@ -1,19 +1,23 @@
 import { Modal, Button, Form, FloatingLabel, Alert } from "react-bootstrap";
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADDSKI_MUTATION } from "../../graphql/mutations";
+import { UPDATE_SNOWBOARD } from "../../graphql/mutations";
 
-const AddSkiModal = (props) => {
+const UpdateSnowboardModal = (props) => {
   const [formState, setFormState] = useState({
+    snowboardID: "",
     brand: "",
     model: "",
     condition: "",
   });
 
-  const { brand, model, condition } = formState;
+  const { brand, model, condition, snowboardID } = formState;
 
-  const [addSki, { error, data }] = useMutation(ADDSKI_MUTATION);
+  const [updateSnowboard, { error, data }] = useMutation(UPDATE_SNOWBOARD);
 
+  function resetState() {
+    setFormState({ snowboardID: "", brand: "", model: "", condition: "" });
+  }
   function handleChange(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
     console.log(formState);
@@ -23,8 +27,9 @@ const AddSkiModal = (props) => {
     e.preventDefault();
 
     try {
-      const newSki = await addSki({
+      const updatedSnowboard = await updateSnowboard({
         variables: {
+          id: snowboardID,
           brand: brand,
           model: model,
           condition: condition,
@@ -33,11 +38,10 @@ const AddSkiModal = (props) => {
           return error;
         },
       });
-      document.getElementById("addBootForm").reset();
+      props.onHide();
     } catch (e) {
       console.log(e);
     }
-    props.onHide();
   };
 
   return (
@@ -47,13 +51,30 @@ const AddSkiModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Enter the neccesary information to create a Ski
+      <Modal.Header className="bg-dark text-center" closeButton>
+        <Modal.Title
+          className="p-2 bg-dark text-center text-info "
+          id="contained-modal-title-vcenter"
+        >
+          Enter the Id of the snowboard you would like to update. Then enter
+          what you would like to update.
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <Form id="addSkiForm" onSubmit={handleSubmit}>
+      <Modal.Body className="bg-dark">
+        <Form id="updateSnowbordForm" onSubmit={handleSubmit}>
+          <FloatingLabel
+            controlId="floatingInput"
+            label="snowboardID"
+            className="mb-3"
+          >
+            <Form.Control
+              name="snowboardID"
+              type="text"
+              placeholder="Snowboard ID"
+              defaultValue={snowboardID}
+              onChange={handleChange}
+            />
+          </FloatingLabel>
           <FloatingLabel
             controlId="floatingInput"
             label="brand"
@@ -94,16 +115,20 @@ const AddSkiModal = (props) => {
               onChange={handleChange}
             />
           </FloatingLabel>
-          <Button type="submit">Add Ski</Button>
+          <Button className="bg-info text-black fw-bold" type="submit">
+            Update Snowboard
+          </Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+      <Modal.Footer className="bg-dark">
+        <Button className="bg-info text-black fw-bold" onClick={props.onHide}>
+          Close
+        </Button>
         {error && <Alert>{error.message}</Alert>}
-        {data && <Alert>Ski Added</Alert>}
+        {data && <Alert>Snowboard Updated</Alert>}
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default AddSkiModal;
+export default UpdateSnowboardModal;
