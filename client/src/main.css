@@ -1,0 +1,129 @@
+body,
+html {
+  margin: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+#root {
+  height: 100%;
+  background-image: url("https://wallpaperaccess.com/full/2005304.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: black;
+}
+
+.dashboard-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.dashboard-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contract Styling */
+
+.contract-body {
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+}
+
+.contract-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 95%;
+}
+
+.contract-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.contract-navigation-button {
+  background-color: #212529;
+  color: #ee82ee;
+  font-size: 1.2rem;
+  margin: 0.5rem;
+  width: 12rem;
+}
+
+.navActive {
+  color: #0dcaf0;
+}
+
+.contract-card {
+  padding: 0;
+  margin: 0;
+  height: 6rem;
+}
+
+.equipment-card {
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+.equipment-list {
+  padding: 0;
+}
+
+.span-text {
+  background-color: #212529;
+  display: inline-block;
+  color: #ee82ee;
+}
+
+.card-body {
+  color: #ee82ee;
+  padding: 0;
+}
+
+#equipmentCard {
+  margin: auto;
+  width: 50%;
+  align-items: center;
+  border: none;
+}
+
+/*contract list css*/
+
+#contractListContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#contractListCard {
+  align-items: center;
+  width: 90%;
+}
+
+#contractListCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#contractCardEquipment {
+  width: 90%;
+}

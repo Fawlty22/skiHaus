@@ -39,29 +39,15 @@ module.exports = (
   };
 
   const dateObj = new Date(timestamp);
+  
   const formattedMonth = months[dateObj.getMonth()];
 
   const dayOfMonth = dateSuffix
-    ? addDateSuffix(dateObj.getDate())
-    : dateObj.getDate();
-
+    ? addDateSuffix(dateObj.getDate() + 1 )
+    : dateObj.getDate() + 1;
+    
   const year = dateObj.getFullYear();
-  let hour =
-    dateObj.getHours() > 12
-      ? Math.floor(dateObj.getHours() / 2)
-      : dateObj.getHours();
-
-  // if hour is 0 (12:00am), change it to 12
-  if (hour === 0) {
-    hour = 12;
-  }
-
-  const minutes = dateObj.getMinutes();
-
-  // set `am` or `pm`
-  const periodOfDay = dateObj.getHours() >= 12 ? 'pm' : 'am';
-
-  const formattedTimeStamp = `${formattedMonth} ${dayOfMonth}, ${year} at ${hour}:${minutes} ${periodOfDay}`;
+  const formattedTimeStamp = `${formattedMonth} ${dayOfMonth}, ${year} `;
 
   return formattedTimeStamp;
 };
