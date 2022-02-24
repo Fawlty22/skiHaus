@@ -20,7 +20,7 @@ const resolvers = {
           .select("-__v")
           .populate("contracts");
       } else {
-        throw new AuthenticationError("You are not authorized");
+        throw new AuthenticationError('You are not authorized')
       }
     },
     boots: async (parent, args, context) => {

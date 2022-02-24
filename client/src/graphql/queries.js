@@ -101,16 +101,19 @@ export const QUERY_USERS_CONTRACTS = gql`
 export const ALLEQUIPMENT_QUERY = gql`
   {
     skis {
+      available
       brand
       model
       _id
     }
     snowboards {
+      available
       brand
       model
       _id
     }
     boots {
+      available
       brand
       model
       _id
