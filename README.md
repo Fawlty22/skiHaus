@@ -1,5 +1,6 @@
 # Ski Shop Rental Application
   
+  ![ScreenShot](./skiHaus.png)
 
   ## **Table of Contents**
   * [Description](#description)
@@ -10,8 +11,11 @@
 
 
   ## **Description**
-  This is an application designed to handle rental of ski and snowboard equipment. 
+  SkiHaus is an application for tracking inventory and creating contracts for ski and snowboard rental shops.   The application is intended for use by an employee of any given store. Please use the 'employee' credentials below to login:
 
+  Username: Fawlty   |    Password: password  
+
+Once logged in you can view the dashboard and from there view whatever you'd like. Create contract, view customer information, update inventory, etc. 
 
   
 ## **License** 
