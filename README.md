@@ -11,12 +11,7 @@
 
 
   ## **Description**
-  SkiHaus is an application for tracking inventory and creating contracts for ski and snowboard rental shops.   The application is intended for use by an employee of any given store. Please use the 'employee' credentials below to login:
-
-  Username: guest   |    Password: password  
-
-Once logged in you can view the dashboard and from there view whatever you'd like. Create contract, view customer information, update inventory, etc. 
-
+  SkiHaus is an application for tracking inventory and creating contracts for ski and snowboard rental shops.   The application is intended for use by an employee of the simulated store. Please see the Usage Information for login credentials and further instructions.
   
 ## **License** 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) <br>
@@ -30,18 +25,26 @@ Copyright 2022 Matthew Keys
     
     
 
-
-
   ## **Installation** 
   To run this program locally, run 'npm i' locally, then npm start.  <br>
   You can also watch a short video on installation [here.](Not yet)
 
 
   ## **Usage Information**
-  This app is being designed for a specific shop and will not be available for free use after completion.
+  Please use the 'employee' credentials below to login:
 
+  Username: guest   |    Password: password  
 
-  ## **Contribution Guidelines** 
+  As noted above, this application is intended to be used in an actual shop. On the dashboard you will see a button labeled 'Customer Form'. The idea is that this form would be open on an iPad in the store, and after receiving a customer's information, the employee can then create a contract for that customer.  
+
+  After clicking on the 'Create New Contract' button, you (the employee), search for the customer by their email address.  Then, you select the customers desired equipment and confirm the contract at the end of contract creation. 
+  The 'Equipment Management' and 'User Management' buttons allow you to edit and delete information for each category respectively.
+  Click the 'View Contracts' button to search for and view individual contracts to view the customers information or the specific gear they used and its' condition. 
+  If a contract expires today, and we (the shop) should expect the gear to return today, we can see that contract in the returning today widget on the dashboard. Simply click on that contract to view it individually. 
+  Lastly, since we are the boss... well maybe not but let's pretend for a second.  We can press the 'Create New Employee' button to add new login credentials to the database.  
+
+  Enjoy messing around with the app! 
+  
   
 ## *Contributor Covenant Code of Conduct*
 
