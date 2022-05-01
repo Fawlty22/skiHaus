@@ -13,7 +13,7 @@
   ## **Description**
   SkiHaus is an application for tracking inventory and creating contracts for ski and snowboard rental shops.   The application is intended for use by an employee of any given store. Please use the 'employee' credentials below to login:
 
-  Username: Fawlty   |    Password: password  
+  Username: guest   |    Password: password  
 
 Once logged in you can view the dashboard and from there view whatever you'd like. Create contract, view customer information, update inventory, etc. 
 
