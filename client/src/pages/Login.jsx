@@ -97,6 +97,12 @@ function Login(props) {
               </div>
             </form>
           </Card>
+          <Card bg="dark" className="p-3 text-info mt-3">
+          <h5 className="text-center">
+              For testing purposes, use the following login credentials: <br />
+              Usename: guest | Password: password
+              </h5>
+          </Card>
         </Col>
       </Row>
     </Container>
