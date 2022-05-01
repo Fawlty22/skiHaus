@@ -11,7 +11,7 @@
 
 
   ## **Description**
-  SkiHaus is an application for tracking inventory and creating contracts for ski and snowboard rental shops.   The application is intended for use by an employee of the simulated store. Please see the Usage Information for login credentials and further instructions.
+  SkiHaus is an application for tracking inventory, maintaining customer information, and creating contracts for ski and snowboard rental shops.   The application is intended for use by an employee of the simulated store. Please see the Usage Information for login credentials and further instructions.
   
 ## **License** 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) <br>
