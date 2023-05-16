@@ -8,7 +8,7 @@ import {
 } from "@apollo/client";
 import "./index.css";
 import App from "./App";
-import css from "./main.css";
+import  "./main.css";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:3001/graphql",
