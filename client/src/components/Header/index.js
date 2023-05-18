@@ -15,7 +15,7 @@ const Header = () => {
         bg="light"
         expand="lg"
       >
-        <Container className="d-flex justify-content-center">
+        <Container className="d-flex justify-content-between">
           <Navbar.Brand className="fs-1 fw-bold d-flex text-light" to="/login">
             <Link to="/login" style={{ textDecoration: "none", color: "pink" }}>
               Ski Haus
@@ -23,10 +23,10 @@ const Header = () => {
           </Navbar.Brand>
 
           <Col xs={12} md={4} className="dashboard-col">
-            <Card bg="dark" style={{ width: "18rem" }}>
+            <Card bg="dark" style={{ width: "15rem", border: '1px solid transparent'}}>
               <Link style={{ textDecoration: "none" }} to="/login">
                 <Card.Body className="text-center">
-                  <Card.Title style={{ color: "violet", fontSize: "1.70rem" }}>
+                  <Card.Title style={{ color: "violet", fontSize: "1.40rem" }} className="m-auto">
                     Employee Log In
                   </Card.Title>
                 </Card.Body>{" "}
@@ -43,7 +43,7 @@ const Header = () => {
         bg="light"
         expand="lg"
       >
-        <Container className="d-flex justify-content-center">
+        <Container className="d-flex justify-content-between">
           <Navbar.Brand
             className="fs-1 fw-bold d-flex text-light"
             to="/dashboard"
@@ -57,11 +57,11 @@ const Header = () => {
           </Navbar.Brand>
 
           <Col xs={12} md={4} className="dashboard-col">
-            <Card bg="dark" style={{ width: "18rem" }}>
+            <Card bg="dark" style={{ width: "8rem" }}>
         
                 <Card.Body className="text-center">
                   
-                    <Card.Link style={{ color: "violet" }} href="/" onClick={() => Auth.logout()}>
+                    <Card.Link style={{ color: "violet", margin: 'auto' }} href="/" onClick={() => Auth.logout()}>
                       Logout
                     </Card.Link>
               
